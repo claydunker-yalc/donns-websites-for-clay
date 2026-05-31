@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reusable Research Kanban Playbook</title>
-  <meta name="description" content="A reusable Kanban process Clay and Donn can use when Clay asks Donn to research a topic and publish the findings as an HTML brief." />
+  <title>Clay's Reusable Research Kanban Playbook</title>
+  <meta name="description" content="Clay's reusable Kanban operating policy for research projects Donn should scope, research, synthesize, and publish as public-safe HTML briefs." />
   <style>
     :root {
       color-scheme: dark;
@@ -48,10 +48,10 @@
       padding: .42rem .72rem; color: var(--muted); background: rgba(255,255,255,.045);
       font-size: .86rem; white-space: nowrap;
     }
-    .hero { display: grid; grid-template-columns: minmax(0, 1.12fr) 380px; gap: 34px; align-items: end; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) 410px; gap: 34px; align-items: end; }
     .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; font-weight: 850; }
-    h1 { margin: .45rem 0 1rem; font-size: clamp(2.7rem, 7vw, 6.4rem); line-height: .9; letter-spacing: -.065em; text-wrap: balance; }
-    .lede { margin: 0; max-width: 840px; color: #cdd9e8; font-size: clamp(1.12rem, 2vw, 1.42rem); }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.7rem, 7vw, 6.2rem); line-height: .9; letter-spacing: -.065em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 850px; color: #cdd9e8; font-size: clamp(1.12rem, 2vw, 1.42rem); }
     .hero-card { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045)); box-shadow: var(--shadow); padding: 24px; }
     .hero-card h2 { margin: 0 0 .75rem; font-size: 1rem; color: var(--accent); }
     .hero-card p { margin: 0; color: var(--muted); }
@@ -77,7 +77,7 @@
     .card p, .card li { color: var(--muted); }
     .card .small { color: var(--quiet); font-size: .92rem; }
     .board { display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 12px; align-items: stretch; }
-    .lane { border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.045); padding: 14px; min-height: 170px; }
+    .lane { border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.045); padding: 14px; min-height: 190px; }
     .lane h3 { color: var(--accent); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px; }
     .ticket { border: 1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.18); border-radius: 14px; padding: 12px; color: #dce9f8; font-size: .93rem; }
     .ticket + .ticket { margin-top: 10px; }
@@ -85,7 +85,6 @@
     .flow { counter-reset: step; display: grid; gap: 14px; }
     .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
     .step::before { counter-increment: step; content: counter(step); width: 38px; height: 38px; border-radius: 50%; display: inline-grid; place-items: center; color: #04151a; background: var(--accent); font-weight: 900; }
-    .step p { color: var(--muted); }
     .callout { border-left: 4px solid var(--accent); padding: 18px 22px; border-radius: 16px; background: rgba(132,224,194,.08); color: #dbfff5; margin: 18px 0; }
     .prompt { border: 1px solid rgba(159,199,255,.24); border-radius: 18px; background: rgba(159,199,255,.07); padding: 18px; color: #e7f0ff; }
     code, .code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .92em; color: #d7c9ff; background: rgba(255,255,255,.07); border: 1px solid var(--line); border-radius: 8px; padding: .12rem .38rem; }
@@ -100,18 +99,18 @@
 <body>
   <header class="wrap">
     <div class="topbar">
-      <div class="crumb"><a href="../index.html">Donn's websites for Clay</a><span>›</span><span>Research playbook</span></div>
-      <span class="pill">Published May 30, 2026</span>
+      <div class="crumb"><a href="../index.html">Donn's websites for Clay</a><span>›</span><span>Research Kanban v1</span></div>
+      <span class="pill">Updated May 30, 2026</span>
     </div>
     <div class="hero">
       <div>
-        <div class="eyebrow">Reusable research system</div>
-        <h1>A Kanban for look-it-up projects.</h1>
-        <p class="lede">Use this when Clay asks Donn to research a topic, split the work into visible lanes, synthesize the findings, and publish a clean HTML brief back to the GitHub Pages repository.</p>
+        <div class="eyebrow">Reusable research operating policy</div>
+        <h1>Clay's Kanban for look-it-up projects.</h1>
+        <p class="lede">This is the reusable house style for when Clay asks Donn to research a topic: create a durable board trail, split evidence into lanes, synthesize the findings, and publish a public-safe HTML brief when appropriate.</p>
       </div>
       <aside class="hero-card" aria-label="Bottom line">
         <h2>Bottom line</h2>
-        <p>Clay's call phrase is <code>Kanban research &lt;topic&gt;</code>. Donn reads Clay's editable spec, queues the research graph on <code>research-projects</code>, synthesizes findings, and publishes the HTML brief.</p>
+        <p><strong>Kanban is the machinery.</strong> The existing Kanban skills are the manual. This playbook and <code>kanban_research_spec.yaml</code> are Clay's reusable operating policy for topic research.</p>
       </aside>
     </div>
   </header>
@@ -119,10 +118,11 @@
   <nav class="toc" aria-label="Page sections">
     <div class="wrap">
       <a href="#trigger">Trigger</a>
+      <a href="#principles">Principles</a>
       <a href="#board">Board</a>
       <a href="#intake">Intake</a>
       <a href="#task-graph">Task graph</a>
-      <a href="#templates">Templates</a>
+      <a href="#contracts">Contracts</a>
       <a href="#publish">Publish</a>
       <a href="#commands">Commands</a>
     </div>
@@ -141,74 +141,89 @@
           <p class="small">The topic is everything after <code>Kanban research</code>. If the topic is clear, Donn proceeds instead of asking for a long form.</p>
         </article>
         <article class="card">
-          <h3>Clay's editable spec</h3>
-          <p>The behavior lives in <code>/home/clay/.hermes/notes/kanban_research_spec.yaml</code>. Edit that file to change depth, source standards, task lanes, publishing rules, or completion format.</p>
-          <p class="small">A dedicated skill, <code>kanban-research-trigger</code>, loads when this shorthand appears and tells Donn to read the spec before creating cards.</p>
+          <h3>Clay's editable source of truth</h3>
+          <p>The behavior lives in <code>/home/clay/.hermes/notes/kanban_research_spec.yaml</code>. That file now defines trigger parsing, lanes, gates, source standards, recovery rules, publishing policy, and final reply format.</p>
+          <p class="small">The trigger skill <code>kanban-research-trigger</code> tells Donn to read this file before creating cards.</p>
         </article>
       </div>
       <div class="prompt" style="margin-top: 18px;">
         <strong>Minimum viable call:</strong> <code>Kanban research volcanoes</code><br />
-        <strong>Optional scoped call:</strong> <code>Kanban research volcano monitoring for school emergency planning; focus on practical risks and good sources</code>
+        <strong>Optional scoped call:</strong> <code>Kanban research school voucher outcomes in rural districts; focus on credible studies and policy trade-offs</code>
       </div>
+    </section>
+
+    <section id="principles">
+      <div class="section-head">
+        <div class="section-kicker">01 · House style</div>
+        <h2>The reusable verbiage Donn should follow.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card strong"><h3>Do the workflow, not a lecture</h3><p>When Clay uses the trigger, Donn should not merely explain Kanban. Donn should read the spec, discover profiles, create the graph, and report task IDs.</p></article>
+        <article class="card"><h3>Durable before clever</h3><p>The board trail matters: clear cards, parent links, handoff metadata, and visible blocked decisions are more useful than a single clever answer.</p></article>
+        <article class="card"><h3>Public-safe by default</h3><p>Research can become HTML, so workers must separate useful findings from private operational context before publishing.</p></article>
+      </div>
+      <div class="callout"><strong>Success definition:</strong> a completed cycle leaves behind evidence handoffs with URLs, a synthesis that separates facts from disputed interpretations, a public-safe HTML artifact when appropriate, and a short reply with URL plus verification status.</div>
     </section>
 
     <section id="board">
       <div class="section-head">
-        <div class="section-kicker">01 · Setup</div>
+        <div class="section-kicker">02 · Setup</div>
         <h2>One board, repeatable topic cycles.</h2>
       </div>
       <div class="grid two">
         <article class="card strong">
           <h3>Reusable board</h3>
           <p>Board slug: <code>research-projects</code>. Keep this board for research requests where the output is a synthesized answer, memo, or public/static HTML artifact.</p>
-          <p class="small">Default behavior: the board can hold many topic cycles. Use a unique prefix in each task title, such as <code>[topic: school choice]</code>, to keep cycles readable.</p>
+          <p class="small">Use a unique prefix in each task title, such as <code>[research: school-choice]</code>, so multiple topics can coexist on the same board.</p>
         </article>
         <article class="card warn">
           <h3>Current profile reality</h3>
-          <p>Only the <code>default</code> Hermes profile is currently available, so research cards assigned to it will be processed serially. If Clay adds specialist profiles later, the same task graph can fan out in parallel.</p>
+          <p>Only the <code>default</code> Hermes profile is currently available, so research cards assigned to it will process serially. The same graph can fan out in parallel later if Clay adds specialist profiles.</p>
         </article>
       </div>
-      <div class="callout"><strong>Rule:</strong> do not create a pile of independent ready cards if later work needs the findings first. Research lanes can run independently; synthesis, review, and publishing should depend on those parent cards.</div>
+      <div class="callout"><strong>Dependency rule:</strong> evidence lanes may run independently; synthesis depends on evidence parents; HTML publishing depends on synthesis; verification comes after publishing work exists.</div>
     </section>
 
     <section id="intake">
       <div class="section-head">
-        <div class="section-kicker">02 · Intake</div>
-        <h2>Every research cycle starts with the smallest useful brief.</h2>
+        <div class="section-kicker">03 · Intake</div>
+        <h2>The smallest useful brief beats a long form.</h2>
       </div>
       <div class="grid four">
-        <article class="card"><h3>Question</h3><p>What decision or understanding should the research unlock?</p></article>
-        <article class="card"><h3>Scope</h3><p>What is included, excluded, and time-sensitive?</p></article>
+        <article class="card"><h3>Question</h3><p>What should Clay understand or decide after reading?</p></article>
+        <article class="card"><h3>Scope</h3><p>What is included, excluded, time-sensitive, or risky?</p></article>
         <article class="card"><h3>Output</h3><p>Quick answer, memo, comparison table, saved notes, or public HTML?</p></article>
-        <article class="card"><h3>Standards</h3><p>Required sources, citation depth, skepticism level, and whether private context can be used.</p></article>
+        <article class="card"><h3>Standards</h3><p>Which source types, skepticism level, and privacy rules apply?</p></article>
       </div>
-      <div class="prompt" style="margin-top: 18px;">
-        <strong>Reusable prompt to Donn:</strong><br />
-        “<code>Kanban research [topic]</code>” is enough for the default behavior. Add scope only when you care about a particular angle, audience, source type, or exclusion.
+      <div class="grid two" style="margin-top: 18px;">
+        <article class="card"><h3>Ask Clay when</h3><ul><li>The topic is empty or genuinely ambiguous.</li><li>Publishing could expose private context.</li><li>The audience or output format materially changes the plan.</li></ul></article>
+        <article class="card"><h3>Proceed when</h3><ul><li>The topic is clear enough for a broad default brief.</li><li>Missing details can be written as assumptions.</li><li>The first step is only internal evidence gathering.</li></ul></article>
       </div>
     </section>
 
     <section id="task-graph">
       <div class="section-head">
-        <div class="section-kicker">03 · Flow</div>
+        <div class="section-kicker">04 · Flow</div>
         <h2>Fan out research, then fan in to synthesis.</h2>
       </div>
       <div class="board" aria-label="Research Kanban columns">
-        <div class="lane"><h3>Triage</h3><div class="ticket">Raw topic request<small>clarify question, scope, output</small></div></div>
-        <div class="lane"><h3>Ready</h3><div class="ticket">Source discovery</div><div class="ticket">Primary-source read</div><div class="ticket">Counterarguments</div></div>
-        <div class="lane"><h3>Running</h3><div class="ticket">Worker gathers evidence<small>heartbeat only if long-running</small></div></div>
-        <div class="lane"><h3>Blocked</h3><div class="ticket">Needs Clay decision<small>scope, source, publish/no publish</small></div></div>
-        <div class="lane"><h3>Done</h3><div class="ticket">Synthesis complete</div><div class="ticket">HTML published</div></div>
+        <div class="lane"><h3>Triage</h3><div class="ticket">Scope and avenue map<small>assumptions, lanes, publish posture</small></div></div>
+        <div class="lane"><h3>Ready</h3><div class="ticket">Foundations</div><div class="ticket">Current landscape</div><div class="ticket">Evidence quality</div><div class="ticket">Debates and risks</div></div>
+        <div class="lane"><h3>Running</h3><div class="ticket">Workers gather evidence<small>URLs + relevance notes</small></div></div>
+        <div class="lane"><h3>Blocked</h3><div class="ticket">Specific Clay decision<small>scope, source, public/private</small></div></div>
+        <div class="lane"><h3>Review / Publish</h3><div class="ticket">Synthesis</div><div class="ticket">HTML artifact</div><div class="ticket">Live verification</div></div>
       </div>
       <div class="grid two" style="margin-top: 18px;">
         <article class="card">
-          <h3>Good default task graph</h3>
+          <h3>Default task graph</h3>
           <ol>
-            <li><strong>Scope card</strong>: turn the request into a concrete research spec.</li>
-            <li><strong>Research lanes</strong>: source discovery, primary evidence, opposing views, examples/cases.</li>
-            <li><strong>Synthesis card</strong>: combine parent outputs into a recommendation or briefing.</li>
-            <li><strong>Artifact card</strong>: write the HTML page and update the repository index.</li>
-            <li><strong>Verification card</strong>: check links, commit/push, and confirm the live URL.</li>
+            <li><strong>Scope card</strong>: convert the raw topic into a research map.</li>
+            <li><strong>Foundations</strong>: definitions, background, why the topic matters.</li>
+            <li><strong>Current landscape</strong>: examples, actors, timelines, practical context.</li>
+            <li><strong>Evidence quality</strong>: best sources and weak source clusters.</li>
+            <li><strong>Debates / risks</strong>: counterarguments, uncertainties, failure modes.</li>
+            <li><strong>Synthesis</strong>: child of evidence lanes; produces bottom line and trade-offs.</li>
+            <li><strong>HTML publish</strong>: child of synthesis; writes, indexes, commits, pushes, verifies.</li>
           </ol>
         </article>
         <article class="card danger">
@@ -216,95 +231,69 @@
           <ul>
             <li>Inventing profile names that do not exist.</li>
             <li>Bundling unrelated research lanes into one huge card.</li>
-            <li>Letting the publisher start before synthesis is done.</li>
+            <li>Letting synthesis or publishing start before source work is done.</li>
             <li>Putting private prompts, credentials, or operational context on the public page.</li>
           </ul>
         </article>
       </div>
     </section>
 
-    <section id="templates">
+    <section id="contracts">
       <div class="section-head">
-        <div class="section-kicker">04 · Card templates</div>
-        <h2>Copy these shapes when starting a topic.</h2>
+        <div class="section-kicker">05 · Card contracts</div>
+        <h2>Every card should be ready, and every handoff should be usable.</h2>
       </div>
-      <div class="flow">
-        <article class="step card">
-          <div>
-            <h3>Scope / spec</h3>
-            <p>Define the research question, output format, source requirements, exclusions, and whether the final result should be public.</p>
-<pre>Title: [topic] scope research request
-Body: Convert Clay's request into a concrete research spec. Include question, audience, deliverable, source standards, exclusions, and publish/no-publish recommendation.</pre>
-          </div>
-        </article>
-        <article class="step card">
-          <div>
-            <h3>Evidence lanes</h3>
-            <p>Create independent lanes only when they can be worked without waiting for each other.</p>
-<pre>Title: [topic] source discovery
-Body: Find high-signal sources, official docs/data, credible explainers, and dissenting views. Return URLs and 1-2 sentence relevance notes.</pre>
-          </div>
-        </article>
-        <article class="step card">
-          <div>
-            <h3>Synthesis</h3>
-            <p>Gate this behind all evidence parents. The output should be a concise bottom line plus trade-offs.</p>
-<pre>Title: [topic] synthesize findings
-Parents: source discovery + primary-source + counterarguments
-Body: Produce a decision-ready synthesis with bottom line, key takeaways, uncertainty, and source links.</pre>
-          </div>
-        </article>
-        <article class="step card">
-          <div>
-            <h3>HTML artifact</h3>
-            <p>Gate publishing behind synthesis. Keep the page skimmable and safe for public GitHub Pages.</p>
-<pre>Title: [topic] publish HTML brief
-Parents: synthesis
-Body: Build a self-contained HTML page under research/, update index.html, commit, push, and verify the live GitHub Pages URL.</pre>
-          </div>
-        </article>
+      <div class="grid three">
+        <article class="card"><h3>Definition of ready</h3><ul><li>Title includes the topic prefix.</li><li>Body is self-contained.</li><li>Lane goal and handoff shape are explicit.</li><li>Parent dependencies are actual links.</li></ul></article>
+        <article class="card"><h3>Research done means</h3><ul><li>Concise findings, not browsing transcript.</li><li>Source URLs with relevance notes.</li><li>Facts, interpretations, and uncertainty separated.</li><li>Weak or unchecked areas named.</li></ul></article>
+        <article class="card"><h3>Synthesis done means</h3><ul><li>Bottom line for Clay.</li><li>Major takeaways and trade-offs.</li><li>Settled vs contested claims.</li><li>Source list carried forward.</li><li>Publish/no-publish recommendation.</li></ul></article>
+      </div>
+      <div class="prompt" style="margin-top: 18px;">
+        <strong>Handoff shape:</strong> summary paragraph; 3–7 source-backed key points; source list with title, URL, publisher, date if known, and relevance; uncertainty note; recommended next question if needed.
       </div>
     </section>
 
     <section id="publish">
       <div class="section-head">
-        <div class="section-kicker">05 · HTML output</div>
+        <div class="section-kicker">06 · HTML output</div>
         <h2>The repository is the durable shelf.</h2>
       </div>
       <div class="grid three">
         <article class="card"><h3>Where pages live</h3><p>Standalone research pages go under <code>research/</code> using filenames like <code>YYYY-MM-DD-topic-slug.html</code>.</p></article>
-        <article class="card"><h3>How pages are found</h3><p>Update the homepage card grid with a relative link, short title, and one-sentence summary.</p></article>
-        <article class="card"><h3>How pages are verified</h3><p>Check the file locally, commit and push to <code>main</code>, then poll GitHub Pages until the page returns <code>200</code> and contains an expected text marker.</p></article>
+        <article class="card"><h3>What pages include</h3><p>Plain-language title, bottom line, context, evidence-backed takeaways, debates/risks/uncertainties, and source links.</p></article>
+        <article class="card"><h3>How pages are verified</h3><p>Check the file locally, update the index, commit and push to <code>main</code>, then poll GitHub Pages until the page returns <code>200</code> and contains an expected marker.</p></article>
       </div>
+      <div class="callout"><strong>Ask before publishing</strong> when a topic depends on Clay's private life, family, work, finances, health, legal situation, or private agent/repo operations.</div>
     </section>
 
     <section id="commands">
       <div class="section-head">
-        <div class="section-kicker">06 · Operator commands</div>
+        <div class="section-kicker">07 · Operator commands</div>
         <h2>Concrete commands for Clay or Donn.</h2>
       </div>
       <div class="grid two">
         <article class="card">
-          <h3>Board commands</h3>
-<pre>hermes kanban boards list
-hermes kanban boards switch research-projects
+          <h3>Inspect board and profiles</h3>
+<pre>hermes profile list
 hermes kanban assignees
+hermes kanban boards list
+hermes kanban boards switch research-projects
 hermes kanban list --board research-projects</pre>
         </article>
         <article class="card">
           <h3>Create the first card in a topic cycle</h3>
 <pre>hermes kanban --board research-projects create \
-  "[topic] scope research request" \
+  "[research: topic] scope and avenue map" \
   --assignee default \
-  --body "Turn Clay's request into a concrete research spec: question, audience, deliverable, source standards, exclusions, and publish/no-publish recommendation."</pre>
+  --body "Turn Clay's request into a concrete research spec: question, audience, assumptions, lanes, source standards, exclusions, and publish/no-publish recommendation."</pre>
         </article>
       </div>
-      <div class="callout"><strong>Operating preference:</strong> when Clay uses the shorthand, Donn should not merely explain the process. Donn should read the spec, discover profiles, queue the parent-linked graph, and report the task IDs. If the request is unclear, ask one focused question.</div>
+      <div class="callout"><strong>Operating preference:</strong> when Clay uses the shorthand, Donn should read the YAML, discover profiles, queue the parent-linked graph, and report task IDs. If the request is unclear, ask one focused question.</div>
     </section>
 
     <p class="footer">
       <span>Repository: <a href="https://github.com/claydunker-yalc/donns-websites-for-clay">claydunker-yalc/donns-websites-for-clay</a></span>
-      <span>Board slug: <code>research-projects</code></span>
+      <span>Spec file: <code>/home/clay/.hermes/notes/kanban_research_spec.yaml</code></span>
     </p>
   </main>
 </body>
