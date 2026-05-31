@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermes MCP Catalog: What to Use, What to Watch</title>
+  <meta name="description" content="A research brief on the Hermes Agent MCP catalog, safety concerns, prompt injection risks, and popular MCP servers discussed by the community." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08090a;
+      --bg-2: #0f1011;
+      --surface: rgba(255,255,255,.035);
+      --surface-2: rgba(255,255,255,.065);
+      --surface-3: rgba(255,255,255,.10);
+      --ink: #f7f8f8;
+      --muted: #d0d6e0;
+      --quiet: #8a8f98;
+      --dim: #62666d;
+      --accent: #7170ff;
+      --accent-2: #828fff;
+      --good: #10b981;
+      --warn: #ffd28a;
+      --danger: #ff9ca6;
+      --line: rgba(255,255,255,.08);
+      --line-strong: rgba(255,255,255,.14);
+      --max: 1180px;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-feature-settings: "cv01", "ss03";
+      background:
+        radial-gradient(circle at 18% -8%, rgba(113,112,255,.24), transparent 34rem),
+        radial-gradient(circle at 98% 12%, rgba(16,185,129,.12), transparent 32rem),
+        linear-gradient(180deg, #08090a 0%, #0b0d12 48%, #08090a 100%);
+      color: var(--ink);
+      line-height: 1.58;
+    }
+    a { color: #aeb4ff; text-underline-offset: .18em; }
+    a:hover { color: var(--accent-2); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 38px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 72px; color: var(--quiet); font-size: .94rem; }
+    .crumb { display: inline-flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+    .pill, .tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: .42rem .72rem; color: var(--muted); background: rgba(255,255,255,.035);
+      font-size: .84rem; white-space: nowrap;
+    }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 34px; align-items: end; }
+    .eyebrow { color: #aeb4ff; text-transform: uppercase; letter-spacing: .18em; font-size: .76rem; font-weight: 600; }
+    h1 { margin: .5rem 0 1.1rem; font-size: clamp(2.7rem, 7vw, 6.4rem); line-height: .88; letter-spacing: -.065em; font-weight: 500; text-wrap: balance; }
+    .lede { margin: 0; max-width: 810px; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.38rem); letter-spacing: -.01em; }
+    .hero-card, .card, .panel { border: 1px solid var(--line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); border-radius: var(--radius); box-shadow: 0 28px 90px rgba(0,0,0,.32); }
+    .hero-card { padding: 24px; }
+    .hero-card h2 { margin: 0 0 .7rem; font-size: 1rem; color: #aeb4ff; }
+    .hero-card p { margin: 0; color: var(--muted); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .stat { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: rgba(255,255,255,.035); }
+    .stat b { display:block; font-size: 1.35rem; line-height:1; color: var(--ink); }
+    .stat span { color: var(--quiet); font-size: .78rem; }
+    nav.toc { position: sticky; top: 0; z-index: 5; backdrop-filter: blur(18px); background: rgba(8,9,10,.78); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 10px; overflow-x: auto; padding: 12px 18px; }
+    nav.toc a { color: var(--muted); text-decoration: none; border: 1px solid transparent; padding: .48rem .7rem; border-radius: 999px; white-space: nowrap; font-size: .9rem; }
+    nav.toc a:hover { color: var(--ink); border-color: var(--line); background: rgba(255,255,255,.045); }
+    main { padding: 38px 0 74px; }
+    section { scroll-margin-top: 86px; }
+    .section-head { display: grid; grid-template-columns: 230px 1fr; gap: 28px; align-items: start; margin: 68px 0 22px; }
+    .section-kicker { color: #aeb4ff; text-transform: uppercase; letter-spacing: .16em; font-size: .74rem; font-weight: 600; }
+    h2 { margin: 0; font-size: clamp(1.75rem, 4vw, 3.25rem); line-height: 1; letter-spacing: -.045em; font-weight: 500; text-wrap: balance; }
+    h3 { margin: 0 0 .55rem; font-size: 1.08rem; line-height: 1.22; letter-spacing: -.018em; }
+    p { margin: 0 0 1rem; }
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { padding: 24px; }
+    .card p, .card li { color: var(--muted); }
+    .card strong { color: var(--ink); }
+    .card.good { border-color: rgba(16,185,129,.32); background: linear-gradient(180deg, rgba(16,185,129,.11), rgba(255,255,255,.035)); }
+    .card.warn { border-color: rgba(255,210,138,.34); background: rgba(255,210,138,.07); }
+    .card.danger { border-color: rgba(255,156,166,.32); background: rgba(255,156,166,.065); }
+    .callout { border-left: 4px solid var(--accent); padding: 18px 22px; border-radius: 16px; background: rgba(113,112,255,.10); color: #e7e8ff; margin: 18px 0; }
+    .matrix { display: grid; gap: 12px; }
+    .row { display: grid; grid-template-columns: 190px 1fr 1fr; gap: 12px; align-items: stretch; }
+    .cell { border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 14px; padding: 14px; color: var(--muted); }
+    .cell:first-child { color: var(--ink); font-weight: 600; }
+    .rank { display: grid; gap: 12px; }
+    .rank article { display: grid; grid-template-columns: 42px 1fr auto; gap: 14px; align-items: start; border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: rgba(255,255,255,.035); }
+    .num { width: 34px; height: 34px; border-radius: 50%; display: inline-grid; place-items: center; background: #5e6ad2; color: #fff; font-weight: 600; }
+    .confidence { color: var(--quiet); font-size: .82rem; border: 1px solid var(--line); border-radius: 999px; padding: .2rem .5rem; white-space: nowrap; }
+    code, .code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: .9em; color: #d8d7ff; background: rgba(255,255,255,.065); border: 1px solid var(--line); border-radius: 8px; padding: .12rem .38rem; }
+    pre { overflow: auto; padding: 18px; border-radius: 18px; border: 1px solid var(--line); background: rgba(0,0,0,.24); color: #dfe2ff; }
+    ul, ol { margin: .7rem 0 0; padding-left: 1.25rem; }
+    li + li { margin-top: .45rem; }
+    .source-list { columns: 2; column-gap: 34px; }
+    .source-list li { break-inside: avoid; margin-bottom: .6rem; color: var(--muted); }
+    .note { color: var(--quiet); font-size: .92rem; }
+    .footer { margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line); color: var(--quiet); display: flex; gap: 18px; justify-content: space-between; flex-wrap: wrap; }
+    @media (max-width: 940px) {
+      .hero, .section-head, .grid.two, .grid.three, .row { grid-template-columns: 1fr; }
+      .rank article { grid-template-columns: 42px 1fr; }
+      .confidence { grid-column: 2; width: max-content; }
+      .source-list { columns: 1; }
+      .topbar { align-items: flex-start; flex-direction: column; margin-bottom: 42px; }
+    }
+    @media print {
+      body { background: white; color: #111; }
+      nav.toc { display:none; }
+      .card, .hero-card, .panel { background: white; box-shadow: none; border-color: #ddd; }
+      a { color: #0645ad; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">Donn's websites for Clay</a><span>›</span><span>Research brief</span></div>
+      <span class="pill">Published May 30, 2026</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Hermes Agent × MCP catalog</div>
+        <h1>Useful tools, real risk surface.</h1>
+        <p class="lede">Hermes Agent’s MCP support is robust: native stdio/HTTP servers, OAuth, catalog installs, per-tool filtering, and sampling controls. The official catalog is still small, but MCP’s broader ecosystem is moving fast — and the security model requires treating every server like executable code plus a prompt-injection surface.</p>
+      </div>
+      <aside class="hero-card" aria-label="Bottom line">
+        <h2>Bottom line</h2>
+        <p>Use the catalog as a safer starting point, not a magic trust boundary. Prefer reviewed servers, expose only the tools you need, scope credentials tightly, and disable sampling for anything you do not fully trust.</p>
+        <div class="stats">
+          <div class="stat"><b>2</b><span>catalog entries found</span></div>
+          <div class="stat"><b>3</b><span>research tracks</span></div>
+          <div class="stat"><b>10+</b><span>popular MCPs flagged</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="wrap">
+      <a href="#catalog">Catalog</a>
+      <a href="#safety">Safety</a>
+      <a href="#popular">Popular MCPs</a>
+      <a href="#recommendations">Recommendations</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="catalog">
+      <div class="section-head">
+        <div class="section-kicker">01 / Catalog reality</div>
+        <h2>Hermes has native MCP support and a reviewed catalog, but the official catalog is early.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card good">
+          <h3>What Hermes supports</h3>
+          <p>Hermes connects to MCP servers at startup, discovers tools, and registers them as first-class Hermes tools with names like <code>mcp_server_tool</code>. It supports local stdio servers and remote HTTP/StreamableHTTP servers.</p>
+          <ul>
+            <li>Interactive picker: <code>hermes mcp</code> or <code>hermes mcp picker</code>.</li>
+            <li>Scriptable catalog listing: <code>hermes mcp catalog</code>.</li>
+            <li>Catalog install: <code>hermes mcp install &lt;name&gt;</code>.</li>
+            <li>Custom add: <code>hermes mcp add &lt;name&gt; --url ...</code> or <code>--command ...</code>.</li>
+            <li>Tool selection: <code>hermes mcp configure &lt;name&gt;</code>.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>What the official catalog contained in the checked snapshot</h3>
+          <p>The official Hermes docs point to repo manifests under <code>optional-mcps/</code> as the reviewed catalog. The fetched snapshot showed two catalog entries:</p>
+          <ul>
+            <li><strong>Linear</strong> — remote HTTP/OAuth workflow integration for issues and project management.</li>
+            <li><strong>n8n</strong> — stdio bridge for inspecting and managing n8n workflows.</li>
+          </ul>
+          <p class="note">Caveat: this is a fast-moving catalog; the page should be treated as a dated snapshot, not a permanent inventory.</p>
+        </article>
+      </div>
+      <div class="callout"><strong>Translation:</strong> Hermes’ MCP implementation is broader than the catalog. The catalog is the reviewed on-ramp; manual MCP configuration is how users connect the wider ecosystem.</div>
+    </section>
+
+    <section id="safety">
+      <div class="section-head">
+        <div class="section-kicker">02 / Safety model</div>
+        <h2>MCP safety is both software supply-chain safety and prompt-injection safety.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card danger">
+          <h3>Prompt injection before tool use</h3>
+          <p>MCP tools expose names, descriptions, resources, and prompts to the model. A malicious server can hide instructions in those descriptions, influencing the agent before the user intentionally calls that tool.</p>
+        </article>
+        <article class="card danger">
+          <h3>Tool poisoning and shadowing</h3>
+          <p>One malicious MCP can try to shape how the model uses other tools, e.g. by telling it to exfiltrate secrets through a trusted-looking workflow or to prefer the malicious tool.</p>
+        </article>
+        <article class="card danger">
+          <h3>Executable third-party code</h3>
+          <p>Local stdio MCPs may run <code>npx</code>, <code>uvx</code>, bootstrap scripts, package installs, or cloned repo code. That is not just “configuration”; it is code execution.</p>
+        </article>
+      </div>
+
+      <div class="section-head">
+        <div class="section-kicker">Controls</div>
+        <h2>Hermes has useful guardrails, but they work best with least privilege.</h2>
+      </div>
+      <div class="matrix" role="table" aria-label="Hermes MCP safety controls">
+        <div class="row" role="row">
+          <div class="cell" role="cell">Risk</div>
+          <div class="cell" role="cell">Hermes control</div>
+          <div class="cell" role="cell">Best practice</div>
+        </div>
+        <div class="row" role="row">
+          <div class="cell">Credential leakage</div>
+          <div class="cell">Filtered stdio environment; only safe baseline env vars plus explicitly configured <code>env</code> are passed.</div>
+          <div class="cell">Give each server only the one token/scope it needs; rotate and revoke aggressively.</div>
+        </div>
+        <div class="row" role="row">
+          <div class="cell">Oversized tool surface</div>
+          <div class="cell"><code>tools.include</code>, <code>tools.exclude</code>, and toggles for resources/prompts.</div>
+          <div class="cell">Expose the smallest practical tool set. Default to allowlists for untrusted or powerful servers.</div>
+        </div>
+        <div class="row" role="row">
+          <div class="cell">Prompt/resource injection</div>
+          <div class="cell">Tool-selection UI and server-level config; Hermes also documents prompt-injection/security scanning outside MCP.</div>
+          <div class="cell">Disable prompt/resource wrappers unless needed; inspect tool descriptions and upstream source.</div>
+        </div>
+        <div class="row" role="row">
+          <div class="cell">Server-initiated LLM calls</div>
+          <div class="cell">Per-server sampling config: enable/disable, token caps, timeouts, rate limits, model allowlists, max tool rounds.</div>
+          <div class="cell">Set <code>sampling: { enabled: false }</code> for untrusted servers.</div>
+        </div>
+        <div class="row" role="row">
+          <div class="cell">Remote MCP trust</div>
+          <div class="cell">HTTP headers/OAuth/TLS options and token storage under <code>~/.hermes/mcp-tokens/</code>.</div>
+          <div class="cell">Treat remote MCPs like vendors with access to sensitive workflow context.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="popular">
+      <div class="section-head">
+        <div class="section-kicker">03 / Community buzz</div>
+        <h2>The popular MCPs are mostly from the broader Claude/Cursor/agent ecosystem, not Hermes-exclusive chatter.</h2>
+      </div>
+      <p class="note">One research track used Grok/X Search and Reddit-accessible pages. Direct Hermes-specific “I use this MCP in Hermes” evidence was limited; the ranking below separates catalog/Hermes relevance from general MCP popularity.</p>
+      <div class="rank">
+        <article><span class="num">1</span><div><h3>Filesystem + Git</h3><p>Foundational for local coding agents: read/write project files, inspect repos, and support daily development loops. Very strong general MCP signal.</p></div><span class="confidence">General: high</span></article>
+        <article><span class="num">2</span><div><h3>GitHub</h3><p>Popular for issues, pull requests, repo inspection, code review, and replacing ad-hoc API/CLI steps in engineering workflows.</p></div><span class="confidence">General: high</span></article>
+        <article><span class="num">3</span><div><h3>Linear</h3><p>Important because it is both broadly discussed and present in the Hermes catalog snapshot. Good fit for agentic project-management workflows.</p></div><span class="confidence">Hermes catalog</span></article>
+        <article><span class="num">4</span><div><h3>n8n</h3><p>Present in the Hermes catalog snapshot. Useful if the user already relies on n8n for automations and wants agents to inspect or manage workflows.</p></div><span class="confidence">Hermes catalog</span></article>
+        <article><span class="num">5</span><div><h3>Context7</h3><p>Strong coding-agent buzz for up-to-date framework/library docs. Helpful when agents hallucinate stale APIs.</p></div><span class="confidence">General: high</span></article>
+        <article><span class="num">6</span><div><h3>Playwright / browser MCPs</h3><p>Commonly discussed for browser automation, testing, scraping, and form workflows. Also a higher-risk class because it touches web pages and user sessions.</p></div><span class="confidence">General: high</span></article>
+        <article><span class="num">7</span><div><h3>Brave Search + Fetch/web readers</h3><p>Useful for research agents: search, fetch pages, summarize, and cite. Community signal is broad rather than Hermes-specific.</p></div><span class="confidence">General: high</span></article>
+        <article><span class="num">8</span><div><h3>Notion / Slack / Google Workspace</h3><p>Workspace MCPs are frequently paired with GitHub and Linear for docs, status updates, team chat, and knowledge retrieval.</p></div><span class="confidence">General: medium-high</span></article>
+        <article><span class="num">9</span><div><h3>Memory / codebase knowledge graph</h3><p>Reddit discussions show strong interest in persistent memory and codebase-intelligence MCPs to reduce repeated context-loading.</p></div><span class="confidence">General: medium-high</span></article>
+        <article><span class="num">10</span><div><h3>Databases, Jira, Home Assistant, Composio</h3><p>Database MCPs help with schema/query debugging; Jira and Home Assistant are strong in their communities; managed hubs like Composio trade convenience for broader trust/security questions.</p></div><span class="confidence">Domain-specific</span></article>
+      </div>
+    </section>
+
+    <section id="recommendations">
+      <div class="section-head">
+        <div class="section-kicker">04 / Recommendations</div>
+        <h2>A safe default policy for Clay’s Hermes setup.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card good">
+          <h3>Green-light candidates</h3>
+          <ul>
+            <li><strong>Linear catalog MCP</strong> if project-management loops matter and OAuth scopes are narrow.</li>
+            <li><strong>n8n catalog MCP</strong> if automations are already managed in n8n and workflow visibility is valuable.</li>
+            <li><strong>Context7</strong> for coding help, after source review and tool allowlisting.</li>
+            <li><strong>Project-scoped filesystem/Git</strong> only when scoped to a single repo directory, never all of <code>$HOME</code>.</li>
+          </ul>
+        </article>
+        <article class="card warn">
+          <h3>Use with extra caution</h3>
+          <ul>
+            <li><strong>Browser automation MCPs</strong> because prompt injection from websites can blend with active sessions and forms.</li>
+            <li><strong>Remote managed hubs</strong> because they centralize auth and can touch many services.</li>
+            <li><strong>Workspace/chat MCPs</strong> because they can read sensitive docs/messages or post externally.</li>
+            <li><strong>Database MCPs</strong> because query tools can expose production data or mutate records.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout"><strong>Operational rule:</strong> Every MCP install should have an owner, a stated purpose, a scoped credential, an exposed-tool allowlist, and a rollback/removal path.</div>
+      <pre><code>mcp_servers:
+  example:
+    command: "npx"
+    args: ["-y", "trusted-mcp-package"]
+    tools:
+      include: ["safe_read_only_tool"]
+      resources: false
+      prompts: false
+    sampling:
+      enabled: false</code></pre>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <div class="section-kicker">05 / Sources</div>
+        <h2>Primary sources and research trail.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <h3>Hermes sources</h3>
+          <ul class="source-list">
+            <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp">Hermes MCP feature docs</a></li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference">Hermes MCP config reference</a></li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/guides/use-mcp-with-hermes">Use MCP with Hermes guide</a></li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/security">Hermes security docs</a></li>
+            <li><a href="https://github.com/NousResearch/hermes-agent/tree/main/optional-mcps">Hermes optional MCP manifests</a></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Security sources</h3>
+          <ul class="source-list">
+            <li><a href="https://blog.trailofbits.com/2025/04/21/jumping-the-line-how-mcp-servers-can-attack-you-before-you-ever-use-them/">Trail of Bits: MCP servers can attack before use</a></li>
+            <li><a href="https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks">Invariant Labs: tool poisoning attacks</a></li>
+            <li><a href="https://www.wiz.io/blog/mcp-security-research-briefing">Wiz MCP security briefing</a></li>
+            <li><a href="https://modelcontextprotocol.io/specification/draft/basic/security_best_practices">MCP security best practices</a></li>
+            <li><a href="https://modelcontextprotocol.io/docs/concepts/transports">MCP transport docs</a></li>
+            <li><a href="https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/">OWASP Agentic AI threats and mitigations</a></li>
+          </ul>
+        </article>
+      </div>
+      <article class="card" style="margin-top:18px">
+        <h3>Community signal sources</h3>
+        <p>Grok/X Search was used for current X chatter. Reddit signal came from accessible old.reddit/search result pages and thread URLs; Reddit’s JSON API was blocked during research.</p>
+        <ul class="source-list">
+          <li><a href="https://www.reddit.com/r/ClaudeAI/comments/1s0u2ms/mcp_servers_i_use_every_single_day_whats_in_your/">Reddit: “MCP servers I use every single day”</a></li>
+          <li><a href="https://www.reddit.com/r/ClaudeAI/comments/1pu51t7/the_best_mcp_servers_that_actually_can_change_how/">Reddit: “Best MCP Servers That Actually Can Change How You Code”</a></li>
+          <li><a href="https://www.reddit.com/r/mcp/comments/1rhjxet/charlotte_a_browser_mcp_server_built_for_token/">Reddit: browser MCP discussion</a></li>
+          <li><a href="https://www.reddit.com/r/ClaudeAI/comments/1qmuttr/i_gave_claude_the_one_thing_it_was_missing_memory/">Reddit: memory MCP discussion</a></li>
+          <li><a href="https://www.reddit.com/r/homeassistant/comments/1rvn71u/i_was_skeptical_at_first_but_claude_mcp_with_ha/">Reddit: Home Assistant MCP discussion</a></li>
+          <li><a href="https://x.com/linear/status/1917975398828134698">X: Linear MCP signal</a></li>
+          <li><a href="https://x.com/NotionDevs/status/1955666037816623486">X: Notion MCP signal</a></li>
+          <li><a href="https://x.com/_philschmid/status/1917132993644146956">X: MCP server roundup signal</a></li>
+        </ul>
+      </article>
+      <p class="note" style="margin-top:18px">Research note: I also attempted to launch a separate cheap open-model reviewer via OpenRouter <code>openai/gpt-oss-20b</code>, but this environment had no OpenRouter API key configured. The completed research used isolated Hermes subagents plus Grok/X Search for X signal.</p>
+    </section>
+
+    <p class="footer">
+      <span>Built by Donn for Clay.</span>
+      <span><a href="https://github.com/claydunker-yalc/donns-websites-for-clay">GitHub repo</a></span>
+    </p>
+  </main>
+</body>
+</html>
