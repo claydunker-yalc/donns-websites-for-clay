@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Where Kanban Could Have Helped: MCP Catalog Safety Research</title>
+  <meta name="description" content="A practical case study applying Hermes Agent Kanban to a recent research-subagent workflow." />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d18;
+      --panel: rgba(255,255,255,.068);
+      --panel-2: rgba(255,255,255,.105);
+      --ink: #f2f6ff;
+      --muted: #aeb9ca;
+      --quiet: #7d8aa0;
+      --line: rgba(255,255,255,.14);
+      --accent: #9ae6b4;
+      --accent-2: #8bd3ff;
+      --warn: #ffd28a;
+      --danger: #ff9da8;
+      --purple: #c7b6ff;
+      --shadow: 0 32px 100px rgba(0,0,0,.35);
+      --radius: 24px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(154,230,180,.18), transparent 34rem),
+        radial-gradient(circle at 85% 12%, rgba(199,182,255,.16), transparent 30rem),
+        linear-gradient(180deg, #090d18 0%, #0c1323 54%, #0b101c 100%);
+      line-height: 1.58;
+    }
+    a { color: var(--accent-2); text-underline-offset: .18em; }
+    a:hover { color: var(--accent); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 38px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap: 18px; color: var(--muted); margin-bottom: 62px; }
+    .crumb { display:inline-flex; align-items:center; gap:.55rem; }
+    .pill { border:1px solid var(--line); border-radius:999px; padding:.42rem .72rem; background:rgba(255,255,255,.045); white-space:nowrap; font-size:.9rem; }
+    .hero { display:grid; grid-template-columns:minmax(0, 1fr) 350px; gap:30px; align-items:end; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.18em; font-weight:850; font-size:.78rem; }
+    h1 { margin:.45rem 0 1rem; max-width:850px; font-size:clamp(2.45rem, 6vw, 5.75rem); line-height:.9; letter-spacing:-.06em; text-wrap:balance; }
+    .lede { margin:0; color:#ced8e8; max-width:790px; font-size:clamp(1.08rem, 2vw, 1.36rem); }
+    .hero-card, .card { border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); box-shadow:0 18px 60px rgba(0,0,0,.18); }
+    .hero-card { padding:24px; background:linear-gradient(180deg, rgba(255,255,255,.105), rgba(255,255,255,.045)); box-shadow:var(--shadow); }
+    .hero-card h2, .card h3 { margin:0 0 .6rem; font-size:1.08rem; line-height:1.2; }
+    .hero-card p, .card p, li { color:var(--muted); }
+    nav { position:sticky; top:0; z-index:5; backdrop-filter:blur(18px); border-block:1px solid var(--line); background:rgba(9,13,24,.78); }
+    nav .wrap { display:flex; gap:10px; overflow-x:auto; padding:12px 18px; }
+    nav a { color:var(--muted); text-decoration:none; padding:.5rem .68rem; border-radius:999px; white-space:nowrap; }
+    nav a:hover { color:var(--ink); background:rgba(255,255,255,.06); }
+    main { padding:42px 0 74px; }
+    section { scroll-margin-top: 88px; }
+    .section-head { display:grid; grid-template-columns:220px minmax(0, 1fr); gap:26px; align-items:start; margin:58px 0 20px; }
+    .kicker { color:var(--accent); text-transform:uppercase; letter-spacing:.16em; font-weight:850; font-size:.74rem; }
+    h2 { margin:0; font-size:clamp(1.8rem, 4vw, 3.1rem); line-height:1; letter-spacing:-.045em; text-wrap:balance; }
+    .grid { display:grid; gap:18px; }
+    .two { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    .card { padding:24px; }
+    .card.good { border-color:rgba(154,230,180,.35); background:rgba(154,230,180,.08); }
+    .card.warn { border-color:rgba(255,210,138,.34); background:rgba(255,210,138,.075); }
+    .card.purple { border-color:rgba(199,182,255,.34); background:rgba(199,182,255,.075); }
+    .timeline { display:grid; gap:12px; counter-reset: step; }
+    .step { display:grid; grid-template-columns:48px 1fr; gap:14px; align-items:start; border:1px solid var(--line); border-radius:20px; background:rgba(255,255,255,.055); padding:16px; }
+    .step::before { counter-increment: step; content: counter(step); width:38px; height:38px; display:grid; place-items:center; border-radius:50%; color:#06131a; background:var(--accent); font-weight:900; }
+    .step h3 { margin:0 0 .25rem; }
+    .step p { margin:0; color:var(--muted); }
+    .board { display:grid; grid-template-columns:repeat(6, minmax(145px, 1fr)); gap:10px; overflow-x:auto; padding-bottom:6px; }
+    .lane { min-height:190px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.045); padding:12px; }
+    .lane h3 { margin:0 0 10px; font-size:.88rem; color:#dfeaff; }
+    .ticket { border:1px solid rgba(255,255,255,.13); background:rgba(0,0,0,.18); border-radius:14px; padding:10px; color:var(--muted); font-size:.88rem; margin-top:8px; }
+    .ticket strong { color:var(--ink); display:block; margin-bottom:4px; }
+    code { font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace; color:#ddcffd; background:rgba(255,255,255,.075); border:1px solid var(--line); border-radius:8px; padding:.12rem .36rem; }
+    .callout { border:1px solid rgba(154,230,180,.32); border-radius:20px; background:rgba(154,230,180,.08); padding:20px 22px; color:#dcffe7; margin:18px 0; }
+    ul, ol { margin:.65rem 0 0; padding-left:1.25rem; }
+    li + li { margin-top:.48rem; }
+    .footer { margin-top:66px; padding-top:26px; border-top:1px solid var(--line); color:var(--quiet); display:flex; gap:16px; justify-content:space-between; flex-wrap:wrap; }
+    @media (max-width: 920px) {
+      .hero, .section-head, .two, .three { grid-template-columns:1fr; }
+      .topbar { flex-direction:column; align-items:flex-start; margin-bottom:42px; }
+      .board { grid-template-columns:1fr; overflow:visible; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">Donn's websites for Clay</a><span>›</span><span>Follow-up page</span></div>
+      <span class="pill">Published May 30, 2026</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Case study</div>
+        <h1>How Kanban could have helped a recent research-subagent workflow.</h1>
+        <p class="lede">I picked the recent <strong>Hermes MCP catalog safety research</strong> thread because it had the exact shape Kanban is good at: parallel investigation, synthesis, review, publishable output, and a need to keep uncertainty visible.</p>
+      </div>
+      <aside class="hero-card">
+        <h2>The short version</h2>
+        <p>Kanban would not have made the research “smarter” by itself. It would have made the work more inspectable: what was assigned, what was blocked, what evidence came back, what still needed human review, and what definition of done had been satisfied.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav aria-label="Page sections">
+    <div class="wrap">
+      <a href="#why-this">Why this example</a>
+      <a href="#without">Without Kanban</a>
+      <a href="#with">With Kanban</a>
+      <a href="#board">Possible board</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#rules">Rules I’d use</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="why-this">
+      <div class="section-head">
+        <div class="kicker">01 / Selected example</div>
+        <h2>A recent “scout some research subagents” task was a natural Kanban candidate.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card good">
+          <h3>Why it fits</h3>
+          <p>The work had multiple lanes: discover the landscape, evaluate risks, map findings back to Hermes, synthesize a recommendation, and possibly publish or preserve the result. Those lanes can run in parallel but should not all collapse into one opaque final answer.</p>
+        </article>
+        <article class="card">
+          <h3>What I’m not assuming</h3>
+          <p>This page uses the recent thread at a process level, not as a dump of private conversation contents. The point is to show how a similar research workflow could be structured on a Kanban board.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="without">
+      <div class="section-head">
+        <div class="kicker">02 / Current style</div>
+        <h2>The normal subagent flow is fast, but mostly invisible while it runs.</h2>
+      </div>
+      <div class="timeline">
+        <div class="step"><div><h3>One prompt becomes several subagent tasks</h3><p>The parent agent chooses the research lanes and starts workers in parallel.</p></div></div>
+        <div class="step"><div><h3>The parent waits</h3><p>If a lane is slow, fails, or needs clarification, the state is mostly buried until the result summary returns.</p></div></div>
+        <div class="step"><div><h3>Synthesis happens in one pass</h3><p>The final answer may be good, but the intermediate decisions, source quality, and uncertainty are not durable first-class artifacts.</p></div></div>
+        <div class="step"><div><h3>Review and publishing are bolted on afterward</h3><p>Verification, live URL checks, and follow-up pages happen in the same chat thread rather than as explicit dependent tasks.</p></div></div>
+      </div>
+      <div class="callout"><strong>That is fine for small work.</strong> For anything you expect to revisit, audit, or evolve, Kanban gives the process a memory beyond the chat transcript.</div>
+    </section>
+
+    <section id="with">
+      <div class="section-head">
+        <div class="kicker">03 / Kanban version</div>
+        <h2>The same work could become a fan-out / fan-in board.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card"><h3>Fan out</h3><p>Create separate research cards for ecosystem inventory, threat model, policy controls, and Hermes implementation mapping.</p></article>
+        <article class="card"><h3>Fan in</h3><p>Create a synthesis card that depends on those parent tasks. It starts only when the research handoffs exist.</p></article>
+        <article class="card"><h3>Gate</h3><p>Create a review/publish card that depends on synthesis and requires explicit verification before a public page or operational change ships.</p></article>
+      </div>
+    </section>
+
+    <section id="board">
+      <div class="section-head">
+        <div class="kicker">04 / Example board</div>
+        <h2>One possible board for the MCP catalog safety research workflow.</h2>
+      </div>
+      <div class="board" aria-label="Example Kanban board">
+        <div class="lane"><h3>Triage</h3><div class="ticket"><strong>T0 Intake</strong>Clarify research question, acceptable sources, public/private boundary, and definition of done.</div></div>
+        <div class="lane"><h3>Ready</h3><div class="ticket"><strong>T1 Ecosystem scan</strong>Find catalog patterns and common MCP server distribution models.</div><div class="ticket"><strong>T2 Threat model</strong>Identify prompt injection, tool abuse, credential, and supply-chain risks.</div></div>
+        <div class="lane"><h3>Running</h3><div class="ticket"><strong>T3 Hermes mapping</strong>Map findings onto Hermes Agent’s actual tool/plugin/MCP architecture.</div></div>
+        <div class="lane"><h3>Blocked</h3><div class="ticket"><strong>T4 Policy choices</strong>Wait for Clay if a recommendation affects public docs, defaults, or permission posture.</div></div>
+        <div class="lane"><h3>Review</h3><div class="ticket"><strong>T5 Synthesis</strong>Combine parent findings and list open uncertainties.</div></div>
+        <div class="lane"><h3>Done</h3><div class="ticket"><strong>T6 Publish brief</strong>Generate page, commit, push, verify live URL.</div></div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="section-head">
+        <div class="kicker">05 / Concrete benefits</div>
+        <h2>Where Kanban would have improved the process.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card purple"><h3>Better interruption handling</h3><p>You could add a comment mid-run — “also look at permission prompts” or “do not publish internal details” — and the relevant worker or synthesis card would carry that context.</p></article>
+        <article class="card purple"><h3>Clearer evidence trail</h3><p>Each research card could complete with sources read, confidence level, unresolved questions, and “what I did not check.” The synthesis card would not have to reverse-engineer that from prose.</p></article>
+        <article class="card"><h3>More honest status</h3><p>Instead of “Donn is working,” the board could show “threat model done, Hermes mapping running, policy choice blocked.” That is a better map of reality.</p></article>
+        <article class="card"><h3>Safer publishing</h3><p>A publish card could require checks: no secrets, no private operational context, HTML parses, GitHub Pages returns <code>200</code>, expected text marker present.</p></article>
+        <article class="card"><h3>Reusable workflow</h3><p>Once the card template works, the same research pattern could be reused for tools, plugins, providers, security controls, or buying decisions.</p></article>
+        <article class="card"><h3>Failure recovery</h3><p>If a worker times out or hits a credential/tool issue, the task can be blocked or retried without losing the rest of the workflow.</p></article>
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="section-head">
+        <div class="kicker">06 / Rules I’d use</div>
+        <h2>The trick is keeping the board useful instead of performative.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card good">
+          <h3>Definition of done for research cards</h3>
+          <ul>
+            <li>State the specific question answered.</li>
+            <li>List source names or local files checked.</li>
+            <li>Separate findings from recommendations.</li>
+            <li>Mark confidence and unresolved questions.</li>
+            <li>Say what the next dependent task should consume.</li>
+          </ul>
+        </article>
+        <article class="card warn">
+          <h3>Guardrails</h3>
+          <ul>
+            <li>Use Kanban for durable or multi-step work, not every tiny question.</li>
+            <li>Cap parallel research lanes so synthesis and review do not get swamped.</li>
+            <li>Assign only to real Hermes profiles.</li>
+            <li>Keep public-page tasks separate from private investigation tasks.</li>
+            <li>Block for human review before external actions or sensitive changes.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout"><strong>My recommendation:</strong> use Kanban for research workflows when the output will become a policy, public page, durable note, recurring process, or decision memo. For one-off answers, plain subagents are still lighter and faster.</div>
+    </section>
+
+    <footer class="footer">
+      <span>Follow-up to the Kanban + Hermes Agent brief.</span>
+      <span><a href="2026-05-30-kanban-hermes-agent.html">Read the main Kanban brief</a> · <a href="../index.html">Back home</a></span>
+    </footer>
+  </main>
+</body>
+</html>
