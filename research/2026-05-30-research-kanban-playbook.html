@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reusable Research Kanban Playbook</title>
+  <meta name="description" content="A reusable Kanban process Clay and Donn can use when Clay asks Donn to research a topic and publish the findings as an HTML brief." />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07101d;
+      --bg-soft: #0d1a2c;
+      --panel: rgba(255,255,255,.065);
+      --panel-strong: rgba(255,255,255,.105);
+      --ink: #f1f7ff;
+      --muted: #aebcd1;
+      --quiet: #7f8ca1;
+      --line: rgba(255,255,255,.14);
+      --accent: #84e0c2;
+      --accent-2: #9fc7ff;
+      --accent-3: #ffd58f;
+      --danger: #ff9ea9;
+      --shadow: 0 28px 90px rgba(0,0,0,.36);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% -12%, rgba(132,224,194,.22), transparent 34rem),
+        radial-gradient(circle at 92% 0%, rgba(159,199,255,.16), transparent 32rem),
+        linear-gradient(180deg, #07101d 0%, #0a1423 45%, #08111f 100%);
+      color: var(--ink);
+      line-height: 1.58;
+    }
+    a { color: var(--accent-2); text-underline-offset: .18em; }
+    a:hover { color: var(--accent); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 34px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 68px; color: var(--muted); font-size: .95rem; }
+    .crumb { display: inline-flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .pill, .tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: .42rem .72rem; color: var(--muted); background: rgba(255,255,255,.045);
+      font-size: .86rem; white-space: nowrap;
+    }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.12fr) 380px; gap: 34px; align-items: end; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; font-weight: 850; }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.7rem, 7vw, 6.4rem); line-height: .9; letter-spacing: -.065em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 840px; color: #cdd9e8; font-size: clamp(1.12rem, 2vw, 1.42rem); }
+    .hero-card { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045)); box-shadow: var(--shadow); padding: 24px; }
+    .hero-card h2 { margin: 0 0 .75rem; font-size: 1rem; color: var(--accent); }
+    .hero-card p { margin: 0; color: var(--muted); }
+    nav.toc { position: sticky; top: 0; z-index: 3; backdrop-filter: blur(18px); background: rgba(7,16,29,.80); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 12px; overflow-x: auto; padding: 12px 18px; }
+    nav.toc a { color: var(--muted); text-decoration: none; border: 1px solid transparent; padding: .5rem .7rem; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { color: var(--ink); border-color: var(--line); background: rgba(255,255,255,.055); }
+    main { padding: 42px 0 74px; }
+    section { scroll-margin-top: 86px; }
+    .section-head { display: grid; grid-template-columns: 236px 1fr; gap: 26px; align-items: start; margin: 62px 0 22px; }
+    .section-kicker { color: var(--accent); font-weight: 850; text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; }
+    h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 3.2rem); line-height: 1; letter-spacing: -.045em; text-wrap: balance; }
+    h3 { margin: 0 0 .55rem; font-size: 1.1rem; line-height: 1.2; }
+    p { margin: 0 0 1rem; }
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.18); }
+    .card.strong { background: linear-gradient(180deg, rgba(132,224,194,.13), rgba(255,255,255,.05)); }
+    .card.warn { border-color: rgba(255,213,143,.34); background: rgba(255,213,143,.075); }
+    .card.danger { border-color: rgba(255,158,169,.33); background: rgba(255,158,169,.07); }
+    .card p, .card li { color: var(--muted); }
+    .card .small { color: var(--quiet); font-size: .92rem; }
+    .board { display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 12px; align-items: stretch; }
+    .lane { border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.045); padding: 14px; min-height: 170px; }
+    .lane h3 { color: var(--accent); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px; }
+    .ticket { border: 1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.18); border-radius: 14px; padding: 12px; color: #dce9f8; font-size: .93rem; }
+    .ticket + .ticket { margin-top: 10px; }
+    .ticket small { display: block; color: var(--quiet); margin-top: .35rem; }
+    .flow { counter-reset: step; display: grid; gap: 14px; }
+    .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+    .step::before { counter-increment: step; content: counter(step); width: 38px; height: 38px; border-radius: 50%; display: inline-grid; place-items: center; color: #04151a; background: var(--accent); font-weight: 900; }
+    .step p { color: var(--muted); }
+    .callout { border-left: 4px solid var(--accent); padding: 18px 22px; border-radius: 16px; background: rgba(132,224,194,.08); color: #dbfff5; margin: 18px 0; }
+    .prompt { border: 1px solid rgba(159,199,255,.24); border-radius: 18px; background: rgba(159,199,255,.07); padding: 18px; color: #e7f0ff; }
+    code, .code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .92em; color: #d7c9ff; background: rgba(255,255,255,.07); border: 1px solid var(--line); border-radius: 8px; padding: .12rem .38rem; }
+    pre { overflow: auto; padding: 18px; border-radius: 18px; border: 1px solid var(--line); background: rgba(0,0,0,.25); color: #e3efff; }
+    ul, ol { margin: .7rem 0 0; padding-left: 1.25rem; }
+    li + li { margin-top: .5rem; }
+    .footer { margin-top: 70px; padding-top: 28px; border-top: 1px solid var(--line); color: var(--quiet); display: flex; gap: 18px; justify-content: space-between; flex-wrap: wrap; }
+    @media (max-width: 1000px) { .hero, .section-head, .grid.two, .grid.three, .grid.four, .board { grid-template-columns: 1fr; } .topbar { align-items: flex-start; flex-direction: column; margin-bottom: 42px; } }
+    @media print { body { background: white; color: #111; } nav.toc { display: none; } .card, .hero-card, .lane { box-shadow: none; background: white; border-color: #ddd; } a { color: #0645ad; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">Donn's websites for Clay</a><span>›</span><span>Research playbook</span></div>
+      <span class="pill">Published May 30, 2026</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Reusable research system</div>
+        <h1>A Kanban for look-it-up projects.</h1>
+        <p class="lede">Use this when Clay asks Donn to research a topic, split the work into visible lanes, synthesize the findings, and publish a clean HTML brief back to the GitHub Pages repository.</p>
+      </div>
+      <aside class="hero-card" aria-label="Bottom line">
+        <h2>Bottom line</h2>
+        <p>The reusable board is <code>research-projects</code>. Start each topic with a tight brief, fan out only independent research lanes, gate synthesis and publishing behind finished findings, and keep public HTML free of private operational details.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Page sections">
+    <div class="wrap">
+      <a href="#board">Board</a>
+      <a href="#intake">Intake</a>
+      <a href="#task-graph">Task graph</a>
+      <a href="#templates">Templates</a>
+      <a href="#publish">Publish</a>
+      <a href="#commands">Commands</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="board">
+      <div class="section-head">
+        <div class="section-kicker">01 · Setup</div>
+        <h2>One board, repeatable topic cycles.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>Reusable board</h3>
+          <p>Board slug: <code>research-projects</code>. Keep this board for research requests where the output is a synthesized answer, memo, or public/static HTML artifact.</p>
+          <p class="small">Default behavior: the board can hold many topic cycles. Use a unique prefix in each task title, such as <code>[topic: school choice]</code>, to keep cycles readable.</p>
+        </article>
+        <article class="card warn">
+          <h3>Current profile reality</h3>
+          <p>Only the <code>default</code> Hermes profile is currently available, so research cards assigned to it will be processed serially. If Clay adds specialist profiles later, the same task graph can fan out in parallel.</p>
+        </article>
+      </div>
+      <div class="callout"><strong>Rule:</strong> do not create a pile of independent ready cards if later work needs the findings first. Research lanes can run independently; synthesis, review, and publishing should depend on those parent cards.</div>
+    </section>
+
+    <section id="intake">
+      <div class="section-head">
+        <div class="section-kicker">02 · Intake</div>
+        <h2>Every research cycle starts with the smallest useful brief.</h2>
+      </div>
+      <div class="grid four">
+        <article class="card"><h3>Question</h3><p>What decision or understanding should the research unlock?</p></article>
+        <article class="card"><h3>Scope</h3><p>What is included, excluded, and time-sensitive?</p></article>
+        <article class="card"><h3>Output</h3><p>Quick answer, memo, comparison table, saved notes, or public HTML?</p></article>
+        <article class="card"><h3>Standards</h3><p>Required sources, citation depth, skepticism level, and whether private context can be used.</p></article>
+      </div>
+      <div class="prompt" style="margin-top: 18px;">
+        <strong>Reusable prompt to Donn:</strong><br />
+        “Use the <code>research-projects</code> Kanban. Research <em>[topic]</em>. I need <em>[decision/output]</em>. Include <em>[source types]</em>. Exclude <em>[boundaries]</em>. Publish an HTML brief if the findings are worth saving.”
+      </div>
+    </section>
+
+    <section id="task-graph">
+      <div class="section-head">
+        <div class="section-kicker">03 · Flow</div>
+        <h2>Fan out research, then fan in to synthesis.</h2>
+      </div>
+      <div class="board" aria-label="Research Kanban columns">
+        <div class="lane"><h3>Triage</h3><div class="ticket">Raw topic request<small>clarify question, scope, output</small></div></div>
+        <div class="lane"><h3>Ready</h3><div class="ticket">Source discovery</div><div class="ticket">Primary-source read</div><div class="ticket">Counterarguments</div></div>
+        <div class="lane"><h3>Running</h3><div class="ticket">Worker gathers evidence<small>heartbeat only if long-running</small></div></div>
+        <div class="lane"><h3>Blocked</h3><div class="ticket">Needs Clay decision<small>scope, source, publish/no publish</small></div></div>
+        <div class="lane"><h3>Done</h3><div class="ticket">Synthesis complete</div><div class="ticket">HTML published</div></div>
+      </div>
+      <div class="grid two" style="margin-top: 18px;">
+        <article class="card">
+          <h3>Good default task graph</h3>
+          <ol>
+            <li><strong>Scope card</strong>: turn the request into a concrete research spec.</li>
+            <li><strong>Research lanes</strong>: source discovery, primary evidence, opposing views, examples/cases.</li>
+            <li><strong>Synthesis card</strong>: combine parent outputs into a recommendation or briefing.</li>
+            <li><strong>Artifact card</strong>: write the HTML page and update the repository index.</li>
+            <li><strong>Verification card</strong>: check links, commit/push, and confirm the live URL.</li>
+          </ol>
+        </article>
+        <article class="card danger">
+          <h3>Avoid these traps</h3>
+          <ul>
+            <li>Inventing profile names that do not exist.</li>
+            <li>Bundling unrelated research lanes into one huge card.</li>
+            <li>Letting the publisher start before synthesis is done.</li>
+            <li>Putting private prompts, credentials, or operational context on the public page.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="templates">
+      <div class="section-head">
+        <div class="section-kicker">04 · Card templates</div>
+        <h2>Copy these shapes when starting a topic.</h2>
+      </div>
+      <div class="flow">
+        <article class="step card">
+          <div>
+            <h3>Scope / spec</h3>
+            <p>Define the research question, output format, source requirements, exclusions, and whether the final result should be public.</p>
+<pre>Title: [topic] scope research request
+Body: Convert Clay's request into a concrete research spec. Include question, audience, deliverable, source standards, exclusions, and publish/no-publish recommendation.</pre>
+          </div>
+        </article>
+        <article class="step card">
+          <div>
+            <h3>Evidence lanes</h3>
+            <p>Create independent lanes only when they can be worked without waiting for each other.</p>
+<pre>Title: [topic] source discovery
+Body: Find high-signal sources, official docs/data, credible explainers, and dissenting views. Return URLs and 1-2 sentence relevance notes.</pre>
+          </div>
+        </article>
+        <article class="step card">
+          <div>
+            <h3>Synthesis</h3>
+            <p>Gate this behind all evidence parents. The output should be a concise bottom line plus trade-offs.</p>
+<pre>Title: [topic] synthesize findings
+Parents: source discovery + primary-source + counterarguments
+Body: Produce a decision-ready synthesis with bottom line, key takeaways, uncertainty, and source links.</pre>
+          </div>
+        </article>
+        <article class="step card">
+          <div>
+            <h3>HTML artifact</h3>
+            <p>Gate publishing behind synthesis. Keep the page skimmable and safe for public GitHub Pages.</p>
+<pre>Title: [topic] publish HTML brief
+Parents: synthesis
+Body: Build a self-contained HTML page under research/, update index.html, commit, push, and verify the live GitHub Pages URL.</pre>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="publish">
+      <div class="section-head">
+        <div class="section-kicker">05 · HTML output</div>
+        <h2>The repository is the durable shelf.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card"><h3>Where pages live</h3><p>Standalone research pages go under <code>research/</code> using filenames like <code>YYYY-MM-DD-topic-slug.html</code>.</p></article>
+        <article class="card"><h3>How pages are found</h3><p>Update the homepage card grid with a relative link, short title, and one-sentence summary.</p></article>
+        <article class="card"><h3>How pages are verified</h3><p>Check the file locally, commit and push to <code>main</code>, then poll GitHub Pages until the page returns <code>200</code> and contains an expected text marker.</p></article>
+      </div>
+    </section>
+
+    <section id="commands">
+      <div class="section-head">
+        <div class="section-kicker">06 · Operator commands</div>
+        <h2>Concrete commands for Clay or Donn.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <h3>Board commands</h3>
+<pre>hermes kanban boards list
+hermes kanban boards switch research-projects
+hermes kanban assignees
+hermes kanban list --board research-projects</pre>
+        </article>
+        <article class="card">
+          <h3>Create the first card in a topic cycle</h3>
+<pre>hermes kanban --board research-projects create \
+  "[topic] scope research request" \
+  --assignee default \
+  --body "Turn Clay's request into a concrete research spec: question, audience, deliverable, source standards, exclusions, and publish/no-publish recommendation."</pre>
+        </article>
+      </div>
+      <div class="callout"><strong>Operating preference:</strong> for a real research request, Donn should show Clay the proposed graph before creating cards, then use parent dependencies so the board reflects the actual order of work.</div>
+    </section>
+
+    <p class="footer">
+      <span>Repository: <a href="https://github.com/claydunker-yalc/donns-websites-for-clay">claydunker-yalc/donns-websites-for-clay</a></span>
+      <span>Board slug: <code>research-projects</code></span>
+    </p>
+  </main>
+</body>
+</html>
