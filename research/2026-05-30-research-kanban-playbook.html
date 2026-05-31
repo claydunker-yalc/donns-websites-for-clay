@@ -111,13 +111,14 @@
       </div>
       <aside class="hero-card" aria-label="Bottom line">
         <h2>Bottom line</h2>
-        <p>The reusable board is <code>research-projects</code>. Start each topic with a tight brief, fan out only independent research lanes, gate synthesis and publishing behind finished findings, and keep public HTML free of private operational details.</p>
+        <p>Clay's call phrase is <code>Kanban research &lt;topic&gt;</code>. Donn reads Clay's editable spec, queues the research graph on <code>research-projects</code>, synthesizes findings, and publishes the HTML brief.</p>
       </aside>
     </div>
   </header>
 
   <nav class="toc" aria-label="Page sections">
     <div class="wrap">
+      <a href="#trigger">Trigger</a>
       <a href="#board">Board</a>
       <a href="#intake">Intake</a>
       <a href="#task-graph">Task graph</a>
@@ -128,6 +129,29 @@
   </nav>
 
   <main class="wrap">
+    <section id="trigger">
+      <div class="section-head">
+        <div class="section-kicker">00 · Trigger</div>
+        <h2>What Clay actually types.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>Shorthand request</h3>
+          <p>In Telegram DM, type: <code>Kanban research volcanoes</code>. In Discord server channels, use <code>@Donn Kanban research volcanoes</code> if mentions are required.</p>
+          <p class="small">The topic is everything after <code>Kanban research</code>. If the topic is clear, Donn proceeds instead of asking for a long form.</p>
+        </article>
+        <article class="card">
+          <h3>Clay's editable spec</h3>
+          <p>The behavior lives in <code>/home/clay/.hermes/notes/kanban_research_spec.yaml</code>. Edit that file to change depth, source standards, task lanes, publishing rules, or completion format.</p>
+          <p class="small">A dedicated skill, <code>kanban-research-trigger</code>, loads when this shorthand appears and tells Donn to read the spec before creating cards.</p>
+        </article>
+      </div>
+      <div class="prompt" style="margin-top: 18px;">
+        <strong>Minimum viable call:</strong> <code>Kanban research volcanoes</code><br />
+        <strong>Optional scoped call:</strong> <code>Kanban research volcano monitoring for school emergency planning; focus on practical risks and good sources</code>
+      </div>
+    </section>
+
     <section id="board">
       <div class="section-head">
         <div class="section-kicker">01 · Setup</div>
@@ -160,7 +184,7 @@
       </div>
       <div class="prompt" style="margin-top: 18px;">
         <strong>Reusable prompt to Donn:</strong><br />
-        “Use the <code>research-projects</code> Kanban. Research <em>[topic]</em>. I need <em>[decision/output]</em>. Include <em>[source types]</em>. Exclude <em>[boundaries]</em>. Publish an HTML brief if the findings are worth saving.”
+        “<code>Kanban research [topic]</code>” is enough for the default behavior. Add scope only when you care about a particular angle, audience, source type, or exclusion.
       </div>
     </section>
 
@@ -275,7 +299,7 @@ hermes kanban list --board research-projects</pre>
   --body "Turn Clay's request into a concrete research spec: question, audience, deliverable, source standards, exclusions, and publish/no-publish recommendation."</pre>
         </article>
       </div>
-      <div class="callout"><strong>Operating preference:</strong> for a real research request, Donn should show Clay the proposed graph before creating cards, then use parent dependencies so the board reflects the actual order of work.</div>
+      <div class="callout"><strong>Operating preference:</strong> when Clay uses the shorthand, Donn should not merely explain the process. Donn should read the spec, discover profiles, queue the parent-linked graph, and report the task IDs. If the request is unclear, ask one focused question.</div>
     </section>
 
     <p class="footer">
