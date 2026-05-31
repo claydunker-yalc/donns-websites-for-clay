@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kanban, Hermes Agent, and Multi-Agent Workflows</title>
+  <meta name="description" content="A practical research brief on Kanban in general, Kanban inside Hermes Agent, and how to use it safely for multi-agent workflows." />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --bg-2: #0f1b2d;
+      --panel: rgba(255, 255, 255, 0.065);
+      --panel-strong: rgba(255, 255, 255, 0.105);
+      --ink: #eef6ff;
+      --muted: #a9b7c9;
+      --quiet: #7f8ea3;
+      --line: rgba(255, 255, 255, 0.14);
+      --accent: #79d7c5;
+      --accent-2: #a6c8ff;
+      --warn: #ffd28a;
+      --danger: #ff9ca6;
+      --good: #a7e7a2;
+      --shadow: 0 30px 90px rgba(0,0,0,.34);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 16% -10%, rgba(121,215,197,.20), transparent 34rem),
+        radial-gradient(circle at 95% 8%, rgba(166,200,255,.16), transparent 30rem),
+        linear-gradient(180deg, #08111f 0%, #0a1321 44%, #0c1422 100%);
+      color: var(--ink);
+      line-height: 1.58;
+    }
+    a { color: var(--accent-2); text-underline-offset: .18em; }
+    a:hover { color: var(--accent); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 54px 0 32px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 70px; color: var(--muted); font-size: .95rem; }
+    .crumb { display: inline-flex; align-items: center; gap: .6rem; }
+    .pill, .tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: .42rem .72rem; color: var(--muted); background: rgba(255,255,255,.045);
+      font-size: .86rem; white-space: nowrap;
+    }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) 360px; gap: 34px; align-items: end; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; font-weight: 800; }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.75rem, 7vw, 6.5rem); line-height: .88; letter-spacing: -.065em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 820px; color: #cad7e8; font-size: clamp(1.12rem, 2vw, 1.42rem); }
+    .hero-card { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045)); box-shadow: var(--shadow); padding: 24px; }
+    .hero-card h2 { margin: 0 0 .75rem; font-size: 1rem; color: var(--accent); }
+    .hero-card p { margin: 0; color: var(--muted); }
+    nav.toc { position: sticky; top: 0; z-index: 3; backdrop-filter: blur(18px); background: rgba(8,17,31,.78); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 12px; overflow-x: auto; padding: 12px 18px; }
+    nav.toc a { color: var(--muted); text-decoration: none; border: 1px solid transparent; padding: .5rem .7rem; border-radius: 999px; white-space: nowrap; }
+    nav.toc a:hover { color: var(--ink); border-color: var(--line); background: rgba(255,255,255,.055); }
+    main { padding: 44px 0 72px; }
+    section { scroll-margin-top: 86px; }
+    .section-head { display: grid; grid-template-columns: 240px 1fr; gap: 26px; align-items: start; margin: 64px 0 22px; }
+    .section-kicker { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; }
+    h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 3.25rem); line-height: 1; letter-spacing: -.045em; text-wrap: balance; }
+    h3 { margin: 0 0 .55rem; font-size: 1.15rem; line-height: 1.2; }
+    p { margin: 0 0 1rem; }
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.18); }
+    .card.strong { background: linear-gradient(180deg, rgba(121,215,197,.12), rgba(255,255,255,.05)); }
+    .card.warn { border-color: rgba(255,210,138,.34); background: rgba(255,210,138,.075); }
+    .card.danger { border-color: rgba(255,156,166,.32); background: rgba(255,156,166,.07); }
+    .card p, .card li { color: var(--muted); }
+    .callout { border-left: 4px solid var(--accent); padding: 18px 22px; border-radius: 16px; background: rgba(121,215,197,.08); color: #d9fff7; margin: 18px 0; }
+    .flow { display: grid; grid-template-columns: repeat(5, minmax(130px, 1fr)); gap: 10px; margin: 18px 0; }
+    .flow span { border: 1px solid var(--line); background: rgba(255,255,255,.055); padding: 14px 12px; border-radius: 16px; text-align: center; color: #d8e7f6; font-weight: 700; }
+    .flow span.ready { border-color: rgba(121,215,197,.4); background: rgba(121,215,197,.095); }
+    .compare { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .metric { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+    .num { width: 34px; height: 34px; border-radius: 50%; display: inline-grid; place-items: center; color: #04151a; background: var(--accent); font-weight: 900; }
+    code, .code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .92em; color: #d8c7ff; background: rgba(255,255,255,.07); border: 1px solid var(--line); border-radius: 8px; padding: .12rem .38rem; }
+    pre { overflow: auto; padding: 18px; border-radius: 18px; border: 1px solid var(--line); background: rgba(0,0,0,.24); color: #dceaff; }
+    ul, ol { margin: .7rem 0 0; padding-left: 1.25rem; }
+    li + li { margin-top: .5rem; }
+    .source-list { columns: 2; column-gap: 32px; }
+    .source-list li { break-inside: avoid; margin-bottom: .55rem; }
+    .footer { margin-top: 70px; padding-top: 28px; border-top: 1px solid var(--line); color: var(--quiet); display: flex; gap: 18px; justify-content: space-between; flex-wrap: wrap; }
+    @media (max-width: 900px) {
+      .hero, .section-head, .grid.two, .grid.three, .compare { grid-template-columns: 1fr; }
+      .hero-card { max-width: none; }
+      .flow { grid-template-columns: 1fr; }
+      .source-list { columns: 1; }
+      .topbar { align-items: flex-start; flex-direction: column; margin-bottom: 42px; }
+    }
+    @media print {
+      body { background: white; color: #111; }
+      nav.toc { display: none; }
+      .card, .hero-card { box-shadow: none; background: white; border-color: #ddd; }
+      a { color: #0645ad; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">Donn's websites for Clay</a><span>›</span><span>Research brief</span></div>
+      <span class="pill">Published May 30, 2026</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Kanban × Hermes Agent</div>
+        <h1>Stop starting. Start finishing.</h1>
+        <p class="lede">Kanban is a practical way to make work visible, limit overload, and improve flow. Inside Hermes Agent, it becomes a durable coordination board for multiple AI profiles, human review, retries, and long-running workflows.</p>
+      </div>
+      <aside class="hero-card" aria-label="Bottom line">
+        <h2>Bottom line</h2>
+        <p>Use Hermes Kanban when work needs to survive restarts, fan out across specialists, collect human input, or keep an audit trail. Do <strong>not</strong> treat it as magic autonomy: define done, cap WIP, verify outputs, and keep recovery visible.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Page sections">
+    <div class="wrap">
+      <a href="#what-is-kanban">What Kanban is</a>
+      <a href="#practices">Core practices</a>
+      <a href="#hermes">Hermes Kanban</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#careful">Be careful</a>
+      <a href="#starter">How to start</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="what-is-kanban">
+      <div class="section-head">
+        <div class="section-kicker">01 / General idea</div>
+        <h2>Kanban is a pull system for visible, limited, continuously improving work.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>Origin story</h3>
+          <p>Kanban began in the Toyota Production System. A downstream step used a card or signal to request more parts only when it had capacity or demand. That “pull” mechanism helped Toyota reduce waste, avoid overproduction, and improve flow.</p>
+        </article>
+        <article class="card">
+          <h3>Knowledge-work translation</h3>
+          <p>In software, operations, research, and administrative work, Kanban manages invisible inventory: tasks, requests, bugs, drafts, approvals, and projects. The board is not the point; the point is seeing the system clearly enough to improve it.</p>
+        </article>
+      </div>
+      <div class="flow" aria-label="Example Kanban workflow">
+        <span>Inbox</span>
+        <span class="ready">Ready</span>
+        <span>In progress</span>
+        <span>Review</span>
+        <span>Done</span>
+      </div>
+      <div class="callout"><strong>Plain English:</strong> Kanban helps you stop pushing every idea into motion at once. It asks: what work exists, what is actually ready, what is in progress, what is blocked, and what can be finished next?</div>
+    </section>
+
+    <section id="practices">
+      <div class="section-head">
+        <div class="section-kicker">02 / Practices</div>
+        <h2>A Kanban board only becomes useful when it changes behavior.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card metric"><span class="num">1</span><div><h3>Visualize the workflow</h3><p>Make the real workflow visible, not the idealized one. Include blocked, review, and waiting states if those are where work actually lives.</p></div></article>
+        <article class="card metric"><span class="num">2</span><div><h3>Limit WIP</h3><p>Work-in-progress limits force prioritization and reveal bottlenecks. Without WIP limits, a board often becomes a prettier overload list.</p></div></article>
+        <article class="card metric"><span class="num">3</span><div><h3>Manage flow</h3><p>Watch lead time, cycle time, throughput, blocked time, and aging work. Optimize for finished, verified outcomes rather than busy people.</p></div></article>
+        <article class="card metric"><span class="num">4</span><div><h3>Make policies explicit</h3><p>Define what “ready,” “blocked,” “reviewed,” and “done” mean. The policy is how the board becomes trustworthy.</p></div></article>
+        <article class="card metric"><span class="num">5</span><div><h3>Use feedback loops</h3><p>Review replenishment, delivery, service quality, and operations regularly. Kanban is meant to evolve through small experiments.</p></div></article>
+        <article class="card metric"><span class="num">6</span><div><h3>Improve collaboratively</h3><p>Start where you are. Do not impose a perfect process. Use the board to expose reality, then adjust the system.</p></div></article>
+      </div>
+    </section>
+
+    <section id="hermes">
+      <div class="section-head">
+        <div class="section-kicker">03 / Hermes Agent</div>
+        <h2>Hermes Kanban turns Kanban into a durable multi-agent work queue.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>What it is</h3>
+          <p>Hermes Agent's Kanban feature is a SQLite-backed board for coordinating named Hermes profiles. It persists tasks, dependencies, comments, events, runs, worker handoffs, and completion metadata. Compared with a short-lived subagent call, Kanban gives the work a durable home.</p>
+        </article>
+        <article class="card">
+          <h3>When it matters</h3>
+          <p>Use it for workflows that need fan-out/fan-in, restart safety, human intervention, specialist profiles, retries, review loops, or an inspectable audit trail.</p>
+        </article>
+      </div>
+
+      <div class="compare" style="margin-top:18px">
+        <article class="card">
+          <span class="tag">Board</span>
+          <h3>Persistent state</h3>
+          <p>Tasks move through statuses like <span class="code">triage</span>, <span class="code">todo</span>, <span class="code">ready</span>, <span class="code">running</span>, <span class="code">blocked</span>, <span class="code">done</span>, and <span class="code">archived</span>.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Dispatcher</span>
+          <h3>Spawns workers</h3>
+          <p>The gateway dispatcher claims ready assigned tasks, spawns the assignee profile, monitors heartbeats, detects crashes, reclaims stale work, and promotes children when parents complete.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Workers</span>
+          <h3>Structured handoff</h3>
+          <p>A worker reads its card, works in its workspace, then completes with a summary and metadata or blocks with a reason that a human or later worker can act on.</p>
+        </article>
+      </div>
+
+      <pre><code># Typical operator commands
+hermes kanban init
+hermes kanban create "research a buying decision" --assignee researcher
+hermes kanban show t_abcd1234
+hermes kanban comment t_abcd1234 "Use these sources too..."
+hermes kanban unblock t_abcd1234
+hermes kanban dispatch --max 3</code></pre>
+
+      <div class="grid two">
+        <article class="card">
+          <h3>Important implementation details</h3>
+          <ul>
+            <li>Default board: <span class="code">~/.hermes/kanban.db</span>; named boards live under <span class="code">~/.hermes/kanban/boards/</span>.</li>
+            <li>The dispatcher runs in the gateway by default, so the gateway needs to be alive for automatic task pickup.</li>
+            <li>Workers use <span class="code">kanban_*</span> tools, not shell commands, so lifecycle actions stay scoped to the assigned task.</li>
+            <li>Dependencies are parent → child links. Children wait until parents are done before becoming ready.</li>
+          </ul>
+        </article>
+        <article class="card warn">
+          <h3>Docs/code note</h3>
+          <p>Local research found a likely docs/code drift around dashboard plugin authentication: one doc described unauthenticated local plugin routes, while current plugin code indicates dashboard token/session handling. Treat dashboard auth details as version-specific and verify before exposing anything beyond localhost.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="section-head">
+        <div class="section-kicker">04 / Why Clay might care</div>
+        <h2>Kanban fits a proactive chief-of-staff agent because it makes agent work inspectable.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card"><h3>Research pipelines</h3><p>Multiple researchers can run in parallel; a synthesis or writing task waits on their handoffs instead of relying on one giant prompt.</p></article>
+        <article class="card"><h3>Human-in-the-loop control</h3><p>Workers can block for approval, clarification, or review. A human can comment or unblock without losing the task trail.</p></article>
+        <article class="card"><h3>Durable operations</h3><p>Recurring or long-running work survives crashes and restarts. The board records attempts, errors, comments, and final metadata.</p></article>
+        <article class="card"><h3>Specialist profiles</h3><p>Different profiles can own research, coding, review, writing, or ops. Each can have narrower tools, model choices, and memory.</p></article>
+        <article class="card"><h3>Better review loops</h3><p>“Done” can mean “ready for review,” not “merged, emailed, or deployed.” That keeps risky actions gated.</p></article>
+        <article class="card"><h3>Cross-channel continuity</h3><p>A Discord or Telegram request can become a durable board item rather than disappearing into one conversation thread.</p></article>
+      </div>
+    </section>
+
+    <section id="careful">
+      <div class="section-head">
+        <div class="section-kicker">05 / Things to be careful of</div>
+        <h2>The danger is not that agents cannot move cards. The danger is believing moved cards mean trustworthy outcomes.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card danger"><h3>A board alone is not Kanban</h3><p>If there are no WIP limits, explicit policies, review gates, or flow checks, the board is just a task tracker with nicer columns.</p></article>
+        <article class="card danger"><h3>Human review becomes the bottleneck</h3><p>Ten fast agents can overload one human reviewer. Set WIP limits for agents <em>and</em> humans.</p></article>
+        <article class="card warn"><h3>Unknown assignees stall work</h3><p>Hermes orchestrators should discover real local profiles before assigning. Invented profile names can leave tasks ready but unspawned.</p></article>
+        <article class="card warn"><h3>Dependencies must be real</h3><p>Do not over-link tasks just because prose says “then.” But if a child truly depends on a parent, create the dependency at task creation time to avoid races.</p></article>
+        <article class="card"><h3>Definition of done needs teeth</h3><p>For agent work, “done” should often require tests, source citations, live URL verification, human approval, or deployment checks — not merely generated text.</p></article>
+        <article class="card"><h3>Logs are sensitive</h3><p>Comments, metadata, prompts, and worker logs can contain private context. Store summaries and pointers, not credentials, raw secrets, or unnecessary personal data.</p></article>
+      </div>
+
+      <div class="callout"><strong>Most useful beginner lesson:</strong> make uncertainty visible. Add states or policies for blocked, stale, failed, needs recovery, and ready for human review. A happy-path-only board becomes a false map.</div>
+    </section>
+
+    <section id="starter">
+      <div class="section-head">
+        <div class="section-kicker">06 / Starter policy</div>
+        <h2>A sane way to start with Hermes Kanban.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>Start small</h3>
+          <ol>
+            <li>Create one board for a real recurring workflow.</li>
+            <li>Use three or four states first: Ready, Running, Blocked, Done.</li>
+            <li>Define “ready” and “done” in writing.</li>
+            <li>Assign to real profiles only.</li>
+            <li>Require workers to leave structured summaries and verification notes.</li>
+            <li>Review aging work and blocked cards daily until the flow is boring.</li>
+          </ol>
+        </article>
+        <article class="card">
+          <h3>Suggested card template</h3>
+          <ul>
+            <li><strong>Goal:</strong> what valuable outcome should exist?</li>
+            <li><strong>Definition of done:</strong> what proves it is complete?</li>
+            <li><strong>Assignee + accountable human:</strong> who acts and who accepts?</li>
+            <li><strong>Tools/access:</strong> web, repo, files, credentials, dashboard, etc.</li>
+            <li><strong>Dependencies:</strong> parent tasks, inputs, blockers.</li>
+            <li><strong>Risk:</strong> approvals needed before external side effects.</li>
+            <li><strong>Verification:</strong> tests, citations, live URL, screenshot, diff, or human review.</li>
+            <li><strong>Recovery:</strong> what to do if it stalls or fails.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <div class="section-kicker">07 / Sources</div>
+        <h2>Sources and local references used for this brief.</h2>
+      </div>
+      <div class="card">
+        <ul class="source-list">
+          <li><a href="https://global.toyota/en/company/vision-and-philosophy/production-system/">Toyota Production System</a></li>
+          <li><a href="https://www.lean.org/lexicon-terms/kanban/">Lean Enterprise Institute: Kanban</a></li>
+          <li><a href="https://kanban.university/kanban-method/">Kanban University: The Kanban Method</a></li>
+          <li><a href="https://kanbanguides.org/">The Kanban Guide</a></li>
+          <li><a href="https://www.atlassian.com/agile/kanban">Atlassian Agile Coach: Kanban</a></li>
+          <li>David J. Anderson, <em>Kanban: Successful Evolutionary Change for Your Technology Business</em></li>
+          <li>Taiichi Ohno, <em>Toyota Production System: Beyond Large-Scale Production</em></li>
+          <li>Hermes Agent local docs: <span class="code">website/docs/user-guide/features/kanban.md</span></li>
+          <li>Hermes Agent local docs: <span class="code">kanban-tutorial.md</span> and <span class="code">kanban-worker-lanes.md</span></li>
+          <li>Hermes Agent local code: <span class="code">hermes_cli/kanban_db.py</span>, <span class="code">hermes_cli/kanban.py</span>, <span class="code">tools/kanban_tools.py</span>, <span class="code">gateway/run.py</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Research run: three parallel subagent lanes, then synthesized by Donn.</span>
+      <span><a href="../index.html">Back to site home</a></span>
+    </footer>
+  </main>
+</body>
+</html>
