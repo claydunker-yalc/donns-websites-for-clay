@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fourth of July Hosting Playbook</title>
+  <meta name="description" content="An extensive Fourth of July hosting report for Clay: prep timeline, guest-experience tactics, safety systems, non-obvious details, and a practical host preflight checklist." />
+  <!-- Fourth of July hosting playbook marker -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c1220;
+      --panel: rgba(255,255,255,.06);
+      --panel-strong: rgba(255,255,255,.1);
+      --ink: #f6f3ed;
+      --muted: #c8c1b6;
+      --quiet: #9c9589;
+      --line: rgba(255,255,255,.14);
+      --red: #ff7b7b;
+      --blue: #7bd5ff;
+      --cream: #ffd9a0;
+      --good: #89e0b6;
+      --warn: #ffbe6b;
+      --shadow: 0 28px 90px rgba(0,0,0,.34);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 12% -6%, rgba(255,123,123,.22), transparent 32rem),
+        radial-gradient(circle at 92% 5%, rgba(123,213,255,.17), transparent 30rem),
+        linear-gradient(180deg, #0c1220 0%, #121a2f 48%, #0c1220 100%);
+    }
+    a { color: var(--blue); text-underline-offset: .18em; }
+    a:hover { color: var(--cream); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 34px; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 56px;
+      color: var(--muted);
+      font-size: .95rem;
+      flex-wrap: wrap;
+    }
+    .crumb, .meta-row {
+      display: inline-flex;
+      gap: .6rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .pill {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .42rem .75rem;
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) 400px;
+      gap: 32px;
+      align-items: end;
+    }
+    .eyebrow {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .78rem;
+      font-weight: 850;
+    }
+    h1 {
+      margin: .45rem 0 1rem;
+      font-size: clamp(2.65rem, 7vw, 6rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+      text-wrap: balance;
+    }
+    .lede {
+      margin: 0;
+      max-width: 820px;
+      color: #e3ddd3;
+      font-size: clamp(1.08rem, 2vw, 1.38rem);
+    }
+    .hero-card, .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .hero-card {
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,123,123,.12), rgba(255,255,255,.05));
+    }
+    .hero-card h2, .card h3 { margin: 0 0 .6rem; }
+    .hero-card p, .card p, .card li { color: var(--muted); }
+    .hero-card h2 { color: var(--cream); font-size: 1rem; }
+    nav.toc {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      backdrop-filter: blur(18px);
+      background: rgba(12,18,32,.84);
+      border-block: 1px solid var(--line);
+    }
+    nav.toc .wrap {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 12px 18px;
+    }
+    nav.toc a {
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid transparent;
+      padding: .52rem .76rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    nav.toc a:hover {
+      color: var(--ink);
+      border-color: var(--line);
+      background: rgba(255,255,255,.06);
+    }
+    main { padding: 42px 0 76px; }
+    section { scroll-margin-top: 90px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 236px 1fr;
+      gap: 26px;
+      align-items: start;
+      margin: 64px 0 22px;
+    }
+    .section-kicker {
+      color: var(--red);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .75rem;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3.15rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+    }
+    h3 {
+      font-size: 1.08rem;
+      line-height: 1.22;
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card { padding: 24px; }
+    .card.strong { background: linear-gradient(180deg, rgba(137,224,182,.13), rgba(255,255,255,.05)); }
+    .card.warn { background: rgba(255,190,107,.08); border-color: rgba(255,190,107,.35); }
+    .card.flag { background: rgba(255,123,123,.08); border-color: rgba(255,123,123,.34); }
+    .callout {
+      border-left: 4px solid var(--blue);
+      padding: 18px 22px;
+      border-radius: 16px;
+      background: rgba(123,213,255,.08);
+      color: #e5f6ff;
+      margin: 18px 0;
+    }
+    .timeline { display: grid; gap: 14px; }
+    .time-step {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.045);
+    }
+    .time-step strong { color: var(--cream); display: block; }
+    .ops-list, .checklist, .source-list { display: grid; gap: 12px; }
+    .ops-item, .check-item, .source-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,.045);
+    }
+    .ops-item b, .check-item b, .source-item b { color: var(--blue); }
+    ul, ol { margin: .7rem 0 0; padding-left: 1.25rem; }
+    li + li { margin-top: .45rem; }
+    .phase {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.045);
+      padding: 20px;
+    }
+    .phase .phase-label {
+      color: var(--cream);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .76rem;
+      font-weight: 800;
+    }
+    .footer {
+      margin-top: 72px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      color: var(--quiet);
+      display: flex;
+      gap: 18px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .92em;
+      color: var(--cream);
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: .12rem .38rem;
+    }
+    @media (max-width: 1000px) {
+      .hero, .section-head, .grid.two, .grid.three, .grid.four, .time-step { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; }
+    }
+    @media print {
+      body { background: white; color: #111; }
+      nav.toc { display: none; }
+      .card, .hero-card, .ops-item, .check-item, .source-item, .phase, .time-step { box-shadow: none; background: white; border-color: #ddd; }
+      .card p, .card li, .hero-card p { color: #333; }
+      a { color: #0645ad; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">Research pages</a><span>›</span><span>Fourth of July hosting playbook</span></div>
+      <div class="meta-row"><span class="pill">Published June 16, 2026</span><span class="pill">3 research subagents + synthesis</span></div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Host calmly. Guests feel it.</div>
+        <h1>A Fourth of July hosting playbook that makes the party feel easy.</h1>
+        <p class="lede">This report is built for a real home party, not an aspirational magazine spread: what to do ahead of time, what to stage so guests can self-serve, how to keep people included, and the non-obvious moves that make a host seem relaxed, attentive, and ahead of the night.</p>
+      </div>
+      <aside class="hero-card" aria-label="Bottom line">
+        <h2>Bottom line</h2>
+        <p><strong>The best host does not look busy.</strong> The win condition is not “impress everyone with complexity.” It is building simple systems so food, drinks, flow, comfort, and belonging all work without you having to rescue the party every fifteen minutes.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Page sections">
+    <div class="wrap">
+      <a href="#thesis">Thesis</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#systems">Host systems</a>
+      <a href="#social">Guest experience</a>
+      <a href="#seasonal">Seasonal execution</a>
+      <a href="#flow">Party arc</a>
+      <a href="#rescue">Rescue tactics</a>
+      <a href="#details">Non-obvious details</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="thesis">
+      <div class="section-head">
+        <div class="section-kicker">00 · Framing</div>
+        <h2>Great hosting is mostly invisible systems, not charisma.</h2>
+      </div>
+      <div class="grid four">
+        <article class="card flag"><h3>What fails</h3><p>Too much live cooking, all functions in one place, no seating logic, no backstock plan, and the host trapped by grill duty or problem-solving.</p></article>
+        <article class="card"><h3>What works</h3><p>Food, drinks, trash, bathroom, shade, and social energy all feel obvious enough that guests rarely need instructions.</p></article>
+        <article class="card strong"><h3>What guests remember</h3><p>Feeling welcomed quickly, never wondering what to do next, and noticing that the night kept unfolding smoothly.</p></article>
+        <article class="card warn"><h3>Fourth-of-July twist</h3><p>Heat, bugs, dusk, fireworks timing, and kid energy make this more of an operating problem than a menu problem.</p></article>
+      </div>
+      <div class="callout"><strong>Simple heuristic:</strong> if five guests arrive at once, one cooler runs low, a shy person knows nobody, and dusk starts falling, the party should still feel fine. Build for that moment.</div>
+    </section>
+
+    <section id="timeline">
+      <div class="section-head">
+        <div class="section-kicker">01 · Timeline</div>
+        <h2>Work backward so the day of the party is mostly light finishing work.</h2>
+      </div>
+      <div class="timeline">
+        <article class="time-step">
+          <div><strong>1 week ahead</strong><span>Lock the shape</span></div>
+          <div>
+            <ul>
+              <li>Set the guest count range, arrival window, and whether the night is centered on dinner, games, fireworks, or all three.</li>
+              <li>Reduce the menu to a few dependable crowd-pleasers: 1–2 mains, 2–3 sides, 1 dessert lane, 2 adult drink lanes, 2 strong nonalcoholic lanes.</li>
+              <li>Inventory chairs, folding tables, coolers, extension cords, serving utensils, bug supplies, ice capacity, and bathroom basics.</li>
+              <li>Sketch the physical layout: food zone, drinks zone, shade zone, kids/activity zone, trash/recycling, and post-sunset hangout spot.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="time-step">
+          <div><strong>3 days ahead</strong><span>Buy and prep</span></div>
+          <div>
+            <ul>
+              <li>Buy shelf-stable supplies early so perishables are the only last-mile stress.</li>
+              <li>Prep the items that age well: chopped toppings, marinades, cookies, bars, pasta salad, slaw, fruit washing, cooler organization.</li>
+              <li>Confirm weather, heat, rain, and local fireworks assumptions.</li>
+              <li>If the setup is not obvious, text guests useful details such as parking, kid-friendliness, bring-a-chair note, or likely fireworks timing.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="time-step">
+          <div><strong>Day before</strong><span>Stage the systems</span></div>
+          <div>
+            <ul>
+              <li>Set tables, serving surfaces, visible trash and recycling, lighting, and the bathroom route.</li>
+              <li>Pre-chill drinks and designate backstock by category: water, beer, soda, juice, ice, replenishment food.</li>
+              <li>Do as much cooking and portioning as possible in advance.</li>
+              <li>Create a hidden host landing zone with tape, scissors, lighter, Sharpie, paper towels, first aid basics, extra tongs, trash bags, phone charger, and stain wipes.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="time-step">
+          <div><strong>Day of</strong><span>Only finish</span></div>
+          <div>
+            <ul>
+              <li>Put out an opening wave of food before guests arrive so the first arrivals do not create kitchen panic.</li>
+              <li>Assign one helper to restocking/trash/ice and one helper to food replenishment or grill timing.</li>
+              <li>Keep 20–30% of food and drinks in reserve so the visible setup stays tidy and restocking feels deliberate.</li>
+              <li>Start music low, check shade and water, and do a final dusk walk for cords, steps, and trip hazards.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="systems">
+      <div class="section-head">
+        <div class="section-kicker">02 · Host systems</div>
+        <h2>Make the house and yard answer guest questions before guests ask them.</h2>
+      </div>
+      <div class="ops-list">
+        <div class="ops-item"><b>Flow</b><div><strong>Separate food and drinks.</strong> One crowded station feels like scarcity. Two separate stations feel like abundance and reduce kitchen clogging.</div></div>
+        <div class="ops-item"><b>Water</b><div><strong>Put water in more than one place.</strong> Hydration should be easier to find than alcohol, especially in heat.</div></div>
+        <div class="ops-item"><b>Trash</b><div><strong>Make disposal obvious and shame-free.</strong> Open-lid bins or visibly labeled bags outperform “figure it out” hosting every time.</div></div>
+        <div class="ops-item"><b>Backstock</b><div><strong>Hide it, but centralize it.</strong> A single replenishment zone beats scattered extras across the house.</div></div>
+        <div class="ops-item"><b>Bathroom</b><div><strong>Treat it like part of the event.</strong> Stock soap, towels, toilet paper, a trash can, and do a mid-party check.</div></div>
+        <div class="ops-item"><b>Seating</b><div><strong>Seat for comfort and self-sorting.</strong> Use a mix of standing zones, chat clusters, chairs with backs, and a quieter perch for older or lower-energy guests.</div></div>
+      </div>
+      <div class="grid three" style="margin-top:18px;">
+        <article class="card"><h3>Best host move</h3><p>Create multiple low-friction decision points: guests instantly know where drinks are, where to stand, where to sit, and where their kids can go.</p></article>
+        <article class="card warn"><h3>Common mistake</h3><p>Putting plates, food, condiments, drinks, and trash in a single hot corner near the kitchen door.</p></article>
+        <article class="card strong"><h3>Quiet flex</h3><p>Small labels on coolers or trays—<code>Water</code>, <code>Kids drinks</code>, <code>Bug spray</code>, <code>Trash</code>, <code>Restroom</code>—save the host dozens of interruptions.</p></article>
+      </div>
+    </section>
+
+    <section id="social">
+      <div class="section-head">
+        <div class="section-kicker">03 · Guest experience</div>
+        <h2>Guests have a better time when belonging is easy, not when fun is forced.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>What great hosts do</h3>
+          <ul>
+            <li>Greet people quickly and orient them: drinks, food, bathroom, where to put stuff.</li>
+            <li>Introduce new arrivals to one or two compatible people instead of releasing them into the yard.</li>
+            <li>Use names and pre-planned connectors: same neighborhood, job, sports, parenting stage, hobby, or travel story.</li>
+            <li>Circulate in short laps instead of getting trapped in one long conversation.</li>
+            <li>Create at least one easy activity anchor so mingling is optional, not mandatory.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Invisible hospitality moves</h3>
+          <ul>
+            <li>Check solo or shy guests every 10–15 minutes and quietly bridge them into better groupings.</li>
+            <li>Keep music conversation-friendly during arrival and eating; raise energy only after the party is already working.</li>
+            <li>Replenish food before platters look defeated. Empty trays communicate “you missed it.”</li>
+            <li>Keep one socially generous person near arrivals early if possible.</li>
+            <li>Design three social speeds: lively, conversational, and kid/family activity.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout"><strong>Best social heuristic:</strong> a guest should never have to solve two uncertainties at once. If they do not know anyone, they should at least know where to stand or what to do. If they are shy, the host should lower the social risk around them.</div>
+    </section>
+
+    <section id="seasonal">
+      <div class="section-head">
+        <div class="section-kicker">04 · Seasonal execution</div>
+        <h2>Fourth of July success depends on heat, bugs, food safety, lighting, and nightfall.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card warn">
+          <h3>Heat and hydration</h3>
+          <ul>
+            <li>Build around shade first. Afternoon sun can ruin both mood and stamina.</li>
+            <li>Offer water, sparkling water, and one electrolyte-friendly option in plain sight.</li>
+            <li>Use smaller batches for perishable foods in the heat and rotate from cold backup rather than overloading the serving table.</li>
+            <li>Have one cool-down space indoors or with strong airflow.</li>
+          </ul>
+        </article>
+        <article class="card warn">
+          <h3>Bugs, dusk, and movement</h3>
+          <ul>
+            <li>Dusk is usually the mosquito turning point, so have fans, repellent, and covered food ready before sunset.</li>
+            <li>Turn lights on before the yard feels dark; guests should notice comfort, not a last-minute scramble.</li>
+            <li>Walk the route to the bathroom, coolers, gates, and chairs at dusk as if you are carrying a plate and drink.</li>
+            <li>Move kid activities away from grill traffic and trip hazards before darkness falls.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="grid three" style="margin-top:18px;">
+        <article class="card"><h3>Patriotic without corny overload</h3><p>Favor summer-first styling: red fruit, blue drinks or napkins, white serving pieces, warm lights, and one strong visual focal point instead of novelty clutter.</p></article>
+        <article class="card"><h3>Kid-safe wins</h3><p>Glow sticks, bubbles, chalk, ring toss, popsicles, simple scavenger prompts, and water play if appropriate work better than complicated activity plans.</p></article>
+        <article class="card flag"><h3>Risk point</h3><p>If there may be fireworks nearby, assume noise, smoke, dogs, and tired kids will shape the final hour. Plan for that instead of being surprised by it.</p></article>
+      </div>
+    </section>
+
+    <section id="flow">
+      <div class="section-head">
+        <div class="section-kicker">05 · Party arc</div>
+        <h2>Structure the event so there is always a next mode.</h2>
+      </div>
+      <div class="grid four">
+        <article class="phase"><div class="phase-label">Arrival</div><h3>3:30–5:00 PM</h3><p>Cold drinks, shade, low music, and easy grazing. Focus on greetings, orientation, and early social linking.</p></article>
+        <article class="phase"><div class="phase-label">Main food</div><h3>5:30–6:30 PM</h3><p>Serve before kids and hungry adults get jagged. Keep the line obvious and the condiments where they are used.</p></article>
+        <article class="phase"><div class="phase-label">Twilight reset</div><h3>7:00–8:00 PM</h3><p>Clear plates, refresh drinks, switch on bug control and lights, bring dessert, and reset the social energy.</p></article>
+        <article class="phase"><div class="phase-label">Night mode</div><h3>After dark</h3><p>Fireworks viewing, glow items, dessert, quieter chat clusters, and easier pacing. By now the party should coast.</p></article>
+      </div>
+      <div class="callout"><strong>Subtle but powerful:</strong> guests leave earlier when the party has no second act. Dessert, dusk lights, games, or fireworks-viewing setup tell people the evening is still unfolding.</div>
+    </section>
+
+    <section id="rescue">
+      <div class="section-head">
+        <div class="section-kicker">06 · Rescue tactics</div>
+        <h2>When the energy dips, the host should have a move ready.</h2>
+      </div>
+      <div class="grid three">
+        <article class="card">
+          <h3>Shy guest rescue</h3>
+          <p>Do not just introduce and vanish. Stay for the first 30–60 seconds, seed the conversation with one connector, and if the fit is flat, re-route quickly.</p>
+        </article>
+        <article class="card">
+          <h3>Energy slump rescue</h3>
+          <p>Introduce a transition point: dessert opening, lawn game reset, refill round, fireworks prep, glow-stick handoff, or a low-key toast.</p>
+        </article>
+        <article class="card">
+          <h3>Overdominant guest rescue</h3>
+          <p>Give them a role—grill helper, game captain, playlist point person—so their energy becomes useful instead of overwhelming.</p>
+        </article>
+        <article class="card">
+          <h3>Parent stress rescue</h3>
+          <p>Show where the shade, bathroom, water, and kid-safe play area are. Parents relax when the environment lowers vigilance.</p>
+        </article>
+        <article class="card">
+          <h3>Food station rescue</h3>
+          <p>If a table looks stripped or messy, refresh it before anyone comments. Small-batch replenishment preserves the emotional sense of abundance.</p>
+        </article>
+        <article class="card flag">
+          <h3>Host overload rescue</h3>
+          <p>If you are answering the same five questions, the setup—not you—is failing. Add labels, move supplies, or reassign a helper instead of muscling through.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="details">
+      <div class="section-head">
+        <div class="section-kicker">07 · Non-obvious details</div>
+        <h2>These are the little things that make the party feel unusually well hosted.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card strong">
+          <h3>High-leverage subtle moves</h3>
+          <ul>
+            <li>Freeze water bottles so they cool the cooler first and become backup drinks later.</li>
+            <li>Pre-open packaging and decant what matters: chip bags, condiment bottles, cutlery, napkins, straws, and serving tools.</li>
+            <li>Use curved or clustered seating rather than one long row; it creates easier conversation entries.</li>
+            <li>Put extra chairs in visible reach so needing a seat never becomes a request.</li>
+            <li>Choose one intentional “wow” detail—a watermelon board, dessert lane, drink tub, or dusk lighting moment—instead of trying to wow everywhere.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Signals to monitor all night</h3>
+          <ul>
+            <li>People checking phones because there is nowhere easy to join.</li>
+            <li>Parents staying hyper-vigilant instead of settling in.</li>
+            <li>Guests clustering only with who they arrived with.</li>
+            <li>Music volume making people lean in or move away.</li>
+            <li>One part of the yard overfull while other zones sit empty.</li>
+            <li>Guests leaving soon after eating because nothing signals a second phase.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="section-head">
+        <div class="section-kicker">08 · Preflight</div>
+        <h2>A 12-point host checklist for the final hour before guests arrive.</h2>
+      </div>
+      <div class="checklist">
+        <div class="check-item"><b>01</b><div>The menu is locked, realistic, and mostly make-ahead. No experimental dishes.</div></div>
+        <div class="check-item"><b>02</b><div>Drinks are pre-chilled, ice is abundant, and water exists in more than one place.</div></div>
+        <div class="check-item"><b>03</b><div>Food and drink stations are physically separate.</div></div>
+        <div class="check-item"><b>04</b><div>Trash and recycling are visible, lined, and placed where people naturally finish things.</div></div>
+        <div class="check-item"><b>05</b><div>The bathroom is fully stocked and the route to it feels open and obvious.</div></div>
+        <div class="check-item"><b>06</b><div>A backstock zone is organized with extra drinks, plates, napkins, condiments, and serving tools.</div></div>
+        <div class="check-item"><b>07</b><div>Shade, sunscreen, bug spray, and a heat plan are in place.</div></div>
+        <div class="check-item"><b>08</b><div>Seating includes comfortable chairs with backs, not just standing room or blankets.</div></div>
+        <div class="check-item"><b>09</b><div>One helper knows they own trash/ice/restocking, and another helper knows they own food support or grill timing.</div></div>
+        <div class="check-item"><b>10</b><div>The opening wave of food is already ready to land before the first arrivals.</div></div>
+        <div class="check-item"><b>11</b><div>Lighting is pre-checked for after dark, including paths, steps, gates, and the bathroom route.</div></div>
+        <div class="check-item"><b>12</b><div>You know the next transition after dinner: dessert, games, glow items, fireworks, or a twilight reset.</div></div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <div class="section-kicker">09 · Sources</div>
+        <h2>Safety references plus synthesis notes.</h2>
+      </div>
+      <p class="lede" style="font-size:1.06rem; margin-bottom:18px;">This page combines three parallel research-subagent syntheses focused on logistics, guest experience, and Fourth-of-July-specific execution. Public references below are used mainly for heat, weather, grilling, mosquito, and fireworks safety framing.</p>
+      <div class="source-list">
+        <div class="source-item"><b>01</b><div><strong><a href="https://www.cdc.gov/heat-health/about/index.html">About Heat and Your Health</a></strong><br /><span style="color:var(--quiet);">CDC</span><br />Heat exposure, risk factors, and prevention framing relevant to backyard summer gatherings.</div></div>
+        <div class="source-item"><b>02</b><div><strong><a href="https://www.ready.gov/heat">Extreme Heat</a></strong><br /><span style="color:var(--quiet);">Ready.gov</span><br />Preparedness guidance used to reinforce hydration, cooling, and high-heat backup planning.</div></div>
+        <div class="source-item"><b>03</b><div><strong><a href="https://www.weather.gov/safety/heat">Heat Safety Tips and Resources</a></strong><br /><span style="color:var(--quiet);">National Weather Service</span><br />Additional operational reminders on heat illness prevention and heat-aware planning.</div></div>
+        <div class="source-item"><b>04</b><div><strong><a href="https://www.epa.gov/mosquitocontrol">Mosquito Control</a></strong><br /><span style="color:var(--quiet);">U.S. EPA</span><br />Used for dusk bug-pressure planning and prevention posture.</div></div>
+        <div class="source-item"><b>05</b><div><strong><a href="https://www.ready.gov/thunderstorms-lightning">Thunderstorms &amp; Lightning</a></strong><br /><span style="color:var(--quiet);">Ready.gov</span><br />Supports rain/thunder contingency planning and the distinction between manageable rain and stop-the-party lightning risk.</div></div>
+        <div class="source-item"><b>06</b><div><strong><a href="https://www.weather.gov/safety/lightning">Lightning Safety Tips and Resources</a></strong><br /><span style="color:var(--quiet);">National Weather Service</span><br />Further grounding for outdoor-weather risk and when to move people under shelter.</div></div>
+        <div class="source-item"><b>07</b><div><strong><a href="https://www.nfpa.org/education-and-research/home-fire-safety/grilling">Grilling Safety Facts &amp; Resources</a></strong><br /><span style="color:var(--quiet);">NFPA</span><br />Supports grill-buffer-zone advice and general grilling safety awareness.</div></div>
+        <div class="source-item"><b>08</b><div><strong><a href="https://www.nfpa.org/education-and-research/home-fire-safety/fireworks">Fireworks</a></strong><br /><span style="color:var(--quiet);">NFPA</span><br />Supports fireworks caution, guest expectation-setting, and after-dark risk framing.</div></div>
+      </div>
+      <div class="callout"><strong>Practical note:</strong> the hospitality recommendations here are not “official rules”; they are synthesized operating guidance from the research pass, structured around reducing friction, making guests feel included, and keeping the host from becoming the event bottleneck.</div>
+    </section>
+
+    <p class="footer">
+      <span>Repository: <a href="https://github.com/claydunker-yalc/donns-websites-for-clay">claydunker-yalc/donns-websites-for-clay</a></span>
+      <span>Marker: <code>Fourth of July hosting playbook marker</code></span>
+    </p>
+  </main>
+</body>
+</html>
