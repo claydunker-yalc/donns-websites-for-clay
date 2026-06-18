@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How much water and energy does normal AI use consume?</title>
+  <meta name="description" content="A balanced, source-backed brief on per-prompt and per-token AI energy and water use, including training amortization, viral claims, and educator-facing takeaways." />
+  <!-- ai water energy truth marker -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09111f;
+      --panel: rgba(255,255,255,.066);
+      --panel-strong: rgba(255,255,255,.105);
+      --ink: #f4f8ff;
+      --muted: #c2cee2;
+      --quiet: #93a2bb;
+      --line: rgba(255,255,255,.14);
+      --blue: #75d7ff;
+      --green: #86efac;
+      --gold: #ffd27d;
+      --red: #ff8d8d;
+      --violet: #d6b4ff;
+      --shadow: 0 28px 90px rgba(0,0,0,.34);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      line-height: 1.62;
+      background:
+        radial-gradient(circle at 12% -8%, rgba(117,215,255,.23), transparent 31rem),
+        radial-gradient(circle at 92% 7%, rgba(134,239,172,.13), transparent 28rem),
+        radial-gradient(circle at 50% 112%, rgba(214,180,255,.14), transparent 34rem),
+        linear-gradient(180deg, #09111f 0%, #111b2d 52%, #09111f 100%);
+    }
+    a { color: var(--blue); text-underline-offset: .18em; }
+    a:hover { color: var(--gold); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 34px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 52px; color: var(--muted); font-size: .95rem; flex-wrap: wrap; }
+    .crumb, .meta-row { display: inline-flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+    .pill { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: .42rem .75rem; background: rgba(255,255,255,.05); color: var(--muted); font-size: .86rem; white-space: nowrap; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.08fr) 390px; gap: 32px; align-items: end; }
+    .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; font-weight: 850; }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.55rem, 6.7vw, 5.8rem); line-height: .92; letter-spacing: -.06em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 830px; color: #e5edf9; font-size: clamp(1.08rem, 2vw, 1.35rem); }
+    .hero-card, .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .hero-card { padding: 24px; background: linear-gradient(180deg, rgba(117,215,255,.13), rgba(255,255,255,.05)); }
+    .hero-card h2, .card h3 { margin: 0 0 .6rem; }
+    .hero-card p, .card p, .card li { color: var(--muted); }
+    .hero-card h2 { color: var(--gold); font-size: 1rem; }
+    nav.toc { position: sticky; top: 0; z-index: 4; backdrop-filter: blur(18px); background: rgba(9,17,31,.84); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 12px; overflow-x: auto; padding: 12px 0; }
+    nav.toc a { border: 1px solid var(--line); border-radius: 999px; padding: .48rem .74rem; background: rgba(255,255,255,.045); color: var(--muted); text-decoration: none; white-space: nowrap; font-size: .9rem; }
+    nav.toc a:hover { color: var(--ink); border-color: rgba(117,215,255,.5); }
+    main { padding: 28px 0 64px; }
+    section { margin: 34px 0; }
+    .section-head { margin-bottom: 18px; }
+    h2 { margin: 0 0 .55rem; font-size: clamp(1.65rem, 3vw, 2.7rem); line-height: 1.05; letter-spacing: -.035em; }
+    h3 { color: var(--ink); }
+    .section-head p { margin: 0; color: var(--muted); max-width: 870px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card { grid-column: span 6; padding: 22px; }
+    .card.full { grid-column: 1 / -1; }
+    .card.third { grid-column: span 4; }
+    .callout { border-color: rgba(134,239,172,.32); background: linear-gradient(180deg, rgba(134,239,172,.11), rgba(255,255,255,.045)); }
+    .warning { border-color: rgba(255,210,125,.35); background: linear-gradient(180deg, rgba(255,210,125,.115), rgba(255,255,255,.045)); }
+    .danger { border-color: rgba(255,141,141,.35); background: linear-gradient(180deg, rgba(255,141,141,.105), rgba(255,255,255,.045)); }
+    .kpi { display: grid; gap: .35rem; }
+    .kpi strong { font-size: clamp(1.75rem, 4vw, 3.1rem); line-height: .95; letter-spacing: -.05em; color: var(--green); }
+    .kpi span { color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 16px; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 13px 14px; border-bottom: 1px solid var(--line); }
+    th { color: var(--ink); background: rgba(255,255,255,.08); }
+    td { color: var(--muted); background: rgba(255,255,255,.035); }
+    tr:last-child td { border-bottom: 0; }
+    .small { color: var(--quiet); font-size: .92rem; }
+    .formula { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: rgba(0,0,0,.23); border: 1px solid var(--line); border-radius: 14px; padding: 14px; color: #d8f7ff; overflow-x: auto; }
+    ul, ol { padding-left: 1.25rem; }
+    .verdict { font-size: 1.08rem; color: #e9f1ff !important; }
+    .sources li { margin-bottom: .7rem; }
+    footer { margin-top: 54px; padding: 28px 0 42px; border-top: 1px solid var(--line); color: var(--quiet); }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .card, .card.third { grid-column: 1 / -1; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">← Research index</a><span>AI environmental footprint</span></div>
+      <div class="meta-row"><span class="pill">Published June 18, 2026</span><span class="pill">Text AI focus</span><span class="pill">Source-backed ranges</span></div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">The short honest answer</div>
+        <h1>AI prompts use real water and energy. The scary viral numbers need context.</h1>
+        <p class="lede">For normal text use, the best public evidence points to electricity on the order of a fraction of a watt-hour to a few watt-hours per query, with water estimates ranging from less than 1 mL to tens of mL depending on the model, datacenter, cooling system, grid, and accounting boundary.</p>
+      </div>
+      <aside class="hero-card">
+        <h2>Bottom line for teachers</h2>
+        <p class="verdict">Do not dismiss the issue. Do not panic over every prompt. Use AI when it has clear instructional, accessibility, or workload value; use simpler tools when they are enough; ask vendors for transparency.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="wrap">
+      <a href="#answer">Bottom line</a>
+      <a href="#numbers">The numbers</a>
+      <a href="#viral">Viral claims</a>
+      <a href="#training">Training share</a>
+      <a href="#comparisons">Comparisons</a>
+      <a href="#educators">For educators</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="answer">
+      <div class="section-head">
+        <h2>What is true?</h2>
+        <p>The truth is not “AI is free” and not “one prompt drains a bottle of water.” The responsible answer is a range with assumptions.</p>
+      </div>
+      <div class="grid">
+        <article class="card third kpi">
+          <strong>~0.05–3 Wh</strong>
+          <span>Reasonable range for many ordinary short text queries, inference only. Long answers, frontier models, tools, images, video, or agents can be higher.</span>
+        </article>
+        <article class="card third kpi">
+          <strong>&lt;1–25 mL</strong>
+          <span>Plausible water range per text query across low company-reported estimates and older academic “bottle per 20–50 prompts” modeling.</span>
+        </article>
+        <article class="card third kpi">
+          <strong>training varies</strong>
+          <span>Training is a fixed cost. Per prompt it is tiny for heavily used models, but meaningful for very large or lightly used systems.</span>
+        </article>
+        <article class="card full callout">
+          <h3>Most defensible public statement</h3>
+          <p class="verdict">A normal text AI query probably uses electricity comparable to running a 10-watt LED bulb for seconds to minutes, not hours. Water use is real but highly location-dependent; commonly cited estimates range from less than a milliliter to a few teaspoons per query. The bigger environmental question is not one teacher’s occasional prompt, but billions of prompts, larger media generation, datacenter buildout, local water stress, and whether vendors disclose enough to verify claims.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="numbers">
+      <div class="section-head">
+        <h2>Per prompt and per token estimates</h2>
+        <p>“Per prompt” is unstable because a prompt can produce a sentence or a 2,000-word lesson plan. Per-token accounting is cleaner, but closed providers rarely publish audited per-token footprints.</p>
+      </div>
+      <div class="grid">
+        <article class="card full">
+          <table>
+            <thead><tr><th>Metric</th><th>Plausible range for text AI</th><th>What drives it</th></tr></thead>
+            <tbody>
+              <tr><td>Inference electricity per short query</td><td>~0.05–3 Wh</td><td>Model size, output length, batching, hardware, datacenter efficiency.</td></tr>
+              <tr><td>Inference electricity per 1,000 output tokens</td><td>~0.1–10 Wh</td><td>Small open models can be near the low end; frontier models and long outputs can be higher.</td></tr>
+              <tr><td>Water per query</td><td>&lt;1–25 mL</td><td>Direct cooling water, indirect electricity water, datacenter location, weather, cooling design, and accounting boundary.</td></tr>
+              <tr><td>Training amortization per query</td><td>near-zero to several+ Wh</td><td>Training energy divided by lifetime served tokens. Unknown for most closed models.</td></tr>
+            </tbody>
+          </table>
+          <p class="small">These ranges synthesize public academic measurements, modeling papers, provider statements, and arithmetic. They are not a claim that every model or every query falls inside the range.</p>
+        </article>
+        <article class="card">
+          <h3>Water formula</h3>
+          <p>If a datacenter reports water usage effectiveness (WUE), the rough relationship is:</p>
+          <div class="formula">water per query = electricity per query × WUE</div>
+          <p>Example: a 1 Wh query is 0.001 kWh. At 1 liter/kWh WUE, that is about 1 mL of direct water consumption. At 10 Wh and 3 L/kWh, it is 30 mL.</p>
+        </article>
+        <article class="card">
+          <h3>Why estimates disagree</h3>
+          <ul>
+            <li>Some count only onsite cooling; others include electricity-generation water.</li>
+            <li>Some use older GPT-3-era assumptions; others claim newer average fleet efficiency.</li>
+            <li>Some compare short benchmark prompts; real classroom tasks can be much longer.</li>
+            <li>Closed providers usually do not publish model-specific energy, water, or served-token data.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="viral">
+      <div class="section-head">
+        <h2>Where the viral claims come from</h2>
+        <p>The disagreement is mostly between two reference points: an academic water-footprint model and a later company-provided average.</p>
+      </div>
+      <div class="grid">
+        <article class="card warning">
+          <h3>“A bottle of water per 20–50 prompts”</h3>
+          <p>Usually traces to Li/Ren et al., <em>Making AI Less “Thirsty”</em>. Their modeled estimate says a ChatGPT-style conversation may consume roughly 500 mL for 20–50 questions and answers.</p>
+          <table><tbody><tr><td>500 mL ÷ 20 prompts</td><td>25 mL/prompt</td></tr><tr><td>500 mL ÷ 50 prompts</td><td>10 mL/prompt</td></tr></tbody></table>
+          <p class="small">Fair as a caveated 2023 modeled estimate. Misleading if repeated as a universal current fact or as “one prompt uses one bottle.”</p>
+        </article>
+        <article class="card callout">
+          <h3>“One prompt is 1/800,000 of daily water use”</h3>
+          <p>This appears to come from Sam Altman’s 2025 statement that an average ChatGPT query uses about 0.000085 gallons of water and 0.34 Wh of electricity.</p>
+          <table><tbody><tr><td>0.000085 gallons</td><td>0.322 mL</td></tr><tr><td>68 gallons/day ÷ 0.000085</td><td>~800,000 queries</td></tr></tbody></table>
+          <p class="small">The math works if you accept the company-provided average and a U.S.-style daily household water baseline. It is not the same as an audited full lifecycle footprint.</p>
+        </article>
+        <article class="card full danger">
+          <h3>The real controversy</h3>
+          <p>The controversy is not whether AI has an environmental footprint. It does. The controversy is whether public per-prompt claims are being compared fairly: direct vs indirect water, withdrawal vs consumption, model-specific vs fleet-average estimates, training vs inference, and average global use vs local water-stressed datacenters.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="training">
+      <div class="section-head">
+        <h2>Should a prompt include a slice of training?</h2>
+        <p>Yes for lifecycle accounting; usually no for the marginal impact of one extra use of an already-trained model. The cleanest report shows both.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Marginal-use view</h3>
+          <p>Question: “What happens if I ask one more question today?” Training is mostly sunk. The added impact is inference electricity, cooling, network/storage overhead, and a tiny share of hardware wear.</p>
+        </article>
+        <article class="card">
+          <h3>Lifecycle view</h3>
+          <p>Question: “What is the average footprint of this AI service?” Then allocate training across total lifetime served tokens or queries. The hard part: companies rarely publish the denominator.</p>
+        </article>
+        <article class="card full">
+          <table>
+            <thead><tr><th>Training run example</th><th>Reported/estimated energy</th><th>If amortized over usage</th><th>Interpretation</th></tr></thead>
+            <tbody>
+              <tr><td>GPT-3-scale estimate in Patterson et al.</td><td>~1,287 MWh</td><td>~1 Wh per 750-token interaction if spread over 1 trillion served tokens; ~0.1 Wh over 10 trillion.</td><td>Training share can become small at heavy usage.</td></tr>
+              <tr><td>BLOOM 176B, transparent accounting</td><td>~433 MWh training electricity</td><td>~0.32 Wh per 750-token interaction over 1 trillion served tokens; ~0.032 Wh over 10 trillion.</td><td>Open accounting helps; amortization still depends on usage.</td></tr>
+              <tr><td>Llama 3.1 405B back-of-envelope</td><td>tens of GWh from reported GPU-hours</td><td>Could be several Wh per interaction unless spread over tens or hundreds of trillions of tokens.</td><td>Very large models make the denominator matter a lot.</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+
+    <section id="comparisons">
+      <div class="section-head">
+        <h2>Blue jeans, golf, LEDs, and other comparisons</h2>
+        <p>Comparisons can help scale the issue, but many are apples-to-oranges.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>LED bulb</h3>
+          <p>A 10-watt LED bulb uses 1 Wh in 6 minutes. If a short text query uses ~0.34 Wh, that is about 2 minutes of that bulb; if it uses 3 Wh, about 18 minutes.</p>
+        </article>
+        <article class="card">
+          <h3>Blue jeans</h3>
+          <p>Public jeans water-footprint estimates often run from several thousand to around 10,000 liters. Depending on whether AI water is 0.3 mL or 10–25 mL/query, one pair of jeans can equal hundreds of thousands to tens of millions of prompts. Useful scale; not a moral free pass.</p>
+        </article>
+        <article class="card">
+          <h3>Golf irrigation</h3>
+          <p>U.S. golf-course irrigation is often estimated around millions of acre-feet per year, vastly larger than one AI prompt. But golf and datacenters stress different local watersheds at different times, so this should not dismiss datacenter siting concerns.</p>
+        </article>
+        <article class="card">
+          <h3>Google search</h3>
+          <p>Older claims that ChatGPT used about 10× a Google search often used ~3 Wh/query. Altman’s later public figure, 0.34 Wh/query, is much lower. Treat any single “X times a search” claim as year-, model-, and method-dependent.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="educators">
+      <div class="section-head">
+        <h2>How to talk about this with teachers</h2>
+        <p>The goal is responsible use, not environmental theater and not denial.</p>
+      </div>
+      <div class="grid">
+        <article class="card full callout">
+          <h3>Classroom-safe framing</h3>
+          <p class="verdict">AI tools are not environmentally free. They run in datacenters that use electricity and sometimes water for cooling. The impact of one classroom text prompt is usually small, but widespread use adds up. Use AI where it clearly improves learning, accessibility, feedback, planning, or teacher workload; use simpler tools when they are enough.</p>
+        </article>
+        <article class="card">
+          <h3>Good habits</h3>
+          <ul>
+            <li>Use the right-sized tool: search, spreadsheet, calculator, spellcheck, or local template when that is enough.</li>
+            <li>Batch questions and write clearer prompts to avoid repeated generations.</li>
+            <li>Reuse useful rubrics, emails, examples, and lesson structures.</li>
+            <li>Be more cautious with image, video, and agentic workflows, which can use much more compute than text.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Questions for vendors</h3>
+          <ul>
+            <li>Do you publish energy, emissions, and water data?</li>
+            <li>Do you report water usage effectiveness or datacenter water consumption?</li>
+            <li>Can schools choose efficient models for routine tasks?</li>
+            <li>Are renewable-energy and water claims audited or only company-wide averages?</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>Selected sources</h2>
+        <p>Best available public sources still leave gaps, especially for closed frontier models. These are the sources most worth reading before arguing about a single number.</p>
+      </div>
+      <article class="card full">
+        <ol class="sources">
+          <li>Pengfei Li, Jianyi Yang, Mohammad A. Islam, Shaolei Ren, <a href="https://arxiv.org/abs/2304.03271">“Making AI Less ‘Thirsty’: Uncovering and Addressing the Secret Water Footprint of AI Models”</a>, arXiv, 2023.</li>
+          <li>Sam Altman, <a href="https://blog.samaltman.com/the-gentle-singularity">“The Gentle Singularity”</a>, 2025. Source of the public 0.34 Wh and 0.000085 gallon average-query figures.</li>
+          <li>Alexandra Sasha Luccioni, Yacine Jernite, Emma Strubell, <a href="https://doi.org/10.1145/3630106.3658542">“Power Hungry Processing: Watts Driving the Cost of AI Deployment?”</a>, ACM FAccT, 2024.</li>
+          <li>Siddharth Samsi et al., <a href="https://arxiv.org/abs/2310.03003">“From Words to Watts: Benchmarking the Energy Costs of Large Language Model Inference”</a>, arXiv, 2023.</li>
+          <li>David Patterson et al., <a href="https://arxiv.org/abs/2104.10350">“Carbon Emissions and Large Neural Network Training”</a>, arXiv, 2021.</li>
+          <li>Alexandra Sasha Luccioni et al., <a href="https://jmlr.org/papers/v24/23-0069.html">“Estimating the Carbon Footprint of BLOOM, a 176B Parameter Language Model”</a>, JMLR, 2023.</li>
+          <li>Alex de Vries, <a href="https://www.cell.com/joule/fulltext/S2542-4351(23)00365-3">“The growing energy footprint of artificial intelligence”</a>, <em>Joule</em>, 2023.</li>
+          <li>Meta, <a href="https://arxiv.org/abs/2407.21783">“The Llama 3 Herd of Models”</a>, arXiv, 2024.</li>
+          <li>International Energy Agency, <a href="https://www.iea.org/reports/electricity-2024">Electricity 2024</a> and data center electricity analysis.</li>
+        </ol>
+      </article>
+    </section>
+
+    <footer>
+      <p>Prepared for Clay by Donn. This page is intentionally cautious: where the evidence is uncertain, it says so.</p>
+    </footer>
+  </main>
+</body>
+</html>
