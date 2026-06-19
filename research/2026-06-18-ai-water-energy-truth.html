@@ -111,6 +111,7 @@
     <div class="wrap">
       <a href="#answer">Bottom line</a>
       <a href="#numbers">The numbers</a>
+      <a href="#water-cycle">Water cycle</a>
       <a href="#viral">Viral claims</a>
       <a href="#training">Training share</a>
       <a href="#comparisons">Comparisons</a>
@@ -177,6 +178,44 @@
             <li>Some compare short benchmark prompts; real classroom tasks can be much longer.</li>
             <li>Closed providers usually do not publish model-specific energy, water, or served-token data.</li>
           </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="water-cycle">
+      <div class="section-head">
+        <h2>Doesn’t the water come back?</h2>
+        <p>Yes, in the global water-cycle sense. But environmental water accounting is mostly about local timing, quality, scarcity, and opportunity cost — not literal disappearance from Earth.</p>
+      </div>
+      <div class="grid">
+        <article class="card full callout">
+          <h3>The clean distinction: withdrawal vs consumption</h3>
+          <p><strong>Water withdrawal</strong> means water taken from a river, aquifer, lake, or municipal system and later returned. <strong>Water consumption</strong> means water not returned to that same local source in a usable form on a useful timescale — for example, water evaporated in cooling. Evaporated water is still part of Earth’s water cycle, but it may not rain back into the same watershed when the community, river, farm, or aquifer needs it.</p>
+        </article>
+        <article class="card">
+          <h3>At the datacenter</h3>
+          <p>Some datacenters use evaporative cooling, where water absorbs heat and evaporates. That can reduce electricity use compared with some air-cooling approaches, but it consumes local water. Other facilities use more closed-loop or air-cooled systems, which may use less water onsite but more electricity.</p>
+        </article>
+        <article class="card">
+          <h3>At the power plant</h3>
+          <p>Even if a datacenter itself uses little water, the electricity powering it may have a water footprint. Thermal power plants can withdraw or consume water for cooling; wind and solar generally have much lower operational water use. This is why some studies count both onsite water and offsite electricity-related water.</p>
+        </article>
+        <article class="card">
+          <h3>Why “it rains later” is incomplete</h3>
+          <p>The issue is not that water is destroyed. It is that water can be moved from a local river/aquifer into the atmosphere, returned somewhere else, returned in a different season, or returned after local stress has already happened. In a water-rich region this may be minor; in a drought-prone watershed it can matter.</p>
+        </article>
+        <article class="card">
+          <h3>What water are we discussing?</h3>
+          <ul>
+            <li><strong>Direct onsite water:</strong> cooling water consumed at the datacenter.</li>
+            <li><strong>Indirect/offsite water:</strong> water consumed to generate the electricity used by the datacenter.</li>
+            <li><strong>Withdrawal:</strong> water taken and mostly returned, often warmer or changed.</li>
+            <li><strong>Consumption:</strong> water evaporated or otherwise not returned locally in the same usable window.</li>
+          </ul>
+        </article>
+        <article class="card full warning">
+          <h3>Best wording</h3>
+          <p class="verdict">AI water use is not about water vanishing from the planet. It is about local freshwater demand: how much water is consumed, where it is consumed, whether that place is water-stressed, what season it happens, and whether the datacenter or power source could have used less scarce water or cleaner energy.</p>
         </article>
       </div>
     </section>
@@ -297,6 +336,7 @@
       <article class="card full">
         <ol class="sources">
           <li>Pengfei Li, Jianyi Yang, Mohammad A. Islam, Shaolei Ren, <a href="https://arxiv.org/abs/2304.03271">“Making AI Less ‘Thirsty’: Uncovering and Addressing the Secret Water Footprint of AI Models”</a>, arXiv, 2023.</li>
+          <li>Paul Reig, World Resources Institute, <a href="https://www.wri.org/insights/whats-difference-between-water-use-and-water-consumption">“What’s the Difference Between Water Use and Water Consumption?”</a>, 2013.</li>
           <li>Sam Altman, <a href="https://blog.samaltman.com/the-gentle-singularity">“The Gentle Singularity”</a>, 2025. Source of the public 0.34 Wh and 0.000085 gallon average-query figures.</li>
           <li>Alexandra Sasha Luccioni, Yacine Jernite, Emma Strubell, <a href="https://doi.org/10.1145/3630106.3658542">“Power Hungry Processing: Watts Driving the Cost of AI Deployment?”</a>, ACM FAccT, 2024.</li>
           <li>Siddharth Samsi et al., <a href="https://arxiv.org/abs/2310.03003">“From Words to Watts: Benchmarking the Energy Costs of Large Language Model Inference”</a>, arXiv, 2023.</li>
