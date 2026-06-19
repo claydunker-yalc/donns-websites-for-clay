@@ -112,6 +112,7 @@
       <a href="#answer">Bottom line</a>
       <a href="#numbers">The numbers</a>
       <a href="#water-cycle">Water cycle</a>
+      <a href="#studies">Studies</a>
       <a href="#viral">Viral claims</a>
       <a href="#training">Training share</a>
       <a href="#comparisons">Comparisons</a>
@@ -217,6 +218,44 @@
         <article class="card full warning">
           <h3>Best wording</h3>
           <p class="verdict">AI water use is not about water vanishing from the planet. It is about local freshwater demand: how much water is consumed, where it is consumed, whether that place is water-stressed, what season it happens, and whether the datacenter or power source could have used less scarce water or cleaner energy.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="studies">
+      <div class="section-head">
+        <h2>Have there been actual academic studies?</h2>
+        <p>Yes, but not the kind people usually imply. There are academic studies of AI water footprints and datacenter water use. Public prompt-level water numbers, however, are modeled estimates — not direct metering of ChatGPT/Claude/Gemini water use per prompt.</p>
+      </div>
+      <div class="grid">
+        <article class="card full callout">
+          <h3>The evidence hierarchy</h3>
+          <p class="verdict">I do not find a public academic study that directly meters water use per LLM prompt inside an AI provider’s datacenter. The closest evidence is: measured or provider-reported aggregate datacenter water use; peer-reviewed datacenter footprint models; direct studies of LLM energy use; and AI-specific papers that convert estimated energy into estimated water using WUE and grid-water assumptions.</p>
+        </article>
+        <article class="card full">
+          <table>
+            <thead><tr><th>Source type</th><th>Examples</th><th>What is measured?</th><th>What is modeled?</th></tr></thead>
+            <tbody>
+              <tr><td>AI-specific water paper</td><td>Li/Ren et al., <em>Making AI Less “Thirsty”</em></td><td>Not prompt-level water. Uses public/assumed infrastructure data.</td><td>Training and inference water from estimated energy, WUE, datacenter location, cooling, and electricity-water factors.</td></tr>
+              <tr><td>Datacenter water papers</td><td>Mytton 2021; Ristic/Madani/Makuch 2015; Siddik/Shehabi/Marston 2021</td><td>Sometimes company-reported aggregate facility/fleet water; usually not independently metered by researchers.</td><td>Direct and indirect water footprint at facility, national, or sector scale.</td></tr>
+              <tr><td>LLM inference energy papers</td><td>Luccioni/Jernite/Strubell 2024; Samsi et al. 2023</td><td>Energy/power for specific models/tasks/hardware.</td><td>Water only if someone multiplies energy by WUE and grid-water intensity.</td></tr>
+              <tr><td>Energy-water nexus studies</td><td>Macknick et al.; Meldrum et al.; DOE/LBNL reports</td><td>Power-sector water withdrawal/consumption factors from reported and harmonized data.</td><td>Indirect water for datacenter electricity consumption.</td></tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="card warning">
+          <h3>Why direct prompt-level water is hard</h3>
+          <ul>
+            <li>A datacenter serves many workloads, not just one AI model.</li>
+            <li>Cooling water varies by weather, season, and time of day.</li>
+            <li>Prompts may run across multiple machines or facilities.</li>
+            <li>Providers rarely disclose model-specific traffic, energy, location, or WUE.</li>
+            <li>Indirect power-plant water depends on the grid mix at that time and place.</li>
+          </ul>
+        </article>
+        <article class="card callout">
+          <h3>Best answer</h3>
+          <p>There are real academic studies, but the famous per-prompt water numbers are not direct observations. They are educated models built from energy estimates plus datacenter and electricity-water assumptions. That does not make them useless; it means they should be presented as scenarios or ranges, not as measured facts.</p>
         </article>
       </div>
     </section>
@@ -366,6 +405,11 @@
         <ol class="sources">
           <li>Pengfei Li, Jianyi Yang, Mohammad A. Islam, Shaolei Ren, <a href="https://arxiv.org/abs/2304.03271">“Making AI Less ‘Thirsty’: Uncovering and Addressing the Secret Water Footprint of AI Models”</a>, arXiv, 2023.</li>
           <li>Paul Reig, World Resources Institute, <a href="https://www.wri.org/insights/whats-difference-between-water-use-and-water-consumption">“What’s the Difference Between Water Use and Water Consumption?”</a>, 2013.</li>
+          <li>David Mytton, <a href="https://www.nature.com/articles/s41545-021-00101-w">“Data centre water consumption”</a>, <em>npj Clean Water</em>, 2021.</li>
+          <li>Bahareh Ristic, Kaveh Madani, Zen Makuch, <a href="https://doi.org/10.3390/su70811260">“The Water Footprint of Data Centers”</a>, <em>Sustainability</em>, 2015.</li>
+          <li>Md Abu Bakar Siddik, Arman Shehabi, Landon Marston, <a href="https://doi.org/10.1088/1748-9326/abfba1">“The environmental footprint of data centers in the United States”</a>, <em>Environmental Research Letters</em>, 2021.</li>
+          <li>Eric Masanet et al., <a href="https://www.science.org/doi/10.1126/science.aba3758">“Recalibrating global data center energy-use estimates”</a>, <em>Science</em>, 2020.</li>
+          <li>Lawrence Berkeley National Laboratory, <a href="https://www.osti.gov/biblio/1372902">“United States Data Center Energy Usage Report”</a>, 2016.</li>
           <li>Water Footprint Calculator, <a href="https://www.watercalculator.org/footprint/the-hidden-water-in-everyday-products/">“The Hidden Water in Everyday Products”</a>. Includes cited water footprints for cotton clothing, cars, and gasoline refining.</li>
           <li>Sam Altman, <a href="https://blog.samaltman.com/the-gentle-singularity">“The Gentle Singularity”</a>, 2025. Source of the public 0.34 Wh and 0.000085 gallon average-query figures.</li>
           <li>Alexandra Sasha Luccioni, Yacine Jernite, Emma Strubell, <a href="https://doi.org/10.1145/3630106.3658542">“Power Hungry Processing: Watts Driving the Cost of AI Deployment?”</a>, ACM FAccT, 2024.</li>
