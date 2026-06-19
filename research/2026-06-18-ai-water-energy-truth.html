@@ -115,6 +115,7 @@
       <a href="#viral">Viral claims</a>
       <a href="#training">Training share</a>
       <a href="#comparisons">Comparisons</a>
+      <a href="#outing">Outing math</a>
       <a href="#educators">For educators</a>
       <a href="#sources">Sources</a>
     </div>
@@ -297,6 +298,34 @@
       </div>
     </section>
 
+    <section id="outing">
+      <div class="section-head">
+        <h2>How long prompting equals a normal outing?</h2>
+        <p>This is rough comparison math, not moral accounting. Assumptions: a 20–40 mile car outing, a 25 mpg gasoline car, and Water Footprint Calculator’s cited estimate that refining gasoline uses about 1–2.5 gallons of water per gallon of gasoline. It excludes the theater/store building, snacks, and most purchases.</p>
+      </div>
+      <div class="grid">
+        <article class="card full">
+          <table>
+            <thead><tr><th>Comparison</th><th>Water estimate</th><th>Equivalent prompts at ~0.322 mL/query</th><th>Equivalent prompts at contested 10 mL/query</th><th>Equivalent prompts at contested 50 mL/query</th></tr></thead>
+            <tbody>
+              <tr><td>20-mile outing, gasoline refining only</td><td>~3–7.6 L</td><td>~9,400–23,500 prompts</td><td>~300–760 prompts</td><td>~60–150 prompts</td></tr>
+              <tr><td>40-mile outing, gasoline refining only</td><td>~6.1–15.1 L</td><td>~18,800–47,000 prompts</td><td>~600–1,500 prompts</td><td>~120–300 prompts</td></tr>
+              <tr><td>20-mile outing plus an amortized slice of manufacturing the car</td><td>~10–19 L</td><td>~31,000–58,000 prompts</td><td>~1,000–1,900 prompts</td><td>~200–370 prompts</td></tr>
+            </tbody>
+          </table>
+          <p class="small">At an aggressive human rate of two prompts per minute, 9,400 prompts is about 78 hours of nonstop prompting. At the high contested 10 mL/query water estimate, the same 20-mile gasoline-refining comparison is only a few hours. That spread shows why the chosen AI water number dominates the answer.</p>
+        </article>
+        <article class="card callout">
+          <h3>If you actually buy something</h3>
+          <p>The purchased item usually swamps the transportation comparison. Water Footprint Calculator lists a cotton T-shirt at about 2,720 L and cotton jeans at about 10,850 L. At Altman’s 0.322 mL/query figure, one T-shirt is roughly 8.4 million prompts; one pair of jeans is roughly 33.7 million prompts.</p>
+        </article>
+        <article class="card warning">
+          <h3>Best reading</h3>
+          <p>For a no-shopping errand, the water footprint of the gasoline supply chain can equal anywhere from hundreds to tens of thousands of prompts depending on which AI water estimate you use. For a shopping trip where you buy cotton clothing or manufactured goods, the item’s hidden water footprint can dwarf both the drive and the AI prompts.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="educators">
       <div class="section-head">
         <h2>How to talk about this with teachers</h2>
@@ -337,6 +366,7 @@
         <ol class="sources">
           <li>Pengfei Li, Jianyi Yang, Mohammad A. Islam, Shaolei Ren, <a href="https://arxiv.org/abs/2304.03271">“Making AI Less ‘Thirsty’: Uncovering and Addressing the Secret Water Footprint of AI Models”</a>, arXiv, 2023.</li>
           <li>Paul Reig, World Resources Institute, <a href="https://www.wri.org/insights/whats-difference-between-water-use-and-water-consumption">“What’s the Difference Between Water Use and Water Consumption?”</a>, 2013.</li>
+          <li>Water Footprint Calculator, <a href="https://www.watercalculator.org/footprint/the-hidden-water-in-everyday-products/">“The Hidden Water in Everyday Products”</a>. Includes cited water footprints for cotton clothing, cars, and gasoline refining.</li>
           <li>Sam Altman, <a href="https://blog.samaltman.com/the-gentle-singularity">“The Gentle Singularity”</a>, 2025. Source of the public 0.34 Wh and 0.000085 gallon average-query figures.</li>
           <li>Alexandra Sasha Luccioni, Yacine Jernite, Emma Strubell, <a href="https://doi.org/10.1145/3630106.3658542">“Power Hungry Processing: Watts Driving the Cost of AI Deployment?”</a>, ACM FAccT, 2024.</li>
           <li>Siddharth Samsi et al., <a href="https://arxiv.org/abs/2310.03003">“From Words to Watts: Benchmarking the Energy Costs of Large Language Model Inference”</a>, arXiv, 2023.</li>
