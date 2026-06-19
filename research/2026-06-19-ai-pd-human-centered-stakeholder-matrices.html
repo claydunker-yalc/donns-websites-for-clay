@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Human-centered AI professional development matrices</title>
+  <meta name="description" content="Human-centered design matrices for approaching AI professional development across district stakeholders and attitudes." />
+  <!-- ai pd hcd stakeholder matrices marker 2026-06-19 -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111d;
+      --panel: rgba(255,255,255,.068);
+      --panel-strong: rgba(255,255,255,.108);
+      --ink: #f6f9ff;
+      --muted: #bdc9dc;
+      --quiet: #91a1b8;
+      --line: rgba(255,255,255,.14);
+      --blue: #7dd6ff;
+      --green: #9bf2bc;
+      --gold: #ffd37d;
+      --violet: #d8b8ff;
+      --coral: #ffa6a6;
+      --radius: 24px;
+      --max: 1260px;
+      --shadow: 0 28px 86px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      line-height: 1.58;
+      background:
+        radial-gradient(circle at 8% -8%, rgba(125,214,255,.22), transparent 32rem),
+        radial-gradient(circle at 92% 4%, rgba(216,184,255,.16), transparent 31rem),
+        radial-gradient(circle at 50% 116%, rgba(155,242,188,.12), transparent 36rem),
+        linear-gradient(180deg, #07111d 0%, #111c2d 55%, #07111d 100%);
+    }
+    a { color: var(--blue); text-underline-offset: .18em; }
+    a:hover { color: var(--gold); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 34px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: .94rem; margin-bottom: 46px; }
+    .pill { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: .42rem .72rem; background: rgba(255,255,255,.05); color: var(--muted); white-space: nowrap; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.08fr) 390px; gap: 30px; align-items: end; }
+    .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: .18em; font-weight: 850; font-size: .78rem; }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.45rem, 6.3vw, 5.55rem); line-height: .92; letter-spacing: -.06em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 860px; color: #e6eefb; font-size: clamp(1.08rem, 2vw, 1.34rem); }
+    .hero-card, .card, .note, .matrix { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .hero-card { padding: 24px; background: linear-gradient(180deg, rgba(125,214,255,.13), rgba(255,255,255,.05)); }
+    .hero-card h2 { margin: 0 0 .7rem; color: var(--gold); font-size: 1rem; }
+    .hero-card p { margin: 0; color: var(--muted); }
+    nav.toc { position: sticky; top: 0; z-index: 5; backdrop-filter: blur(18px); background: rgba(7,17,29,.86); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 12px; overflow-x: auto; padding: 12px 0; }
+    nav.toc a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: .48rem .74rem; background: rgba(255,255,255,.045); white-space: nowrap; font-size: .9rem; }
+    nav.toc a:hover { color: var(--ink); border-color: rgba(125,214,255,.5); }
+    main { padding: 30px 0 68px; }
+    section { margin: 36px 0; }
+    .section-head { margin-bottom: 18px; }
+    h2 { margin: 0 0 .55rem; font-size: clamp(1.68rem, 3vw, 2.72rem); line-height: 1.05; letter-spacing: -.035em; }
+    h3 { margin: 0 0 .55rem; color: var(--ink); }
+    .section-head p, .card p, .note p, td, li { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card { grid-column: span 4; padding: 22px; }
+    .card strong { color: var(--green); }
+    .note { padding: 22px; background: linear-gradient(180deg, rgba(155,242,188,.105), rgba(255,255,255,.045)); }
+    .matrix { padding: 0; overflow: hidden; }
+    .matrix-title { padding: 20px 22px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, rgba(125,214,255,.13), rgba(216,184,255,.08)); }
+    .matrix-title h2 { font-size: clamp(1.55rem, 3vw, 2.25rem); }
+    .matrix-title p { margin: 0; color: var(--muted); max-width: 950px; }
+    table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+    th, td { text-align: left; vertical-align: top; padding: 14px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+    th { background: rgba(255,255,255,.085); color: var(--ink); font-size: .85rem; letter-spacing: .02em; }
+    td { background: rgba(255,255,255,.032); }
+    td:first-child { color: var(--gold); font-weight: 820; min-width: 185px; }
+    ul { margin: .25rem 0 0; padding-left: 1.1rem; }
+    li { margin: .33rem 0; }
+    .tag { color: var(--quiet); font-size: .85rem; display: block; margin-top: .38rem; font-weight: 500; }
+    .source-list { columns: 2; column-gap: 34px; }
+    .source-list li { break-inside: avoid; }
+    .small { color: var(--quiet); font-size: .92rem; }
+    footer { border-top: 1px solid var(--line); color: var(--quiet); padding: 28px 0 42px; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .card { grid-column: 1 / -1; }
+      .source-list { columns: 1; }
+      .matrix { overflow-x: auto; }
+      table { min-width: 1040px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div><a href="../index.html">← Research index</a> <span class="pill">Human-centered PD design</span></div>
+      <div><span class="pill">Published June 19, 2026</span><span class="pill">Stakeholders + attitudes</span></div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">AI professional development</div>
+        <h1>Design for the humans in the system, not just the tools.</h1>
+        <p class="lede">This page translates human-centered design principles into practical AI professional development approaches for school district stakeholders and staff attitudes. The point is to move from “deliver AI training” to “understand people’s work, fears, constraints, hopes, and evidence needs.”</p>
+      </div>
+      <aside class="hero-card">
+        <h2>Working stance</h2>
+        <p>AI adoption is a people-change problem. PD should build trust, shared language, agency, and visible support before expecting durable classroom or operational change.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="wrap">
+      <a href="#principles">Principles</a>
+      <a href="#stakeholders">Stakeholders</a>
+      <a href="#attitudes">Attitudes</a>
+      <a href="#pd-moves">PD moves</a>
+      <a href="#sequence">Sequence</a>
+      <a href="#sources">Wiki sources</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="principles">
+      <div class="section-head">
+        <h2>Human-centered design principles for AI PD</h2>
+        <p>Use these as the columns for designing professional learning. They keep the work grounded in actual roles, motivations, friction points, and feedback loops.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>Listen before prescribing</h3><p>Start with interviews, empathy maps, anonymous pulse checks, and shadowing the real work. Ask what people are trying to protect, not only what tool they want.</p></article>
+        <article class="card"><h3>Make the work local</h3><p>Use district tasks, actual assignments, existing platforms, local policies, student needs, and real privacy constraints instead of generic AI demos.</p></article>
+        <article class="card"><h3>Co-design in role groups</h3><p>Principals, teachers, counselors, paraprofessionals, office staff, librarians, tech staff, and coaches need different examples and different agency.</p></article>
+        <article class="card"><h3>Prototype safely</h3><p>Try small, low-stakes routines. Treat negative results as evidence. Make the next version better rather than turning the first failure into a referendum.</p></article>
+        <article class="card"><h3>Protect dignity and agency</h3><p>Design PD so people do not feel shamed for uncertainty, replaced by tools, blamed for student misuse, or forced into adoption faster than trust allows.</p></article>
+        <article class="card"><h3>Build living guidance</h3><p>Leave with decision routines, examples, office hours, peer networks, feedback channels, and revision cycles—not just a slide deck or one-time training.</p></article>
+      </div>
+    </section>
+
+    <section id="stakeholders" class="matrix" aria-labelledby="stakeholders-title">
+      <div class="matrix-title">
+        <h2 id="stakeholders-title">Matrix 1: stakeholder groups × human-centered design moves</h2>
+        <p>Each row starts with the person’s real job-to-be-done. The PD design should meet that job directly rather than assuming every group needs the same “AI 101.”</p>
+      </div>
+      <table>
+        <thead><tr><th>Stakeholder</th><th>What to listen for</th><th>What to make local</th><th>Co-design / participation</th><th>Prototype PD experience</th><th>Evidence and follow-up</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Principals<br><span class="tag">Instructional leadership + building culture</span></td>
+            <td><ul><li>Fear of inconsistent teacher practice, parent conflict, discipline issues, and unclear district expectations.</li><li>Need for language that is calm, actionable, and not overhyped.</li></ul></td>
+            <td><ul><li>Use real building scenarios: AI-generated essays, parent questions, teacher disagreement, student deepfake rumors, lesson redesign time.</li><li>Connect AI work to existing walkthrough, PLC, and improvement-plan routines.</li></ul></td>
+            <td><ul><li>Principal cohorts draft “look-fors” for visible thinking and mature AI use.</li><li>Pair principals with teacher leaders to avoid compliance-only messaging.</li></ul></td>
+            <td><ul><li>Scenario lab: respond to five AI incidents without shaming students or staff.</li><li>Backward-design walkthrough: identify whether a task shows thinking or only a polished product.</li></ul></td>
+            <td><ul><li>Building-level action plan: communication scripts, office hours, PLC prompts, escalation paths.</li><li>Revisit after 30 days with cases collected from the building.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Classroom teachers<br><span class="tag">Instruction, assessment, workload</span></td>
+            <td><ul><li>Where AI threatens evidence of learning, increases workload, or feels like another mandate.</li><li>Where teachers already use AI quietly for planning, feedback, differentiation, or communication.</li></ul></td>
+            <td><ul><li>Bring actual assignments, rubrics, unit plans, student work samples, and district-approved tools.</li><li>Separate AI literacy from assessment integrity so everything does not become cheating prevention.</li></ul></td>
+            <td><ul><li>Department or grade-level teams redesign one task together.</li><li>Teachers name subject-specific standards for evidence, rigor, authorship, and appropriate help.</li></ul></td>
+            <td><ul><li>Assignment audit: Where could AI do the work? What thinking must remain visible?</li><li>Transcript study: grade the interaction process, not only the product.</li></ul></td>
+            <td><ul><li>Collect before/after task designs and student process evidence.</li><li>Schedule PLC cycles rather than one-off tool tours.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Instructional coaches / curriculum leaders<br><span class="tag">Translation layer</span></td>
+            <td><ul><li>Need to translate district strategy into classroom routines without becoming the AI help desk.</li><li>Questions about which changes belong at classroom, department, or district altitude.</li></ul></td>
+            <td><ul><li>Use district curriculum maps, priority standards, common assessments, and PLC structures.</li><li>Name the local boundaries: approved tools, student data, family communication, accessibility.</li></ul></td>
+            <td><ul><li>Co-create coaching protocols for “thinking with, without, and about AI.”</li><li>Build reusable facilitation materials with teacher leaders.</li></ul></td>
+            <td><ul><li>Coaching simulation: a worried teacher, an early adopter, and a blame-oriented colleague.</li><li>Design sprint for a department-specific AI literacy mini-unit.</li></ul></td>
+            <td><ul><li>Track teacher questions, successful routines, failed pilots, and requests for guidance revision.</li><li>Create a living example bank by subject and grade band.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Support staff<br><span class="tag">Office, paraprofessionals, aides, operations</span></td>
+            <td><ul><li>Concern about being excluded from PD even though AI touches communication, scheduling, accommodations, documentation, and student support.</li><li>Fear of surveillance, job replacement, or accidental privacy violations.</li></ul></td>
+            <td><ul><li>Use role-specific tasks: family emails, translation support, IEP-adjacent notes, attendance patterns, front-office scripts, bus/meal/clinic communication.</li><li>Clarify what data is never pasted into public tools.</li></ul></td>
+            <td><ul><li>Invite support staff to define “safe help” and “not safe” workflows.</li><li>Include paraprofessionals and office staff in policy feedback loops, not just certified staff.</li></ul></td>
+            <td><ul><li>Privacy-first tool practice: rewrite a message without exposing student details.</li><li>Scenario sorting: useful AI assist, ask supervisor, not allowed.</li></ul></td>
+            <td><ul><li>Quick-reference decision card for common support-staff tasks.</li><li>Follow-up office hours with tech/data/privacy staff and building leaders.</li></ul></td>
+          </tr>
+          <tr>
+            <td>IT, data, and cybersecurity staff<br><span class="tag">Infrastructure + risk management</span></td>
+            <td><ul><li>Pressure to say yes quickly or no universally without enough instructional context.</li><li>Concerns about data governance, vendor opacity, account provisioning, audits, and shadow AI.</li></ul></td>
+            <td><ul><li>Use the actual app ecosystem: LMS, Google/Microsoft tools, search, extensions, assessment platforms, SIS-adjacent workflows.</li><li>Map approved, restricted, and unknown AI surfaces.</li></ul></td>
+            <td><ul><li>Pair IT with curriculum and building leaders for tool reviews.</li><li>Co-design a local task-evaluation rubric: privacy, accessibility, reliability, bias, support burden.</li></ul></td>
+            <td><ul><li>Vendor claim interrogation lab: what evidence would make this safe enough?</li><li>Shadow-AI mapping workshop: where staff already use tools outside official systems.</li></ul></td>
+            <td><ul><li>Publish a living approved-tools page with review status and rationale.</li><li>Collect support tickets and risk incidents as PD needs, not only compliance failures.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Counselors, social workers, psychologists<br><span class="tag">Wellbeing + student support</span></td>
+            <td><ul><li>Student emotional dependence on AI, AI companionship, deepfakes, bullying, academic anxiety, and disclosure issues.</li><li>Need to avoid pathologizing normal AI use too quickly.</li></ul></td>
+            <td><ul><li>Use student-support scenarios: crisis-adjacent chatbot use, synthetic images, cheating panic, loneliness, overreliance, parent concern.</li><li>Connect to existing reporting, threat assessment, bullying, and mental health protocols.</li></ul></td>
+            <td><ul><li>Co-design referral and conversation scripts with principals and teachers.</li><li>Include students’ perspectives where possible, especially around what support feels safe.</li></ul></td>
+            <td><ul><li>Case consult protocol: what is harm, what is misuse, what is normal experimentation?</li><li>Practice restorative conversations around AI incidents.</li></ul></td>
+            <td><ul><li>Track patterns without over-surveilling students.</li><li>Return to the PD design with anonymized cases and revised guidance.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Families and community partners<br><span class="tag">Trust + shared language</span></td>
+            <td><ul><li>Questions about cheating, safety, job futures, screen time, equity, privacy, and whether school is moving too fast or too slow.</li><li>Different household access to premium tools and adult guidance.</li></ul></td>
+            <td><ul><li>Use district examples of allowed support, not abstract policy language.</li><li>Connect AI expectations to homework, communication, career readiness, and student wellbeing.</li></ul></td>
+            <td><ul><li>Invite families into feedback sessions before finalizing norms.</li><li>Use student/family advisory voices to test whether language is understandable and fair.</li></ul></td>
+            <td><ul><li>Family night: “help, copying, and learning” with concrete examples.</li><li>Home guidance card: what to ask when a child uses AI.</li></ul></td>
+            <td><ul><li>Pulse-check family understanding and worries after rollout.</li><li>Revise FAQs based on real questions rather than predicted objections.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="attitudes" class="matrix" aria-labelledby="attitudes-title">
+      <div class="matrix-title">
+        <h2 id="attitudes-title">Matrix 2: staff attitudes × human-centered PD response</h2>
+        <p>Attitudes are not character flaws. They are signals about needs, fears, identity, workload, evidence, trust, and role clarity.</p>
+      </div>
+      <table>
+        <thead><tr><th>Attitude / posture</th><th>What may be underneath</th><th>Human-centered framing</th><th>Best PD move</th><th>Avoid</th><th>Useful artifact</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Early adopter<br><span class="tag">“I’m already using this.”</span></td>
+            <td><ul><li>Energy, curiosity, status, genuine instructional insight, or a desire to move faster than the system.</li></ul></td>
+            <td><ul><li>Honor experimentation while asking for evidence, boundaries, and shareable practice.</li></ul></td>
+            <td><ul><li>Invite them to run small pilots with reflection protocols and failure logs.</li><li>Pair them with skeptics for task review, not evangelism.</li></ul></td>
+            <td><ul><li>Letting them become unofficial policy or making everyone copy their workflow.</li><li>Rewarding speed over instructional clarity.</li></ul></td>
+            <td><ul><li>Pilot card: purpose, tool, student data status, learning evidence, what failed, next iteration.</li></ul></td>
+          </tr>
+          <tr>
+            <td>On board but unsure<br><span class="tag">“I know we need to do something, but I don’t know what.”</span></td>
+            <td><ul><li>Low confidence, vocabulary gaps, uncertainty about policy, or fear of looking behind.</li></ul></td>
+            <td><ul><li>Normalize not knowing. Make the first step concrete and safe.</li></ul></td>
+            <td><ul><li>Use guided practice with one approved tool and one local task.</li><li>Give decision trees: when AI helps, when to pause, when to ask.</li></ul></td>
+            <td><ul><li>Starting with advanced prompting, model architecture, or tool overload.</li><li>Saying “just play with it” without boundaries.</li></ul></td>
+            <td><ul><li>Starter menu: three safe uses, three no-go areas, one reflection question.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Worried and scared<br><span class="tag">“This is going to hurt kids or my work.”</span></td>
+            <td><ul><li>Concern about learning loss, privacy, replacement, student dependence, bias, deepfakes, or the speed of change.</li></ul></td>
+            <td><ul><li>Treat worry as protective intelligence. Ask what they are trying to safeguard.</li></ul></td>
+            <td><ul><li>Run risk-mapping sessions with real safeguards and escalation pathways.</li><li>Show examples where AI is intentionally not used to preserve learning.</li></ul></td>
+            <td><ul><li>Dismissing concern as resistance or forcing public tool play before trust exists.</li><li>Overpromising safety or inevitability.</li></ul></td>
+            <td><ul><li>Safeguard map: risks, early warning signs, responsible adult, response routine.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Blame-oriented<br><span class="tag">“Students will cheat / teachers won’t adapt / district has no plan.”</span></td>
+            <td><ul><li>Frustration, lack of control, unclear accountability, past failed initiatives, or moral injury around student shortcuts.</li></ul></td>
+            <td><ul><li>Move from blame to system design: what conditions make the behavior likely?</li></ul></td>
+            <td><ul><li>Use system mapping: incentives, task design, access, workload, policy gaps, adult visibility.</li><li>Convert complaint into one redesignable condition.</li></ul></td>
+            <td><ul><li>Arguing about who is at fault or letting venting become the whole session.</li><li>Making AI misuse only a student character issue.</li></ul></td>
+            <td><ul><li>“From complaint to design question” worksheet.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Quiet avoider<br><span class="tag">“I’ll wait until this passes.”</span></td>
+            <td><ul><li>Initiative fatigue, low trust, fear of exposure, workload overload, or belief that AI is not relevant to their role.</li></ul></td>
+            <td><ul><li>Reduce activation energy. Make relevance role-specific and low stakes.</li></ul></td>
+            <td><ul><li>Offer short choice-based stations: classroom, office, support-staff, counseling, admin.</li><li>Use private reflection and anonymous question capture.</li></ul></td>
+            <td><ul><li>Cold-calling, public confessions of ignorance, or mandatory “show your prompt” activities.</li></ul></td>
+            <td><ul><li>Anonymous FAQ plus role-specific next-step cards.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Compliance seeker<br><span class="tag">“Just tell me what’s allowed.”</span></td>
+            <td><ul><li>Desire for safety, consistency, and protection from accusation.</li></ul></td>
+            <td><ul><li>Give rules, but connect them to judgment routines because tool lists age quickly.</li></ul></td>
+            <td><ul><li>Use allowed / ask first / not allowed scenarios, then have participants explain the reasoning.</li><li>Introduce “principles that travel across tools.”</li></ul></td>
+            <td><ul><li>Only distributing policy language with no practice applying it.</li><li>Pretending every future case can be pre-classified.</li></ul></td>
+            <td><ul><li>Decision tree with examples and escalation contacts.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Tool maximalist<br><span class="tag">“AI can do everything; let’s move faster.”</span></td>
+            <td><ul><li>Efficiency pressure, fascination with capabilities, or under-attention to student cognition and equity.</li></ul></td>
+            <td><ul><li>Channel optimism into task-specific evaluation and values-based limits.</li></ul></td>
+            <td><ul><li>Have them run a “negative results” test: where does the tool fail the local task?</li><li>Ask what human relationship, judgment, or learning friction is changed.</li></ul></td>
+            <td><ul><li>Letting productivity gains for adults automatically justify equivalent student use.</li><li>Confusing impressive output with learning evidence.</li></ul></td>
+            <td><ul><li>Tool job interview rubric with failure-case section.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Equity advocate<br><span class="tag">“Who is helped, harmed, or left out?”</span></td>
+            <td><ul><li>Concern about access tiers, disability, language, poverty, surveillance, bias, and uneven adult support.</li></ul></td>
+            <td><ul><li>Make equity a design requirement, not a late-stage objection.</li></ul></td>
+            <td><ul><li>Equity impact review for every pilot: access, accommodations, bias, family resources, data risk.</li><li>Use student personas to stress-test guidance.</li></ul></td>
+            <td><ul><li>Calling equity concerns “slowing things down.”</li><li>Assuming equal access because a tool is technically available.</li></ul></td>
+            <td><ul><li>Equity and access checklist for AI pilots.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="pd-moves" class="matrix" aria-labelledby="moves-title">
+      <div class="matrix-title">
+        <h2 id="moves-title">Matrix 3: professional learning moves × design purpose</h2>
+        <p>These moves can be combined into workshops, PLC cycles, coaching visits, leadership retreats, or support-staff sessions.</p>
+      </div>
+      <table>
+        <thead><tr><th>PD move</th><th>Human-centered purpose</th><th>Best for</th><th>How to run it</th><th>What it produces</th></tr></thead>
+        <tbody>
+          <tr><td>Empathy interviews</td><td>Surface real needs, fears, and existing workarounds.</td><td>Principals, teachers, support staff, families, students.</td><td>Ask: What changed? What worries you? What are you already doing? What would make this feel safe?</td><td>Personas, pain points, language for communication, PD priorities.</td></tr>
+          <tr><td>Assignment / workflow audit</td><td>Make AI impact concrete rather than abstract.</td><td>Teachers, coaches, principals, support staff.</td><td>Bring a real task. Identify what AI can do, what human judgment matters, and what evidence remains visible.</td><td>Redesigned assignment, office workflow, support routine, or escalation pathway.</td></tr>
+          <tr><td>Scenario sorting</td><td>Build shared judgment without pretending policy can answer everything.</td><td>All groups, especially compliance seekers and support staff.</td><td>Sort realistic cases into allowed, ask first, not allowed, and needs redesign; discuss why.</td><td>Common language, decision tree improvements, new FAQ entries.</td></tr>
+          <tr><td>Tool job interview</td><td>Evaluate AI against local tasks and risks, not vendor claims.</td><td>IT, curriculum, teachers, administrators, early adopters.</td><td>Test a tool on real tasks; record accuracy, privacy, bias, accessibility, workload, and failure cases.</td><td>Approval recommendation, pilot plan, or “not yet” decision with evidence.</td></tr>
+          <tr><td>Negative-results review</td><td>Make failure useful instead of embarrassing.</td><td>Tool maximalists, early adopters, leadership teams.</td><td>Ask what failed, who noticed, what risk it exposed, and what should change next.</td><td>Revised guidance, better examples, clearer tool boundaries.</td></tr>
+          <tr><td>Living guidance clinic</td><td>Keep policy and PD aligned with reality.</td><td>Cross-role implementation teams.</td><td>Collect questions and cases monthly; revise examples, decision trees, and training materials.</td><td>Updated living guidance, role-specific examples, communication notes.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sequence">
+      <div class="section-head">
+        <h2>Suggested sequence for a district PD arc</h2>
+        <p>A human-centered approach is not soft or vague; it is a disciplined way to reduce false starts and design for the people who actually have to live with the change.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>1. Listen</h3><p>Run stakeholder interviews and pulse checks. Name the attitude groups without shaming them.</p></article>
+        <article class="card"><h3>2. Frame</h3><p>Define AI implementation as a long-term redesign project, not a tool rollout or cheating panic.</p></article>
+        <article class="card"><h3>3. Segment</h3><p>Design different PD entries for principals, teachers, support staff, IT, student services, and families.</p></article>
+        <article class="card"><h3>4. Prototype</h3><p>Use real assignments, real workflows, approved tools, and safe failure. Keep pilots small and evidence-rich.</p></article>
+        <article class="card"><h3>5. Support</h3><p>Create office hours, peer cohorts, example banks, and role-specific decision cards.</p></article>
+        <article class="card"><h3>6. Revise</h3><p>Treat questions, incidents, failures, and new tools as inputs to living guidance and the next PD cycle.</p></article>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>Wiki sources synthesized</h2>
+        <p>The page is grounded in Clay’s wiki themes about district AI implementation, teacher agency, people-centered adoption, values-first tool decisions, and AI-era instructional redesign.</p>
+      </div>
+      <div class="note">
+        <ul class="source-list">
+          <li><strong>District AI work is a long-term redesign project</strong> — AI touches curriculum, assessment, procurement, teacher learning, data governance, wellbeing, and equity.</li>
+          <li><strong>AI adoption in schools is mostly a people-change problem</strong> — trust, routines, shared expectations, and human coordination come before durable tool adoption.</li>
+          <li><strong>District AI implementation needs living guidance and teacher-led redesign</strong> — guidance must evolve and teachers need time, space, and investment.</li>
+          <li><strong>District AI implementation needs an operating model, not just a tool rollout</strong> — separate but connected workstreams for literacy, assessment, tools, wellbeing, family communication, and pilots.</li>
+          <li><strong>AI implementation needs a reason to believe change is possible</strong> — leaders need a motivating account rooted in values, dignity, agency, or public mission.</li>
+          <li><strong>AI literacy takes system capacity, not just tool access</strong> — infrastructure, monitoring, development, and support matter.</li>
+          <li><strong>AI Priorities and the People’s Problem</strong> — cultural change, guidance, governance, confidence, and coordination are human problems.</li>
+          <li><strong>The Ambidextrous Educator</strong> — teacher work groups and PLCs translate system strategy into classroom practice.</li>
+          <li><strong>Teachers’ AI Literacy and Agency</strong> — teachers need to be partners in integration design, not passive recipients of mandates.</li>
+          <li><strong>Stephen Fitzpatrick and the AI Design Crisis Facing Schools</strong> — schools need backward design, visible thinking, and task redesign rather than compliance language alone.</li>
+          <li><strong>Use case language can hide what AI adoption changes</strong> — AI planning should ask how relationships, judgment, dependencies, and informal knowledge shift.</li>
+        </ul>
+        <p class="small">This is a synthesis and planning artifact, not a formal literature review. It intentionally turns the wiki’s implementation themes into PD design choices.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Repository: <a href="https://github.com/claydunker-yalc/donns-websites-for-clay">claydunker-yalc/donns-websites-for-clay</a> · Page marker: ai pd hcd stakeholder matrices marker 2026-06-19
+  </footer>
+</body>
+</html>
