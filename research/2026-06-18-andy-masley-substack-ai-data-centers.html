@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andy Masley’s Substack: AI, Data Centers, Water, and Panic</title>
+  <meta name="description" content="A public-post review of Andy Masley’s Substack from the last six months, focused on AI energy, water, and data center environmental claims." />
+  <!-- andy masley substack scrape marker -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,.066);
+      --panel-strong: rgba(255,255,255,.105);
+      --ink: #f5f7ff;
+      --muted: #c3cce0;
+      --quiet: #94a1bb;
+      --line: rgba(255,255,255,.14);
+      --blue: #82d8ff;
+      --green: #9af0c0;
+      --gold: #ffd98a;
+      --red: #ff9696;
+      --violet: #d7b8ff;
+      --shadow: 0 28px 90px rgba(0,0,0,.34);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      line-height: 1.62;
+      background:
+        radial-gradient(circle at 10% -8%, rgba(130,216,255,.24), transparent 31rem),
+        radial-gradient(circle at 90% 8%, rgba(154,240,192,.13), transparent 29rem),
+        radial-gradient(circle at 55% 112%, rgba(215,184,255,.13), transparent 34rem),
+        linear-gradient(180deg, #0b1020 0%, #111a2f 52%, #0b1020 100%);
+    }
+    a { color: var(--blue); text-underline-offset: .18em; }
+    a:hover { color: var(--gold); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 34px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 52px; color: var(--muted); font-size: .95rem; flex-wrap: wrap; }
+    .crumb, .meta-row { display: inline-flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+    .pill { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: .42rem .75rem; background: rgba(255,255,255,.05); color: var(--muted); font-size: .86rem; white-space: nowrap; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) 390px; gap: 32px; align-items: end; }
+    .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; font-weight: 850; }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.5rem, 6.7vw, 5.7rem); line-height: .92; letter-spacing: -.06em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 850px; color: #e7edf9; font-size: clamp(1.08rem, 2vw, 1.35rem); }
+    .hero-card, .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .hero-card { padding: 24px; background: linear-gradient(180deg, rgba(130,216,255,.13), rgba(255,255,255,.05)); }
+    .hero-card h2, .card h3 { margin: 0 0 .6rem; }
+    .hero-card p, .card p, .card li { color: var(--muted); }
+    .hero-card h2 { color: var(--gold); font-size: 1rem; }
+    nav.toc { position: sticky; top: 0; z-index: 4; backdrop-filter: blur(18px); background: rgba(11,16,32,.84); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 12px; overflow-x: auto; padding: 12px 0; }
+    nav.toc a { border: 1px solid var(--line); border-radius: 999px; padding: .48rem .74rem; background: rgba(255,255,255,.045); color: var(--muted); text-decoration: none; white-space: nowrap; font-size: .9rem; }
+    nav.toc a:hover { color: var(--ink); border-color: rgba(130,216,255,.5); }
+    main { padding: 28px 0 64px; }
+    section { margin: 34px 0; }
+    .section-head { margin-bottom: 18px; }
+    h2 { margin: 0 0 .55rem; font-size: clamp(1.65rem, 3vw, 2.7rem); line-height: 1.05; letter-spacing: -.035em; }
+    h3 { color: var(--ink); }
+    .section-head p { margin: 0; color: var(--muted); max-width: 900px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card { grid-column: span 6; padding: 22px; }
+    .card.full { grid-column: 1 / -1; }
+    .card.third { grid-column: span 4; }
+    .callout { border-color: rgba(154,240,192,.32); background: linear-gradient(180deg, rgba(154,240,192,.11), rgba(255,255,255,.045)); }
+    .warning { border-color: rgba(255,217,138,.35); background: linear-gradient(180deg, rgba(255,217,138,.115), rgba(255,255,255,.045)); }
+    .danger { border-color: rgba(255,150,150,.35); background: linear-gradient(180deg, rgba(255,150,150,.105), rgba(255,255,255,.045)); }
+    .kpi { display: grid; gap: .35rem; }
+    .kpi strong { font-size: clamp(1.75rem, 4vw, 3.1rem); line-height: .95; letter-spacing: -.05em; color: var(--green); }
+    .kpi span { color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 16px; font-size: .94rem; }
+    th, td { text-align: left; vertical-align: top; padding: 12px 13px; border-bottom: 1px solid var(--line); }
+    th { color: var(--ink); background: rgba(255,255,255,.08); }
+    td { color: var(--muted); background: rgba(255,255,255,.035); }
+    tr:last-child td { border-bottom: 0; }
+    .small { color: var(--quiet); font-size: .92rem; }
+    .verdict { font-size: 1.08rem; color: #eaf2ff !important; }
+    .post-list li { margin-bottom: .8rem; }
+    footer { margin-top: 54px; padding: 28px 0 42px; border-top: 1px solid var(--line); color: var(--quiet); }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .card, .card.third { grid-column: 1 / -1; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div class="crumb"><a href="../index.html">← Research index</a><span>Andy Masley Substack review</span></div>
+      <div class="meta-row"><span class="pill">Published June 18, 2026</span><span class="pill">Public Substack posts</span><span class="pill">14 posts reviewed</span></div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Last-six-month scrape</div>
+        <h1>Andy Masley is building an anti-panic case about AI and data centers.</h1>
+        <p class="lede">I found and scraped public posts from Andy Masley’s Substack at <a href="https://blog.andymasley.com">blog.andymasley.com</a>. Since the six-month cutoff of December 18, 2025, the public archive surfaced 14 posts, dated March 11 through June 11, 2026. Thirteen are in “AI &amp; the Environment.”</p>
+      </div>
+      <aside class="hero-card">
+        <h2>One-sentence read</h2>
+        <p class="verdict">Masley’s argument is not that AI has no footprint; it is that personal prompt guilt and many viral data-center scares are numerically unserious compared with the real questions: grid growth, fossil generation, local siting, noise, pollution, water scarcity, and opportunity cost.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="wrap">
+      <a href="#coverage">Coverage</a>
+      <a href="#themes">Themes</a>
+      <a href="#water-energy">Water & energy</a>
+      <a href="#local-impacts">Local impacts</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#caveats">Caveats</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="coverage">
+      <div class="section-head">
+        <h2>What I found</h2>
+        <p>The scrape used Substack’s public archive API plus public post pages. It does not include paywalled, deleted, email-only, Notes, comments, or hidden posts.</p>
+      </div>
+      <div class="grid">
+        <article class="card third kpi"><strong>14</strong><span>public posts found since 2025-12-18</span></article>
+        <article class="card third kpi"><strong>91k</strong><span>total words across the scraped posts</span></article>
+        <article class="card third kpi"><strong>13/14</strong><span>posts in “AI &amp; the Environment”</span></article>
+        <article class="card full callout">
+          <h3>Core pattern</h3>
+          <p class="verdict">The most engaged posts are long, adversarial myth-busting pieces: land use, infrasound, heat islands, and local data-center panic. Masley’s style is numerate, combative, comparison-heavy, and focused on tracing viral claims back to weak methods or bad framing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="themes">
+      <div class="section-head">
+        <h2>Major themes</h2>
+        <p>Across the last six months, Masley is making a coherent case about AI, climate communication, and data-center politics.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>1. Personal prompt guilt is the wrong target</h3>
+          <p>He argues individual chatbot use adds very little to a person’s carbon or water budget. His June 11 post plugs a calculator intended to make this visible using third-party estimates and citations.</p>
+        </article>
+        <article class="card">
+          <h3>2. Big numbers need denominators</h3>
+          <p>Gallons, megawatts, acres, nuclear-bomb analogies, and tons of CO₂ are not meaningful without comparisons: per user, per county, per acre, per dollar of tax revenue, per alternative land use, or per unit of avoided harm.</p>
+        </article>
+        <article class="card">
+          <h3>3. Data centers are an infrastructure issue</h3>
+          <p>He does think aggregate AI/data-center electricity demand matters. But he wants attention on clean generation, transmission, interconnection, and specific bad siting rather than prompt-shaming.</p>
+        </article>
+        <article class="card">
+          <h3>4. Local harms are site-specific</h3>
+          <p>He concedes real concerns: CO₂, xAI/Memphis-style local air pollution, audible noise near homes, occasional electricity-bill effects, water-rights complications, and transmission siting.</p>
+        </article>
+        <article class="card">
+          <h3>5. Many viral claims are, in his view, broken</h3>
+          <p>He attacks the bottle-of-water claim, land-temperature claims, infrasound illness claims, nuclear-bomb heat analogies, land-use panic, and contextless water stories as misread, inflated, or badly compared.</p>
+        </article>
+        <article class="card">
+          <h3>6. His weakness is tone and overconfidence</h3>
+          <p>Masley is strongest when showing a claim is unproven or badly framed. He is weaker when “unsupported as commonly stated” becomes “fake,” especially for site-specific harms where evidence can be thin.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="water-energy">
+      <div class="section-head">
+        <h2>What he says about AI water and energy</h2>
+        <p>This is the part most relevant to Clay’s teacher-facing AI-water question.</p>
+      </div>
+      <div class="grid">
+        <article class="card full warning">
+          <h3>The bottle-of-water claim</h3>
+          <p>In the May 25 post, Masley argues the “AI uses a bottle of water per prompt” claim is wrong by roughly 50–250×. His post includes an important update: after Shaolei Ren contacted him, Masley says some of his reconstruction was incorrect, but that Ren now agrees GPT-4’s actual water cost was likely much lower than 500 mL — around 15 mL total and about 5 mL onsite for a prompt, with current systems likely lower.</p>
+          <p class="small">That makes this post especially useful: it does not just dunk on the viral claim; it reports a partial correction after contact with the researcher associated with the original estimate.</p>
+        </article>
+        <article class="card">
+          <h3>Training emissions</h3>
+          <p>In “Training AI models doesn’t emit that much,” he argues training is often framed with misleading individual-scale comparisons. He says it should be compared to manufacturing a mass-market product used by hundreds of millions of people. His rough conclusion: even large frontier training runs become small per user when amortized.</p>
+        </article>
+        <article class="card">
+          <h3>Climate communication</h3>
+          <p>His March 11 post asks for more specific, numerate climate tools. This frames the whole series: stop asking whether an action has any footprint and start asking how big it is relative to other actions and systemic interventions.</p>
+        </article>
+        <article class="card full callout">
+          <h3>Best teacher-facing synthesis from Masley</h3>
+          <p class="verdict">Normal individual chatbot use is probably not a meaningful part of a teacher’s personal water or carbon footprint. The serious issue is aggregate infrastructure: how much new electricity demand AI creates, what generation serves it, whether local datacenters are well-sited, and whether communities manage water, noise, tax revenue, and pollution honestly.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="local-impacts">
+      <div class="section-head">
+        <h2>What he says about local data-center impacts</h2>
+        <p>Masley’s data-center posts are mostly a campaign against what he sees as low-quality panic.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Status quo bias</h3>
+          <p>In “A simple trick to fix the data center debate,” he asks whether a county would spend its data-center tax revenue to avoid the externalities. In Loudoun County, he compares roughly $1.3B/year in tax revenue against mitigation costs for water, land, NOx, electricity bills, and emissions.</p>
+        </article>
+        <article class="card">
+          <h3>Land use</h3>
+          <p>He argues land-use objections are mostly fake at national scale: data centers occupy tiny acreage compared with ethanol corn, animal agriculture, food waste, idle farmland, and ordinary exurban development, while generating high revenue per acre.</p>
+        </article>
+        <article class="card">
+          <h3>Heat exhaust</h3>
+          <p>He attacks claims that data-center waste heat is raising surrounding land temperature by degrees. His critique: satellite land-surface temperature mostly detects roofs, pavement, and land-cover change, not server exhaust warming the air.</p>
+        </article>
+        <article class="card">
+          <h3>Infrasound and noise</h3>
+          <p>He sharply separates audible noise, which can be a real nuisance and sleep issue, from sub-audible infrasound illness claims, which he says are not supported by wind-turbine/infrasound research.</p>
+        </article>
+        <article class="card">
+          <h3>Air pollution</h3>
+          <p>His air pollution post concedes real risks from onsite fossil generation and backup generators, especially local NO₂/PM exposure near vulnerable communities. But he is skeptical that datacenters are a national air-pollution catastrophe relative to other sources.</p>
+        </article>
+        <article class="card">
+          <h3>Water</h3>
+          <p>He is skeptical of vague “millions of gallons” stories unless they specify local water stress, share of supply, withdrawal vs consumption, normal operation vs construction damage, and what alternatives or offsets would cost.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="inventory">
+      <div class="section-head">
+        <h2>Public posts found in the six-month window</h2>
+        <p>Dates, URLs, sections, word counts, and one-line synopses from the scraped archive.</p>
+      </div>
+      <article class="card full">
+        <table>
+          <thead><tr><th>Date</th><th>Post</th><th>Section</th><th>Words</th><th>Synopsis</th></tr></thead>
+          <tbody>
+            <tr><td>2026-06-11</td><td><a href="https://blog.andymasley.com/p/a-plug-for-a-tool-i-made-to-show">A plug for a tool I made...</a></td><td>AI &amp; the Environment</td><td>505</td><td>Introduces a calculator showing ordinary chatbot use adds little to personal emissions or water use.</td></tr>
+            <tr><td>2026-06-06</td><td><a href="https://blog.andymasley.com/p/a-simple-trick-to-fix-the-data-center">A simple trick to fix the data center debate</a></td><td>AI &amp; the Environment</td><td>2,486</td><td>Reframes the debate around whether communities would forgo tax revenue to avoid quantified externalities.</td></tr>
+            <tr><td>2026-06-04</td><td><a href="https://blog.andymasley.com/p/why-i-think-panic-about-local-impacts">Why I think panic about local impacts...</a></td><td>AI &amp; the Environment</td><td>1,863</td><td>Surveys local-impact claims and argues most collapse under scrutiny, while asking for counterexamples.</td></tr>
+            <tr><td>2026-05-25</td><td><a href="https://blog.andymasley.com/p/i-might-have-found-the-specific-way">I think I figured out exactly how...</a></td><td>AI &amp; the Environment</td><td>3,541</td><td>Investigates the “bottle of water per prompt” statistic and says corrected numbers are far lower.</td></tr>
+            <tr><td>2026-05-20</td><td><a href="https://blog.andymasley.com/p/a-history-of-the-data-center-panic">A history of the data center panic - part 1</a></td><td>AI &amp; the Environment</td><td>5,272</td><td>Traces AI/data-center panic through earlier inflated training-emissions discourse and media incentives.</td></tr>
+            <tr><td>2026-05-19</td><td><a href="https://blog.andymasley.com/p/a-crash-course-on-us-air-pollution">A crash course on US air pollution</a></td><td>AI &amp; the Environment</td><td>13,373</td><td>Explains U.S. air pollution and contextualizes data-center generator and health-damage claims.</td></tr>
+            <tr><td>2026-05-11</td><td><a href="https://blog.andymasley.com/p/lets-not-compare-data-center-heat">Let’s not compare data center heat exhaust...</a></td><td>AI &amp; the Environment</td><td>2,229</td><td>Rejects nuclear-bomb heat analogies because dispersed continuous heat is not explosive heat.</td></tr>
+            <tr><td>2026-05-02</td><td><a href="https://blog.andymasley.com/p/data-center-land-use-issues-are-fake">Data center land use issues are fake</a></td><td>AI &amp; the Environment</td><td>9,840</td><td>Argues land-use objections are overstated compared with agriculture, ethanol, and other land uses.</td></tr>
+            <tr><td>2026-04-24</td><td><a href="https://blog.andymasley.com/p/to-be-clear-i-do-understand-how-sound">To be clear, I do understand how sound works</a></td><td>AI &amp; the Environment</td><td>4,874</td><td>Responds to criticism of his infrasound argument and clarifies audibility vs clinical significance.</td></tr>
+            <tr><td>2026-04-19</td><td><a href="https://blog.andymasley.com/p/contra-benn-jordan-data-center-and">Contra Benn Jordan...</a></td><td>AI &amp; the Environment</td><td>25,322</td><td>Long rebuttal arguing sub-audible data-center infrasound illness claims are unsupported.</td></tr>
+            <tr><td>2026-04-12</td><td><a href="https://blog.andymasley.com/p/training-ai-models-doesnt-emit-that">Training AI models doesn’t emit that much</a></td><td>AI &amp; the Environment</td><td>3,729</td><td>Argues training emissions look less exceptional when compared to mass-market product manufacturing.</td></tr>
+            <tr><td>2026-04-03</td><td><a href="https://blog.andymasley.com/p/whats-blocking-waymo-in-dc-and-how">What’s blocking Waymo in DC...</a></td><td>Artificial Intelligence</td><td>8,508</td><td>Maps regulatory obstacles and possible fixes for commercial Waymo service in Washington, DC.</td></tr>
+            <tr><td>2026-03-31</td><td><a href="https://blog.andymasley.com/p/data-centers-heat-exhaust-is-not">Data centers’ heat exhaust is not raising...</a></td><td>AI &amp; the Environment</td><td>8,362</td><td>Critiques a “data heat island” paper as likely measuring roofs/pavement rather than waste heat.</td></tr>
+            <tr><td>2026-03-11</td><td><a href="https://blog.andymasley.com/p/a-call-for-more-specific-and-numerate">A call for more specific and numerate climate communication</a></td><td>AI &amp; the Environment</td><td>1,266</td><td>Calls for better tools that compare lifestyle emissions with larger systemic interventions.</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section id="caveats">
+      <div class="section-head">
+        <h2>Caveats and how I’d use this</h2>
+        <p>Masley is useful, but not neutral in tone. Treat him as a strong anti-panic analyst, not as the final word.</p>
+      </div>
+      <div class="grid">
+        <article class="card warning">
+          <h3>Coverage caveats</h3>
+          <ul>
+            <li>The public archive surfaced posts only from March 11 to June 11, 2026 inside the six-month window.</li>
+            <li>This excludes paywalled, hidden, email-only, deleted, Notes, comments, and future revisions.</li>
+            <li>Some very long posts were summarized for claims and structure, not every subclaim.</li>
+          </ul>
+        </article>
+        <article class="card danger">
+          <h3>Interpretive caveats</h3>
+          <ul>
+            <li>His rhetoric sometimes turns “not established” into “fake.”</li>
+            <li>National comparisons can underweight site-specific household harms.</li>
+            <li>Tax-revenue offset logic depends on governments actually mitigating harms.</li>
+            <li>Distribution matters: benefits and burdens may fall on different people.</li>
+          </ul>
+        </article>
+        <article class="card full callout">
+          <h3>Best use for Clay</h3>
+          <p class="verdict">Use Masley as a source for disciplined skepticism: demand mechanisms, denominators, comparisons, and local context. He strengthens the case that teachers should not feel guilty about ordinary AI prompting, while preserving the more serious question of how AI infrastructure should be powered, sited, disclosed, and regulated.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>Prepared for Clay by Donn. Source: public pages and archive metadata from <a href="https://blog.andymasley.com">Andy Masley’s Substack</a>, scraped June 18, 2026.</p>
+    </footer>
+  </main>
+</body>
+</html>
