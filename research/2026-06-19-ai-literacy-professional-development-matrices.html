@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI literacy professional development matrices</title>
+  <meta name="description" content="Grade-band professional development topic matrices for AI literacy, drawn from Clay's personal knowledge wiki." />
+  <!-- ai literacy pd matrices marker 2026-06-19 -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --panel: rgba(255,255,255,.07);
+      --panel-strong: rgba(255,255,255,.105);
+      --ink: #f5f8ff;
+      --muted: #bdc9de;
+      --quiet: #8ea0bb;
+      --line: rgba(255,255,255,.14);
+      --blue: #86d8ff;
+      --green: #8ef0b8;
+      --gold: #ffd37e;
+      --pink: #f1b3ff;
+      --red: #ff9d9d;
+      --radius: 24px;
+      --max: 1240px;
+      --shadow: 0 26px 85px rgba(0,0,0,.34);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -10%, rgba(134,216,255,.24), transparent 34rem),
+        radial-gradient(circle at 90% 10%, rgba(241,179,255,.14), transparent 30rem),
+        radial-gradient(circle at 50% 115%, rgba(142,240,184,.13), transparent 36rem),
+        linear-gradient(180deg, #08111f 0%, #101b2d 55%, #08111f 100%);
+      line-height: 1.58;
+    }
+    a { color: var(--blue); text-underline-offset: .18em; }
+    a:hover { color: var(--gold); }
+    .wrap { width: min(var(--max), calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 52px 0 34px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: .94rem; margin-bottom: 46px; }
+    .pill { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; padding: .42rem .72rem; background: rgba(255,255,255,.05); color: var(--muted); white-space: nowrap; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) 360px; gap: 30px; align-items: end; }
+    .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: .18em; font-weight: 850; font-size: .78rem; }
+    h1 { margin: .45rem 0 1rem; font-size: clamp(2.55rem, 6.5vw, 5.65rem); line-height: .92; letter-spacing: -.06em; text-wrap: balance; }
+    .lede { margin: 0; max-width: 850px; color: #e6eefb; font-size: clamp(1.08rem, 2vw, 1.35rem); }
+    .hero-card, .card, .note, .matrix { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .hero-card { padding: 24px; background: linear-gradient(180deg, rgba(134,216,255,.13), rgba(255,255,255,.05)); }
+    .hero-card h2 { margin: 0 0 .7rem; color: var(--gold); font-size: 1rem; }
+    .hero-card p { margin: 0; color: var(--muted); }
+    nav.toc { position: sticky; top: 0; z-index: 5; backdrop-filter: blur(18px); background: rgba(8,17,31,.86); border-block: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 12px; overflow-x: auto; padding: 12px 0; }
+    nav.toc a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: .48rem .74rem; background: rgba(255,255,255,.045); white-space: nowrap; font-size: .9rem; }
+    nav.toc a:hover { color: var(--ink); border-color: rgba(134,216,255,.5); }
+    main { padding: 30px 0 68px; }
+    section { margin: 36px 0; }
+    .section-head { margin-bottom: 18px; }
+    h2 { margin: 0 0 .55rem; font-size: clamp(1.7rem, 3vw, 2.75rem); line-height: 1.05; letter-spacing: -.035em; }
+    h3 { margin: 0 0 .55rem; color: var(--ink); }
+    .section-head p, .card p, .note p, td, li { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card { grid-column: span 4; padding: 22px; }
+    .card strong { color: var(--green); }
+    .note { padding: 22px; background: linear-gradient(180deg, rgba(142,240,184,.105), rgba(255,255,255,.045)); }
+    .matrix { padding: 0; overflow: hidden; }
+    .matrix-title { padding: 20px 22px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, rgba(134,216,255,.13), rgba(241,179,255,.08)); }
+    .matrix-title h2 { font-size: clamp(1.55rem, 3vw, 2.25rem); }
+    .matrix-title p { margin: 0; color: var(--muted); max-width: 900px; }
+    table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+    th, td { text-align: left; vertical-align: top; padding: 15px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+    th { background: rgba(255,255,255,.085); color: var(--ink); font-size: .86rem; letter-spacing: .02em; }
+    td { background: rgba(255,255,255,.032); }
+    td:first-child { color: var(--gold); font-weight: 800; min-width: 190px; }
+    ul { margin: .25rem 0 0; padding-left: 1.1rem; }
+    li { margin: .34rem 0; }
+    .source-list { columns: 2; column-gap: 34px; }
+    .source-list li { break-inside: avoid; }
+    .tag { color: var(--quiet); font-size: .85rem; display: block; margin-top: .4rem; }
+    footer { border-top: 1px solid var(--line); color: var(--quiet); padding: 28px 0 42px; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .card { grid-column: 1 / -1; }
+      .source-list { columns: 1; }
+      .matrix { overflow-x: auto; }
+      table { min-width: 980px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <div><a href="../index.html">← Research index</a> <span class="pill">Professional learning matrix</span></div>
+      <div><span class="pill">Published June 19, 2026</span><span class="pill">Source: Clay's wiki</span></div>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">AI literacy professional development</div>
+        <h1>Three grade-band matrices for teaching AI literacy.</h1>
+        <p class="lede">A planning page for turning five AI-literacy elements into concrete professional development topics for elementary, middle, and high school teams. The topics are drawn from recurring patterns in Clay's personal knowledge wiki: disciplinary AI literacy, verifiable inquiry, productive friction, values-first implementation, and context-specific tool evaluation.</p>
+      </div>
+      <aside class="hero-card">
+        <h2>Use this as a PD menu</h2>
+        <p>Each cell contains possible session topics, PLC prompts, coaching cycles, or curriculum-design tasks. The through-line is not “use more AI”; it is <strong>learn when, why, and how AI changes the work</strong>.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="wrap">
+      <a href="#frame">Frame</a>
+      <a href="#k5">K–5</a>
+      <a href="#middle">Middle school</a>
+      <a href="#high">High school</a>
+      <a href="#crosswalk">Crosswalk</a>
+      <a href="#sources">Wiki sources</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="frame">
+      <div class="section-head">
+        <h2>Planning frame</h2>
+        <p>The five elements map cleanly onto teacher learning goals: understand AI systems, apply the right tools, evaluate outputs, reason ethically, and translate AI literacy into each subject's standards of evidence and meaning.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>1. Architecture and evaluation</h3><p>What kind of AI system is this? How was it trained? What makes it reliable or unreliable for a local classroom task?</p></article>
+        <article class="card"><h3>2. Application and tool choice</h3><p>How do teachers and students pick the right tool for brainstorming, tutoring, feedback, accessibility, research, or production?</p></article>
+        <article class="card"><h3>3. Output evaluation</h3><p>How do learners trace claims, verify sources, test reasoning, compare evidence, and decide what to trust?</p></article>
+        <article class="card"><h3>4. Ethical use</h3><p>How do schools handle plagiarism, cognitive offload, privacy, equity, environmental impact, deepfakes, bias, and community norms?</p></article>
+        <article class="card"><h3>5. Disciplinary specificity</h3><p>What does “good AI use” mean in ELA, math, science, social studies, arts, CTE, world languages, and other domains?</p></article>
+        <article class="card"><h3>Design principle</h3><p>Keep AI literacy and assessment integrity related but distinct: one teaches capable judgment with AI; the other redesigns evidence of student thinking.</p></article>
+      </div>
+    </section>
+
+    <section id="k5" class="matrix" aria-labelledby="k5-title">
+      <div class="matrix-title">
+        <h2 id="k5-title">Kindergarten–Grade 5 matrix</h2>
+        <p>Elementary PD should treat AI literacy as guided language, curiosity, evidence habits, and protected human thinking—not as independent chatbot access for young children.</p>
+      </div>
+      <table>
+        <thead><tr><th>Grade focus</th><th>Systems architecture</th><th>Appropriate application</th><th>Evaluating outputs</th><th>Ethical use</th><th>Disciplinary specificity</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>K–1<br><span class="tag">Language, play, adult mediation</span></td>
+            <td><ul><li>“AI guesses from patterns” using picture-sort or autocomplete analogies.</li><li>Difference between people, search engines, calculators, and chatbots.</li><li>Teacher-facing: what student data should never go into tools.</li></ul></td>
+            <td><ul><li>Teacher uses AI to create differentiated read-aloud questions, picture-word banks, or parent-friendly explanations.</li><li>Whole-group “ask, listen, decide” demonstrations with teacher as driver.</li><li>Use AI for accessibility supports only after checking age, privacy, and district approval.</li></ul></td>
+            <td><ul><li>“Does that sound right?” routines: compare AI statements to class books, photos, observations, and teacher knowledge.</li><li>Spot the silly answer: AI can be fluent and wrong.</li><li>Use classroom anchor charts for check-with-a-grownup / check-with-a-source.</li></ul></td>
+            <td><ul><li>Protect imagination, drawing, oral storytelling, and productive boredom from instant generated answers.</li><li>Talk about kindness, privacy, and not pretending computer words are your own.</li><li>Use environmental impact as “tools use real electricity and water; use them for a reason.”</li></ul></td>
+            <td><ul><li>ELA: AI as a class-made “noticing partner,” not a replacement for voice or story.</li><li>Math: AI/calculator comparisons after students model with objects.</li><li>Science: ask AI a question, then test with observation.</li><li>Social studies: connect claims to class texts, maps, and community knowledge.</li></ul></td>
+          </tr>
+          <tr>
+            <td>2–3<br><span class="tag">Early inquiry and explanation</span></td>
+            <td><ul><li>Model training as learning from many examples; discuss why missing examples create blind spots.</li><li>Introduce “input, model, output, human check” as a simple system diagram.</li><li>Evaluate tools by purpose: helper, storyteller, translator, image generator, quiz maker.</li></ul></td>
+            <td><ul><li>Prompt frames for teacher-guided vocabulary, examples/nonexamples, and revision suggestions.</li><li>Use AI to generate choices that students must sort, critique, or improve.</li><li>Practice when not to use AI: first draft thinking, mental math strategies, personal reflection.</li></ul></td>
+            <td><ul><li>Get it in / track it down: turn AI claims into “things to check.”</li><li>Use two-source checks with library books, databases, and teacher-provided links.</li><li>Teach students to ask, “What would prove this?”</li></ul></td>
+            <td><ul><li>Distinguish help, copying, and pretending.</li><li>Discuss bias through whose examples are included or left out.</li><li>Class norms for using AI with adult permission and naming the help received.</li></ul></td>
+            <td><ul><li>ELA: compare AI-generated and student-authored descriptions for voice and detail.</li><li>Math: have AI explain a solved problem, then students find the missing step.</li><li>Science: use AI explanations as hypotheses to test.</li><li>Social studies: “source, place, time, perspective” mini-routines.</li></ul></td>
+          </tr>
+          <tr>
+            <td>4–5<br><span class="tag">Upper elementary responsibility</span></td>
+            <td><ul><li>Mini-lessons on training data, pattern prediction, hallucination, and confidence.</li><li>Compare open chatbot, search result, school-approved tutor, and closed learning app.</li><li>Teacher PD: local task tests before adopting an AI feature.</li></ul></td>
+            <td><ul><li>Use AI for brainstorming questions, study games, translation support, reading-level alternatives, or feedback checklists.</li><li>Design “think first, ask second, revise third” routines.</li><li>Have students document what they asked, what they accepted, and what they rejected.</li></ul></td>
+            <td><ul><li>Claim-evidence-reasoning checks for AI answers.</li><li>AI citation detective: find whether a quote, fact, or source actually exists.</li><li>Compare model output with a human-curated source set.</li></ul></td>
+            <td><ul><li>Introduce mature vs immature AI use: using help to learn vs using help to hide.</li><li>Discuss cognitive offload: which thinking should stay with the learner?</li><li>Equity and access: not every student has the same tools, accounts, or adult guidance.</li></ul></td>
+            <td><ul><li>ELA: annotate an AI chat transcript like a reading passage.</li><li>Math: decide whether AI helped reasoning or just answer-getting.</li><li>Science: test AI claims against data tables and observations.</li><li>Social studies: corroborate AI summaries with primary/secondary sources.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="middle" class="matrix" aria-labelledby="middle-title">
+      <div class="matrix-title">
+        <h2 id="middle-title">Middle school matrix: Grades 6–8</h2>
+        <p>Middle school PD can move from adult-mediated exposure toward structured student practice: prompted inquiry, visible process, disciplinary verification, and norms for independent-but-accountable use.</p>
+      </div>
+      <table>
+        <thead><tr><th>Grade focus</th><th>Systems architecture</th><th>Appropriate application</th><th>Evaluating outputs</th><th>Ethical use</th><th>Disciplinary specificity</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>6<br><span class="tag">Structured exposure</span></td>
+            <td><ul><li>LLM basics: tokens, prediction, training data, retrieval, and why fluent text can be wrong.</li><li>Compare model, search engine, calculator, and recommendation system.</li><li>Evaluate a tool with a simple “job interview” checklist tied to class tasks.</li></ul></td>
+            <td><ul><li>Use AI as vocabulary coach, exemplar generator, practice partner, or feedback mirror.</li><li>Teacher-designed guardrails: approved prompts, source sets, and reflection logs.</li><li>Tool-choice lesson: when simpler tools or human collaboration are better.</li></ul></td>
+            <td><ul><li>SIFT-for-AI routines: stop, investigate source, find better coverage, trace claims.</li><li>Students label output as claim, evidence, reasoning, opinion, or unsupported assertion.</li><li>Practice follow-up prompts that demand evidence rather than praise.</li></ul></td>
+            <td><ul><li>Classroom boundary chart: allowed, ask first, and not allowed.</li><li>Plagiarism as misrepresentation, not merely tool use.</li><li>Intro to deepfakes, privacy, bias, and the environmental footprint of unnecessary generation.</li></ul></td>
+            <td><ul><li>ELA: AI as peer-response partner; students judge whether feedback fits author intent.</li><li>Math: critique AI solution paths and error patterns.</li><li>Science: compare AI explanations to lab data.</li><li>Social studies: source AI claims about events and perspectives.</li></ul></td>
+          </tr>
+          <tr>
+            <td>7<br><span class="tag">Visible thinking</span></td>
+            <td><ul><li>How systems are optimized: why “helpful” can become overconfident or sycophantic.</li><li>Closed vs open systems: chatbot, embedded app assistant, AI grader, recommender.</li><li>Bias and benchmark limits: why local evaluation matters.</li></ul></td>
+            <td><ul><li>Use AI to generate counterexamples, alternative explanations, study questions, or debate roles.</li><li>Students submit prompts, notes, revisions, and rationale—not just final products.</li><li>Practice “with, without, about AI” rotations in one unit.</li></ul></td>
+            <td><ul><li>AI output audit: source trace, quote verification, reasoning check, and missing perspective check.</li><li>Students build a correction memo for a flawed AI answer.</li><li>Compare different tools on the same disciplinary task.</li></ul></td>
+            <td><ul><li>Mature use rubric: purpose, transparency, effort, evidence, reflection.</li><li>Cognitive offload discussion: what did the tool do, and what did you still learn?</li><li>Equity/access planning for students with and without premium tools.</li></ul></td>
+            <td><ul><li>ELA: chat transcripts as texts—annotate questions, revisions, and moments of judgment.</li><li>Math: use AI for strategy comparison only after independent attempt.</li><li>Science: AI-generated models must predict or explain observed data.</li><li>Social studies: civic/media literacy around synthetic media and manipulation.</li></ul></td>
+          </tr>
+          <tr>
+            <td>8<br><span class="tag">Transition to independence</span></td>
+            <td><ul><li>System diagrams for generative AI workflows: prompt, model, optional retrieval/tool, output, human verification.</li><li>What training data, fine-tuning, and human feedback imply for reliability and bias.</li><li>Local pilot design: how a team would test an AI feature before trusting it.</li></ul></td>
+            <td><ul><li>Student-created AI use plans for projects: purpose, constraints, prompts, and disclosure.</li><li>Use AI to rehearse oral defense, create study pathways, or stress-test arguments.</li><li>Introduce tool-specific affordances: image, voice, coding, tutoring, translation.</li></ul></td>
+            <td><ul><li>Triangulate AI answers with databases, primary sources, calculations, and expert criteria.</li><li>Use negative results: when the tool fails, students explain what that teaches about the task.</li><li>Assess the transcript as evidence of thinking.</li></ul></td>
+            <td><ul><li>Policy case studies: cheating, deepfakes, privacy, bias, environmental claims, and social dependence.</li><li>Students write use disclosures and reflect on what they intentionally did not outsource.</li><li>Discuss wellbeing: AI companionship, overreliance, and adult visibility.</li></ul></td>
+            <td><ul><li>ELA: authorship, voice, citation, genre, and revision ethics.</li><li>Math: conceptual understanding vs procedural answer-getting.</li><li>Science: uncertainty, modeling, and claims-data-reasoning.</li><li>Social studies: sourcing, corroboration, civic judgment, and perspective.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="high" class="matrix" aria-labelledby="high-title">
+      <div class="matrix-title">
+        <h2 id="high-title">High school matrix</h2>
+        <p>High school PD should prepare teachers to design authentic tasks, teach sophisticated verification, separate AI literacy from assessment integrity, and define subject-specific standards for ethical use.</p>
+      </div>
+      <table>
+        <thead><tr><th>Grade focus</th><th>Systems architecture</th><th>Appropriate application</th><th>Evaluating outputs</th><th>Ethical use</th><th>Disciplinary specificity</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>9–10<br><span class="tag">Foundational fluency</span></td>
+            <td><ul><li>LLM architecture at a conceptual level: tokens, embeddings, training, fine-tuning, retrieval, tools, and agents.</li><li>Evaluate model fit: task, stakes, data privacy, cost, accessibility, latency, and known failure modes.</li><li>Discriminative vs generative systems, especially for grading, recommendations, and detection.</li></ul></td>
+            <td><ul><li>AI as tutor, critic, interviewer, editor, simulator, translator, coder, or brainstorming partner—with purpose statements.</li><li>Prompting as a literacy practice: context, constraints, examples, audience, and iteration.</li><li>Students select tools for the job and defend why AI is or is not appropriate.</li></ul></td>
+            <td><ul><li>Research workflow: get context, track claims, verify sources, synthesize in the student's own frame.</li><li>Quote and citation verification with external sources.</li><li>Compare AI outputs across models and explain differences in evidence quality.</li></ul></td>
+            <td><ul><li>Transparency norms: disclosure, process logs, and boundaries for graded work.</li><li>Plagiarism vs legitimate assistance; offloading vs outsourcing.</li><li>Environmental impact and vendor transparency: real footprint, contested viral claims, and proportional use.</li></ul></td>
+            <td><ul><li>ELA: conversational authoring, voice, interpretation, citation, and human-authored literature.</li><li>Math: proof, reasoning chains, counterexamples, and conceptual explanation.</li><li>Science: model limits, uncertainty, data analysis, and empirical grounding.</li><li>Social studies: historiography, civic media literacy, source context, and bias.</li></ul></td>
+          </tr>
+          <tr>
+            <td>11–12<br><span class="tag">Advanced judgment</span></td>
+            <td><ul><li>Model evaluation labs: design prompts, benchmark against local rubrics, record failure cases.</li><li>Bias, drift, prompt sensitivity, hallucination, sycophancy, and opaque vendor claims.</li><li>Procurement literacy: what questions to ask before trusting an AI system in school.</li></ul></td>
+            <td><ul><li>Capstone AI-use plans: roles, constraints, audit trail, source policy, and reflection.</li><li>AI for code review, data exploration, debate prep, design critique, and specialized study modes.</li><li>Agentic workflows only when students design the work and can explain the chain of actions.</li></ul></td>
+            <td><ul><li>Evidence portfolios: transcript, sources, annotations, corrections, and oral defense.</li><li>Students identify when AI amplifies bad problem framing.</li><li>Advanced source triangulation across primary sources, datasets, scholarly work, and domain experts.</li></ul></td>
+            <td><ul><li>Case seminars: AI grading, surveillance, synthetic media, student wellbeing, access tiers, labor, water/energy, and social trust.</li><li>Community-level ethics vs individual mature-use rubrics.</li><li>When to refuse AI help to preserve learning, authorship, relationships, or civic responsibility.</li></ul></td>
+            <td><ul><li>ELA/humanities: authorship, originality, rhetoric, interpretation, and ethical otherness.</li><li>STEM: simulation, coding, proof, lab design, uncertainty, and reproducibility.</li><li>CTE/arts: client constraints, design process, tool provenance, critique, and portfolio authenticity.</li><li>World languages: translation, cultural nuance, oral fluency, and communicative purpose.</li></ul></td>
+          </tr>
+          <tr>
+            <td>Teacher teams<br><span class="tag">Course redesign and assessment integrity</span></td>
+            <td><ul><li>Department-level tool audits: what systems are embedded in existing platforms?</li><li>Common evaluation protocol: task sample, risk analysis, equity impact, validation, bias check, and negative results.</li><li>Design living guidance rather than one-time tool lists.</li></ul></td>
+            <td><ul><li>Unit redesign sprints: where AI supports access, feedback, practice, or authentic production; where it should be excluded.</li><li>Model effective AI use in front of students: uncertainty, revision, source-checking, and judgment.</li><li>Shared prompt libraries tied to learning goals, not generic tricks.</li></ul></td>
+            <td><ul><li>Assess visible thinking: checkpoints, conferences, process notes, demonstrations, and oral defenses.</li><li>Grade the chat/process when appropriate, not only the polished artifact.</li><li>Create departmental examples of acceptable, questionable, and unacceptable AI-assisted work.</li></ul></td>
+            <td><ul><li>Separate AI literacy from cheating prevention so PD does not collapse into policing.</li><li>Policy alignment: privacy, accessibility, equity, student wellbeing, environmental claims, and community values.</li><li>Response plans for deepfakes, false accusations, and inconsistent access.</li></ul></td>
+            <td><ul><li>Departments define evidence: what counts as rigor in this subject?</li><li>Build subject-specific rubrics for AI use, disclosure, and verification.</li><li>Map “thinking with, without, and about AI” into each course sequence.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="crosswalk">
+      <div class="section-head">
+        <h2>Crosswalk: possible PD strands</h2>
+        <p>These strands can become separate workshops or a yearlong sequence.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>AI systems and local evaluation</h3><p>From “AI guesses patterns” in elementary to high-school model audits and district procurement questions.</p></article>
+        <article class="card"><h3>Critical doing with AI</h3><p>Prompting, revising, comparing, documenting, and reflecting as literacy practices rather than magic commands.</p></article>
+        <article class="card"><h3>Verifiable inquiry</h3><p>Get context from AI, then track claims down to sources, data, observations, and disciplinary evidence.</p></article>
+        <article class="card"><h3>Productive friction</h3><p>Design when students should think first, use AI second, and preserve the struggle that builds understanding.</p></article>
+        <article class="card"><h3>Ethics and mature use</h3><p>Separate community decisions about whether AI is allowed from classroom coaching on mature, transparent use.</p></article>
+        <article class="card"><h3>Disciplinary AI literacy</h3><p>Help every department define what AI changes about evidence, explanation, authorship, rigor, and authentic work.</p></article>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>Wiki sources scanned</h2>
+        <p>This page synthesizes themes from these notes in Clay's personal knowledge wiki rather than inventing a generic AI-literacy checklist.</p>
+      </div>
+      <div class="note">
+        <ul class="source-list">
+          <li><strong>AI literacy has to be taught inside real subjects</strong> — disciplinary evidence, rigor, authorship, and subject-specific examples.</li>
+          <li><strong>Students need to check AI answers against real evidence</strong> — AI as provisional context to trace, test, source, and synthesize.</li>
+          <li><strong>AI literacy requires different kinds of AI interaction</strong> — open chatbots, approved assistants, and closed systems carry different responsibilities.</li>
+          <li><strong>AI tools should be judged by the work they will actually do</strong> — local task testing over vendor claims or generic benchmarks.</li>
+          <li><strong>Education should teach thinking with, without, and about AI</strong> — a three-part duty for AI-ready schools.</li>
+          <li><strong>Schools should start with learning values before choosing AI tools</strong> — values-first implementation and teacher-led redesign.</li>
+          <li><strong>Learning still needs some struggle, even when AI can make things easier</strong> — productive friction, visible process, and cognitive boundaries.</li>
+          <li><strong>AI literacy and assessment integrity need separate workstreams</strong> — teach capable AI use while separately redesigning evidence of learning.</li>
+          <li><strong>AI grading systems need transparency, validation, and bias checks</strong> — especially relevant for evaluating systems that assess students.</li>
+          <li><strong>AI-era media literacy needs emotional resilience too</strong> — verification plus resilience against cynicism, manipulation, and deepfakes.</li>
+          <li><strong>Rushed school AI plans can worsen wellbeing and equity risks</strong> — developmental sequencing, vulnerable students, and safeguards.</li>
+          <li><strong>AI water and energy research page</strong> — environmental impact as real but contextual, with proportional use and vendor transparency.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Repository: <a href="https://github.com/claydunker-yalc/donns-websites-for-clay">claydunker-yalc/donns-websites-for-clay</a> · Page marker: ai literacy pd matrices marker 2026-06-19
+  </footer>
+</body>
+</html>
