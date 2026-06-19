@@ -113,6 +113,7 @@
       <a href="#numbers">The numbers</a>
       <a href="#water-cycle">Water cycle</a>
       <a href="#studies">Studies</a>
+      <a href="#methods">Methods critique</a>
       <a href="#viral">Viral claims</a>
       <a href="#training">Training share</a>
       <a href="#comparisons">Comparisons</a>
@@ -256,6 +257,41 @@
         <article class="card callout">
           <h3>Best answer</h3>
           <p>There are real academic studies, but the famous per-prompt water numbers are not direct observations. They are educated models built from energy estimates plus datacenter and electricity-water assumptions. That does not make them useless; it means they should be presented as scenarios or ranges, not as measured facts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="methods">
+      <div class="section-head">
+        <h2>Critique of the two headline estimates</h2>
+        <p>The two numbers people argue about are built very differently: one is an academic scenario model; the other is a company-reported average with almost no public methodology. Neither is an audited prompt-level measurement.</p>
+      </div>
+      <div class="grid">
+        <article class="card full warning">
+          <h3>Estimate 1: Li/Ren et al. “500 mL per 10–50 responses”</h3>
+          <p><strong>What it is based on:</strong> an academic model for GPT-3-style inference. The paper assumes a medium request, roughly ≤800 input words and 150–300 output words; starts from an outside estimate that GPT-3 uses about 0.4 kWh to generate 100 pages; then adds assumptions for prompt processing, non-GPU server energy, datacenter WUE, cooling, location, weather, and electricity-generation water intensity.</p>
+          <table>
+            <thead><tr><th>Strengths</th><th>Weaknesses</th></tr></thead>
+            <tbody>
+              <tr><td>Transparent enough to inspect; distinguishes onsite cooling water from offsite electricity water; explicitly accounts for location/time variation; grounded in real datacenter water concepts like WUE and water consumption.</td><td>Not direct metering; depends on old/indirect GPT-3 energy estimates; assumes datacenter locations and cooling behavior not publicly confirmed; may not reflect current models, batching, hardware, routing, or efficiency improvements; “response” size is larger than many casual prompts.</td></tr>
+            </tbody>
+          </table>
+          <p class="small">Best use: a high-side scenario showing how AI water could matter under some infrastructure assumptions. Bad use: saying a modern average ChatGPT prompt has been measured to use a bottle of water.</p>
+        </article>
+        <article class="card full callout">
+          <h3>Estimate 2: Altman/OpenAI “0.34 Wh and 0.000085 gallons per query”</h3>
+          <p><strong>What it is based on:</strong> a 2025 public statement by Sam Altman that “the average query” uses about 0.34 watt-hours and 0.000085 gallons of water. The post does not provide a methods appendix, system boundary, model mix, prompt/response length, datacenter locations, WUE assumptions, whether training is included, or whether the figure is independently audited.</p>
+          <table>
+            <thead><tr><th>Strengths</th><th>Weaknesses</th></tr></thead>
+            <tbody>
+              <tr><td>Potentially closer to OpenAI’s real internal fleet because the company may see actual traffic, routing, hardware, and datacenter data unavailable to academics; likely reflects newer efficiency gains and a mix of model sizes.</td><td>Opaque; not peer-reviewed; not independently auditable from the public claim; may be an average across many short/simple queries and efficient models; unclear whether it includes indirect electricity water, training amortization, failed runs, hardware lifecycle, or only operational serving.</td></tr>
+            </tbody>
+          </table>
+          <p class="small">Best use: a plausible lower/current-company-average anchor. Bad use: treating it as a fully audited lifecycle footprint or using it to dismiss local datacenter water concerns.</p>
+        </article>
+        <article class="card full danger">
+          <h3>What I would say if challenged</h3>
+          <p class="verdict">The academic estimate is more methodologically transparent but probably stale/high and not directly measured. The OpenAI estimate may be more current and operationally informed, but it is methodologically opaque and company-provided. The truth for a specific prompt depends on model, output length, datacenter, cooling, grid, and whether you count training or indirect water. So the defensible position is a range plus uncertainty — not either headline number as gospel.</p>
         </article>
       </div>
     </section>
