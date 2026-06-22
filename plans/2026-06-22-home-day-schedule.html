@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tomorrow Plan — Monday, June 22</title>
+  <meta name="description" content="Clay's mobile-first family, PD, dinner, and checklist plan for Monday, June 22, 2026." />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --bg2: #0f1d32;
+      --card: rgba(255,255,255,.075);
+      --card-strong: rgba(255,255,255,.115);
+      --ink: #f3f7ff;
+      --muted: #adbbd3;
+      --soft: #d8e2f2;
+      --line: rgba(255,255,255,.13);
+      --accent: #8ee8c8;
+      --accent2: #ffd58a;
+      --accent3: #aeb8ff;
+      --danger: #ff9c9c;
+      --done: #7ee39f;
+      --shadow: 0 18px 70px rgba(0,0,0,.34);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% -8%, rgba(142,232,200,.26), transparent 26rem),
+        radial-gradient(circle at 98% 16%, rgba(255,213,138,.18), transparent 23rem),
+        linear-gradient(180deg, var(--bg), var(--bg2) 55%, #08111f);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    a { color: var(--accent); }
+    .wrap { width: min(980px, 100%); margin: 0 auto; padding: 20px 14px 72px; }
+    header {
+      padding: 24px 4px 12px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 800;
+      font-size: .74rem;
+    }
+    h1 {
+      margin: 10px 0 8px;
+      font-size: clamp(2.15rem, 12vw, 4.6rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+    }
+    .lede {
+      margin: 0;
+      color: var(--soft);
+      font-size: 1.05rem;
+      max-width: 67ch;
+    }
+    .top-card, .panel, details {
+      background: linear-gradient(180deg, var(--card-strong), rgba(255,255,255,.045));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .top-card { margin: 18px 0; padding: 16px; }
+    .mantra {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent2);
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      color: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .85rem;
+      font-weight: 650;
+    }
+    nav.jump {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      padding: 10px 0 12px;
+      margin: 0 -2px 10px;
+      overflow-x: auto;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(8,17,31,.96), rgba(8,17,31,.72));
+    }
+    nav.jump a, button.utility {
+      white-space: nowrap;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 750;
+      font-size: .9rem;
+    }
+    .section-title {
+      margin: 28px 2px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+    }
+    .section-title h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.03em; }
+    .section-title p { margin: 3px 0 0; color: var(--muted); font-size: .92rem; }
+    details { margin: 10px 0; overflow: hidden; }
+    details[open] { background: linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.052)); }
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 15px 16px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      touch-action: manipulation;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .time {
+      min-width: 78px;
+      color: #06111d;
+      background: var(--accent);
+      border-radius: 14px;
+      padding: 7px 8px;
+      font-weight: 900;
+      font-size: .82rem;
+      text-align: center;
+    }
+    .time.soft { background: var(--accent2); }
+    .time.bonus { background: var(--accent3); }
+    .summary-main b { display: block; font-size: 1rem; }
+    .summary-main span { display: block; color: var(--muted); font-size: .88rem; margin-top: 2px; }
+    .chev { color: var(--muted); font-size: 1.1rem; transform: rotate(0deg); transition: transform .2s ease; }
+    details[open] .chev { transform: rotate(90deg); }
+    .detail-body { border-top: 1px solid var(--line); padding: 14px 16px 16px; color: var(--soft); }
+    .detail-body ul, .detail-body ol { margin: 8px 0 0; padding-left: 1.18rem; }
+    .detail-body li { margin: 6px 0; }
+    .note {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 15px;
+      background: rgba(142,232,200,.1);
+      border: 1px solid rgba(142,232,200,.24);
+      color: #dffcf2;
+    }
+    .panel { padding: 16px; margin-top: 12px; }
+    .panel h3 { margin: 0 0 8px; }
+    .panel p { color: var(--muted); margin: 0 0 10px; }
+    .checklist-controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
+    button.utility { cursor: pointer; }
+    .task-list { display: grid; gap: 9px; }
+    label.task {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 11px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(0,0,0,.16);
+    }
+    label.task input {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--done);
+      margin-top: 1px;
+    }
+    .task-text strong { display: block; font-size: .98rem; }
+    .task-text small { color: var(--muted); display: block; margin-top: 2px; }
+    label.task:has(input:checked) {
+      border-color: rgba(126,227,159,.42);
+      background: rgba(126,227,159,.105);
+    }
+    label.task:has(input:checked) .task-text strong,
+    label.task:has(input:checked) .task-text small {
+      text-decoration: line-through;
+      color: rgba(216,226,242,.55);
+    }
+    .recipe-grid { display: grid; gap: 12px; }
+    .recipe-card {
+      background: rgba(0,0,0,.16);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px;
+    }
+    .recipe-card h4 { margin: 0 0 8px; color: var(--accent2); }
+    .recipe-card ul, .recipe-card ol { margin: 0; padding-left: 1.1rem; }
+    footer { color: var(--muted); text-align: center; padding: 30px 8px 0; font-size: .88rem; }
+    @media (min-width: 720px) {
+      .wrap { padding: 34px 26px 84px; }
+      .top-card { padding: 22px; }
+      summary { padding: 18px 20px; grid-template-columns: 105px 1fr auto; }
+      .detail-body { padding: 16px 20px 20px; }
+      .recipe-grid { grid-template-columns: 1fr 1fr; }
+      .time { min-width: 96px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Monday · June 22 · Home day</div>
+      <h1>Structure the kids. Ship one PD artifact. Touch grass.</h1>
+      <p class="lede">A mobile-first day plan for Poppy swim, Rosie music, room cleaning, crafts, planting flowers, a protected PD/Gamma block, and butter chicken by 5:30.</p>
+    </header>
+
+    <section class="top-card" aria-label="Day priorities">
+      <p class="mantra">Top 5: swim handled · rooms cleaned · reading minutes · one PD artifact · dinner started at 4:20</p>
+      <div class="chips" aria-label="Planning notes">
+        <span class="chip">Poppy: no tablet all week</span>
+        <span class="chip">Rosie music: 4:00 sharp</span>
+        <span class="chip">Dinner: butter chicken + rice</span>
+        <span class="chip">Weather: mild/cloudy; swim is bonus</span>
+      </div>
+    </section>
+
+    <nav class="jump" aria-label="Jump links">
+      <a href="#timeline">Timeline</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#recipe">Dinner recipe</a>
+      <a href="#bonus">Bonus ideas</a>
+    </nav>
+
+    <section id="timeline">
+      <div class="section-title">
+        <div><h2>Timeline</h2><p>Tap any time block to open or hide details.</p></div>
+      </div>
+
+      <details open>
+        <summary><span class="time">6:00</span><span class="summary-main"><b>Clay morning reading / reflection</b><span>Person-before-logistics block.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Tao Te Ching: one passage.</li><li>Tarot: one card / short reflection.</li><li>The Writing Revolution: 15–25 minutes.</li><li>Optional: one sentence about the PD idea if your brain goes there.</li></ul><div class="note">Win condition: start the day feeling like a person before becoming logistics dad.</div></div>
+      </details>
+
+      <details>
+        <summary><span class="time">7:00</span><span class="summary-main"><b>Rosie breakfast + morning setup</b><span>Feed, connect, and prep for Poppy swim logistics.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Make Rosie breakfast.</li><li>Set her up with a calm, doable activity.</li><li>Confirm Poppy's swim stuff is ready.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time">7:35</span><span class="summary-main"><b>Get Poppy up and out</b><span>Leave no later than 7:55.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Wake Poppy.</li><li>Swim gear, bathroom, shoes, out.</li><li>No extra side quests.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time">8:00</span><span class="summary-main"><b>Drop Poppy / return home</b><span>Back around 8:10.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Keep this boring and efficient.</li><li>Once home: Rosie attention, quick kitchen reset, maybe a tiny PD note.</li><li>Do not attempt deep work in this chopped-up window.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time">8:55</span><span class="summary-main"><b>Pick up Poppy / get home</b><span>Back around 9:15.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Leave to pick her up around 8:55.</li><li>Return home and enter breakfast/change/reset mode.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">9:15</span><span class="summary-main"><b>Poppy breakfast / change / reset</b><span>Re-entry buffer after practice.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Breakfast.</li><li>Dry clothes.</li><li>Let her land before asking for room-cleaning effort.</li><li>Keep Rosie included enough that she does not feel displaced.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">9:45</span><span class="summary-main"><b>Room cleaning block</b><span>Obligation first; craft becomes the reward.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Poppy: 35–45 minutes.</li><li>Rosie: 15–25 minutes.</li><li>Checklist: dirty clothes → trash → floor → books/toys → one surface.</li><li>Timer and music are allowed. Loving the task is not required.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time soft">10:30</span><span class="summary-main"><b>Craft / screen-free play container</b><span>Reward/reset after rooms.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Best fit: painted rock garden markers, because it pairs with planting.</li><li>Other options: cardboard animal hotel, treasure maps, paper bag/sock puppets, nature mandalas.</li><li>Goal: create a shared play container, not supervise every minute.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time soft">11:15</span><span class="summary-main"><b>Plant flowers / sphagnum moss</b><span>Outdoor tangible win if weather allows.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Plant flowers and use sphagnum moss.</li><li>Girls can continue garden markers / outside play nearby.</li><li>If weather is gross, swap with reading/quiet time and try later.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time">12:00</span><span class="summary-main"><b>Lunch prep / eat / cleanup</b><span>Budget the full 45 minutes.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Prep.</li><li>Eat.</li><li>Cleanup.</li><li>Keep this boring and sturdy.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time">12:45</span><span class="summary-main"><b>Library reading minutes</b><span>Quiet reset after lunch.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Poppy reads.</li><li>Rosie reads, looks, listens, or gets read to.</li><li>You can read nearby if possible.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time soft">1:15</span><span class="summary-main"><b>Protected PD / Gamma block</b><span>The professional runway block.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Make one PD offer less imaginary.</li><li>Concrete deliverable: title, audience, 3 outcomes, rough agenda, first 8–12 Gamma slides.</li><li>Set the girls up with craft continuation, audiobook/music, blocks/Legos, animal hotel pretend play, or reading.</li></ul><div class="note">Win condition: one PD artifact exists and could eventually be shown to another human.</div></div>
+      </details>
+
+      <details>
+        <summary><span class="time bonus">2:30</span><span class="summary-main"><b>Optional swim / outside / movement</b><span>Weather-dependent bonus block.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Swim only if weather and kid energy support it.</li><li>Alternatives: outside play, walk, short water play, or tiki pot paint layering.</li><li>Do not let this endanger the 3:15 reset / 4:00 lesson.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">3:15</span><span class="summary-main"><b>Music lesson + dinner prep runway</b><span>Kitchen is right by the lesson spot: ideal prep zone.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Clear music lesson area.</li><li>Snack/water/bathroom.</li><li>Set Poppy up with a quiet activity.</li><li>Dinner prep: dice onion, mince garlic/ginger, cut chicken, measure spices, rinse rice.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">4:00</span><span class="summary-main"><b>Rosie music lesson</b><span>Miss Bradley is punctual.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Rosie ready at 4:00.</li><li>Poppy gets quiet craft/reading.</li><li>You can cook/prep nearby because the kitchen is right by the lesson area.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time soft">4:20</span><span class="summary-main"><b>Start butter chicken + rice</b><span>Comfortable start for 5:30 dinner/rest.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Start rice first.</li><li>Cook/brown chicken.</li><li>Build tomato-butter-spice sauce.</li><li>Stir in Greek yogurt off heat / very low heat to avoid curdling.</li></ul><div class="note">Tight start: 4:30. Calmer start: 4:10. Real plan: prep at 3:15, cook at 4:20.</div></div>
+      </details>
+
+      <details>
+        <summary><span class="time">5:30</span><span class="summary-main"><b>Dinner / rest</b><span>Butter chicken + rice.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Eat.</li><li>Let this be a reset, not another productivity block.</li><li>After dinner: normal evening rhythm, light cleanup, bedtime pipeline.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time bonus">8:00</span><span class="summary-main"><b>Tiny adult closing block</b><span>Only if energy remains.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Write tomorrow's top 3.</li><li>Add one more Gamma slide.</li><li>Jot 5 outreach names.</li><li>10-minute Anxious Generation brain dump.</li></ul><div class="note">Do not start a giant second workday.</div></div>
+      </details>
+    </section>
+
+    <section id="checklist">
+      <div class="section-title"><div><h2>Checklist</h2><p>Tap items as they’re done. Your checkmarks stay saved on this device.</p></div></div>
+      <div class="panel">
+        <div class="checklist-controls">
+          <button class="utility" id="clearDone" type="button">Clear checkmarks</button>
+          <button class="utility" id="expandAll" type="button">Expand all</button>
+          <button class="utility" id="collapseAll" type="button">Collapse all</button>
+        </div>
+        <div class="task-list" id="tasks">
+          <label class="task"><input type="checkbox" data-task="swim"><span class="task-text"><strong>Poppy swim practice handled</strong><small>Leave by 7:55; drop off, pick up, get home around 9:15.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="rosie-breakfast"><span class="task-text"><strong>Rosie breakfast + successful morning setup</strong><small>Fed, connected, and set up while Poppy logistics happen.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="poppy-reset"><span class="task-text"><strong>Poppy breakfast/change/reset after practice</strong><small>Breakfast, dry clothes, settle by roughly 9:45.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="rooms"><span class="task-text"><strong>Girls clean rooms</strong><small>Poppy 35–45 min; Rosie 15–25 min. Clothes, trash, floor, books/toys, one surface.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="reading-minutes"><span class="task-text"><strong>Library reading minutes</strong><small>Quiet block after lunch; read-aloud/listening counts if the program allows it.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="music"><span class="task-text"><strong>Rosie music lesson at 4:00</strong><small>3:15–3:45 reset, lesson area ready, Poppy quiet activity ready.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="dinner"><span class="task-text"><strong>Butter chicken + rice started by 4:20</strong><small>Prep during lesson runway; eat/rest around 5:30.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="flowers"><span class="task-text"><strong>Plant flowers / sphagnum moss</strong><small>One outdoor tangible win if weather allows.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="pd"><span class="task-text"><strong>One PD/Gamma artifact block</strong><small>Title, audience, 3 outcomes, rough agenda, first 8–12 slides.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="craft"><span class="task-text"><strong>One screen-free craft/play container</strong><small>Garden markers, animal hotel, treasure maps, puppets, or nature mandalas.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="morning-reading"><span class="task-text"><strong>Morning reading/reflection</strong><small>Tao Te Ching, Tarot, The Writing Revolution — modest is enough.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="anxious-gen"><span class="task-text"><strong>10-minute Anxious Generation book study brain dump</strong><small>Who it’s for, tone, first session purpose, 3 possible themes.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="coaching"><span class="task-text"><strong>20 minutes of The Coaching Habit</strong><small>Nice if there’s a pocket during music or evening.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="swim-bonus"><span class="task-text"><strong>Bonus: swim / water play</strong><small>Only if weather and energy cooperate.</small></span></label>
+          <label class="task"><input type="checkbox" data-task="tiki"><span class="task-text"><strong>Bonus: tiki pot paint layering</strong><small>Creative dessert; not ahead of PD, rooms, reading, or dinner.</small></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="recipe">
+      <div class="section-title"><div><h2>Butter chicken + rice</h2><p>Kid-friendly, smooth sauce, Greek-yogurt version. Start rice first.</p></div></div>
+      <div class="recipe-grid">
+        <div class="recipe-card"><h4>Chicken marinade</h4><ul><li>1.5–2 lb boneless chicken thighs, bite-size pieces</li><li>1/2 cup full-fat Greek yogurt</li><li>1 tbsp lemon juice</li><li>1 tsp garam masala</li><li>1 tsp cumin</li><li>1/2 tsp turmeric</li><li>1/2 tsp salt</li><li>1/2 tsp smoked paprika, or 1 tsp sweet paprika</li></ul></div>
+        <div class="recipe-card"><h4>Sauce</h4><ul><li>3 tbsp butter</li><li>1 onion, finely diced</li><li>3 cloves garlic, minced</li><li>1 tbsp fresh ginger, minced/grated</li><li>1 tbsp tomato paste</li><li>1 cup smooth tomato sauce/passata</li><li>1 tsp garam masala</li><li>1/2 tsp cumin, 1/2 tsp turmeric, 1/2 tsp salt</li><li>1/2 cup water or broth</li><li>1–2 tsp honey or sugar</li><li>1/2 cup full-fat Greek yogurt, added off heat</li></ul></div>
+        <div class="recipe-card"><h4>Steps</h4><ol><li>Marinate chicken if possible, even 10–20 minutes.</li><li>Start rice.</li><li>Brown/cook chicken in butter, then set aside if crowded.</li><li>Cook onion in butter 4–5 minutes; add garlic/ginger 30–60 seconds.</li><li>Add tomato paste and spices; cook 1 minute.</li><li>Add tomato sauce and water/broth; simmer 5–10 minutes.</li><li>Return chicken and simmer until cooked through.</li><li>Turn heat low/off; stir in Greek yogurt slowly. Do not boil hard after yogurt.</li><li>Balance with honey/sugar, salt, lemon, or butter.</li></ol></div>
+        <div class="recipe-card"><h4>Timing</h4><ul><li>3:15–3:45: prep components during music-lesson runway.</li><li>4:00: Rosie lesson starts.</li><li>4:20: rice + butter chicken cooking starts.</li><li>5:15: food done / rice resting / table simple.</li><li>5:30: eat/rest.</li></ul><p class="note">Smoked paprika note: use it lightly so the dish stays creamy/tomato-buttery, not smoky BBQ-curry.</p></div>
+      </div>
+    </section>
+
+    <section id="bonus">
+      <div class="section-title"><div><h2>Bonus / only if the day opens up</h2><p>Do not let these steal from rooms, reading, PD, or dinner.</p></div></div>
+      <div class="panel"><ul><li>Swim if sunny/warm-ish enough.</li><li>Tiki head flower pot paint layering.</li><li>Music Pal naming/tinkering.</li><li>Fantasy baseball helper/news tracker.</li><li>Extra Coaching Habit reading.</li></ul></div>
+    </section>
+
+    <footer>Built for Clay by Donn · checkmarks save locally in your browser · last updated June 21, 2026</footer>
+  </div>
+
+  <script>
+    const key = 'clay-2026-06-22-day-plan-checklist-v1';
+    const boxes = [...document.querySelectorAll('input[type="checkbox"][data-task]')];
+    function loadState(){
+      try {
+        const saved = JSON.parse(localStorage.getItem(key) || '{}');
+        boxes.forEach(box => box.checked = !!saved[box.dataset.task]);
+      } catch(e) {}
+    }
+    function saveState(){
+      const saved = {};
+      boxes.forEach(box => saved[box.dataset.task] = box.checked);
+      localStorage.setItem(key, JSON.stringify(saved));
+    }
+    boxes.forEach(box => box.addEventListener('change', saveState));
+    document.getElementById('clearDone').addEventListener('click', () => { boxes.forEach(box => box.checked = false); saveState(); });
+    document.getElementById('expandAll').addEventListener('click', () => { document.querySelectorAll('details').forEach(d => d.open = true); });
+    document.getElementById('collapseAll').addEventListener('click', () => { document.querySelectorAll('details').forEach(d => d.open = false); });
+    loadState();
+  </script>
+</body>
+</html>
