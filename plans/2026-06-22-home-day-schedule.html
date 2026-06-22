@@ -165,6 +165,8 @@
     .checklist-controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
     button.utility { cursor: pointer; }
     .task-list { display: grid; gap: 9px; }
+    .task-group { display: grid; gap: 9px; margin-top: 12px; }
+    .task-group h3 { margin: 8px 0 0; font-size: 1rem; color: var(--accent2); }
     label.task {
       display: grid;
       grid-template-columns: 26px 1fr;
@@ -217,11 +219,11 @@
     <header>
       <div class="eyebrow">Monday · June 22 · Home day</div>
       <h1>Structure the kids. Ship one PD artifact. Touch grass.</h1>
-      <p class="lede">A mobile-first day plan for Poppy swim, Rosie music, room cleaning, crafts, planting flowers, a protected PD/Gamma block, and butter chicken by 5:30.</p>
+      <p class="lede">A mobile-first day plan for Poppy swim, Rosie music, room cleaning, Clay's actual grown-up actions, a protected PD/Gamma block, and butter chicken by 5:30.</p>
     </header>
 
     <section class="top-card" aria-label="Day priorities">
-      <p class="mantra">Top 5: swim handled · rooms cleaned · reading minutes · one PD artifact · dinner started at 4:20</p>
+      <p class="mantra">Top 5: swim handled · rooms cleaned · Rosie party-favor pick · one PD artifact · dinner started at 4:20</p>
       <div class="chips" aria-label="Planning notes">
         <span class="chip">Poppy: no tablet all week</span>
         <span class="chip">Rosie music: 4:00 sharp</span>
@@ -233,6 +235,7 @@
     <nav class="jump" aria-label="Jump links">
       <a href="#timeline">Timeline</a>
       <a href="#checklist">Checklist</a>
+      <a href="#clay-actions">Clay actions</a>
       <a href="#recipe">Dinner recipe</a>
       <a href="#bonus">Bonus ideas</a>
     </nav>
@@ -279,7 +282,7 @@
 
       <details>
         <summary><span class="time soft">10:30</span><span class="summary-main"><b>Craft / screen-free play container</b><span>Reward/reset after rooms.</span></span><span class="chev">›</span></summary>
-        <div class="detail-body"><ul><li>Best fit: painted rock garden markers, because it pairs with planting.</li><li>Other options: cardboard animal hotel, treasure maps, paper bag/sock puppets, nature mandalas.</li><li>Goal: create a shared play container, not supervise every minute.</li></ul></div>
+        <div class="detail-body"><ul><li>First 20 minutes: Rosie birthday favor mission — sunglasses + one pig/duck/pool choice-bin item + one parent-friendly useful thing.</li><li>Then craft if there is still juice: painted rock garden markers, cardboard animal hotel, treasure maps, paper bag/sock puppets, or nature mandalas.</li><li>Goal: create a shared play container, not supervise every minute.</li></ul></div>
       </details>
 
       <details>
@@ -342,21 +345,33 @@
           <button class="utility" id="collapseAll" type="button">Collapse all</button>
         </div>
         <div class="task-list" id="tasks">
+          <div class="task-group" id="clay-actions">
+            <h3>Clay's actual jobs</h3>
+            <label class="task"><input type="checkbox" data-task="party-favors"><span class="task-text"><strong>Rosie party favor mission</strong><small>After rooms: let Rosie choose sunglasses + 2–3 favor-bar options. Keep it to one Amazon cart, not ten giant bulk packs.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="pd"><span class="task-text"><strong>One PD/Gamma artifact block</strong><small>Title, audience, 3 outcomes, rough agenda, first 8–12 slides.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="dinner"><span class="task-text"><strong>Butter chicken + rice started by 4:20</strong><small>Prep during lesson runway; eat/rest around 5:30.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="flowers"><span class="task-text"><strong>Plant flowers / sphagnum moss</strong><small>One outdoor tangible win if weather allows.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="anxious-gen"><span class="task-text"><strong>10-minute Anxious Generation book study brain dump</strong><small>Who it’s for, tone, first session purpose, 3 possible themes.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="morning-reading"><span class="task-text"><strong>Morning reading/reflection</strong><small>Tao Te Ching, Tarot, The Writing Revolution — modest is enough.</small></span></label>
+          </div>
+
+          <div class="task-group">
+            <h3>Kid / family logistics Clay is shepherding</h3>
           <label class="task"><input type="checkbox" data-task="swim"><span class="task-text"><strong>Poppy swim practice handled</strong><small>Leave by 7:55; drop off, pick up, get home around 9:15.</small></span></label>
           <label class="task"><input type="checkbox" data-task="rosie-breakfast"><span class="task-text"><strong>Rosie breakfast + successful morning setup</strong><small>Fed, connected, and set up while Poppy logistics happen.</small></span></label>
           <label class="task"><input type="checkbox" data-task="poppy-reset"><span class="task-text"><strong>Poppy breakfast/change/reset after practice</strong><small>Breakfast, dry clothes, settle by roughly 9:45.</small></span></label>
           <label class="task"><input type="checkbox" data-task="rooms"><span class="task-text"><strong>Girls clean rooms</strong><small>Poppy 35–45 min; Rosie 15–25 min. Clothes, trash, floor, books/toys, one surface.</small></span></label>
           <label class="task"><input type="checkbox" data-task="reading-minutes"><span class="task-text"><strong>Library reading minutes</strong><small>Quiet block after lunch; read-aloud/listening counts if the program allows it.</small></span></label>
           <label class="task"><input type="checkbox" data-task="music"><span class="task-text"><strong>Rosie music lesson at 4:00</strong><small>3:15–3:45 reset, lesson area ready, Poppy quiet activity ready.</small></span></label>
-          <label class="task"><input type="checkbox" data-task="dinner"><span class="task-text"><strong>Butter chicken + rice started by 4:20</strong><small>Prep during lesson runway; eat/rest around 5:30.</small></span></label>
-          <label class="task"><input type="checkbox" data-task="flowers"><span class="task-text"><strong>Plant flowers / sphagnum moss</strong><small>One outdoor tangible win if weather allows.</small></span></label>
-          <label class="task"><input type="checkbox" data-task="pd"><span class="task-text"><strong>One PD/Gamma artifact block</strong><small>Title, audience, 3 outcomes, rough agenda, first 8–12 slides.</small></span></label>
           <label class="task"><input type="checkbox" data-task="craft"><span class="task-text"><strong>One screen-free craft/play container</strong><small>Garden markers, animal hotel, treasure maps, puppets, or nature mandalas.</small></span></label>
-          <label class="task"><input type="checkbox" data-task="morning-reading"><span class="task-text"><strong>Morning reading/reflection</strong><small>Tao Te Ching, Tarot, The Writing Revolution — modest is enough.</small></span></label>
-          <label class="task"><input type="checkbox" data-task="anxious-gen"><span class="task-text"><strong>10-minute Anxious Generation book study brain dump</strong><small>Who it’s for, tone, first session purpose, 3 possible themes.</small></span></label>
+          </div>
+
+          <div class="task-group">
+            <h3>Bonus only if the day opens up</h3>
           <label class="task"><input type="checkbox" data-task="coaching"><span class="task-text"><strong>20 minutes of The Coaching Habit</strong><small>Nice if there’s a pocket during music or evening.</small></span></label>
           <label class="task"><input type="checkbox" data-task="swim-bonus"><span class="task-text"><strong>Bonus: swim / water play</strong><small>Only if weather and energy cooperate.</small></span></label>
           <label class="task"><input type="checkbox" data-task="tiki"><span class="task-text"><strong>Bonus: tiki pot paint layering</strong><small>Creative dessert; not ahead of PD, rooms, reading, or dinner.</small></span></label>
+          </div>
         </div>
       </div>
     </section>
