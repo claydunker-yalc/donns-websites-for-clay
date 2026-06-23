@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tomorrow Plan — Tuesday, June 23</title>
+  <meta name="description" content="Clay's mobile-first family, playdate, catch-up, PD, and checklist plan for Tuesday, June 23, 2026." />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --bg2: #0f1d32;
+      --card: rgba(255,255,255,.075);
+      --card-strong: rgba(255,255,255,.115);
+      --ink: #f3f7ff;
+      --muted: #adbbd3;
+      --soft: #d8e2f2;
+      --line: rgba(255,255,255,.13);
+      --accent: #8ee8c8;
+      --accent2: #ffd58a;
+      --accent3: #aeb8ff;
+      --danger: #ff9c9c;
+      --done: #7ee39f;
+      --shadow: 0 18px 70px rgba(0,0,0,.34);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% -8%, rgba(142,232,200,.26), transparent 26rem),
+        radial-gradient(circle at 98% 16%, rgba(255,213,138,.18), transparent 23rem),
+        linear-gradient(180deg, var(--bg), var(--bg2) 55%, #08111f);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    a { color: var(--accent); }
+    .wrap { width: min(980px, 100%); margin: 0 auto; padding: 20px 14px 72px; }
+    header {
+      padding: 24px 4px 12px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 800;
+      font-size: .74rem;
+    }
+    h1 {
+      margin: 10px 0 8px;
+      font-size: clamp(2.15rem, 12vw, 4.6rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+    }
+    .lede {
+      margin: 0;
+      color: var(--soft);
+      font-size: 1.05rem;
+      max-width: 67ch;
+    }
+    .top-card, .panel, details {
+      background: linear-gradient(180deg, var(--card-strong), rgba(255,255,255,.045));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .top-card { margin: 18px 0; padding: 16px; }
+    .mantra {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent2);
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      color: var(--soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .85rem;
+      font-weight: 650;
+    }
+    nav.jump {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      padding: 10px 0 12px;
+      margin: 0 -2px 10px;
+      overflow-x: auto;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(8,17,31,.96), rgba(8,17,31,.72));
+    }
+    nav.jump a, button.utility {
+      white-space: nowrap;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 750;
+      font-size: .9rem;
+    }
+    .section-title {
+      margin: 28px 2px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+    }
+    .section-title h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.03em; }
+    .section-title p { margin: 3px 0 0; color: var(--muted); font-size: .92rem; }
+    details { margin: 10px 0; overflow: hidden; }
+    details[open] { background: linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.052)); }
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 15px 16px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      touch-action: manipulation;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .time {
+      min-width: 78px;
+      color: #06111d;
+      background: var(--accent);
+      border-radius: 14px;
+      padding: 7px 8px;
+      font-weight: 900;
+      font-size: .82rem;
+      text-align: center;
+    }
+    .time.soft { background: var(--accent2); }
+    .time.bonus { background: var(--accent3); }
+    .summary-main b { display: block; font-size: 1rem; }
+    .summary-main span { display: block; color: var(--muted); font-size: .88rem; margin-top: 2px; }
+    .chev { color: var(--muted); font-size: 1.1rem; transform: rotate(0deg); transition: transform .2s ease; }
+    details[open] .chev { transform: rotate(90deg); }
+    .detail-body { border-top: 1px solid var(--line); padding: 14px 16px 16px; color: var(--soft); }
+    .detail-body ul, .detail-body ol { margin: 8px 0 0; padding-left: 1.18rem; }
+    .detail-body li { margin: 6px 0; }
+    .note {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 15px;
+      background: rgba(142,232,200,.1);
+      border: 1px solid rgba(142,232,200,.24);
+      color: #dffcf2;
+    }
+    .panel { padding: 16px; margin-top: 12px; }
+    .panel h3 { margin: 0 0 8px; }
+    .panel p { color: var(--muted); margin: 0 0 10px; }
+    .checklist-controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
+    button.utility { cursor: pointer; }
+    .task-list { display: grid; gap: 9px; }
+    .task-group { display: grid; gap: 9px; margin-top: 12px; }
+    .task-group h3 { margin: 8px 0 0; font-size: 1rem; color: var(--accent2); }
+    label.task {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 11px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(0,0,0,.16);
+    }
+    label.task input {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--done);
+      margin-top: 1px;
+    }
+    .task-text strong { display: block; font-size: .98rem; }
+    .task-text small { color: var(--muted); display: block; margin-top: 2px; }
+    label.task:has(input:checked) {
+      border-color: rgba(126,227,159,.42);
+      background: rgba(126,227,159,.105);
+    }
+    label.task:has(input:checked) .task-text strong,
+    label.task:has(input:checked) .task-text small {
+      text-decoration: line-through;
+      color: rgba(216,226,242,.55);
+    }
+    .recipe-grid { display: grid; gap: 12px; }
+    .recipe-card {
+      background: rgba(0,0,0,.16);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px;
+    }
+    .recipe-card h4 { margin: 0 0 8px; color: var(--accent2); }
+    .recipe-card ul, .recipe-card ol { margin: 0; padding-left: 1.1rem; }
+    footer { color: var(--muted); text-align: center; padding: 30px 8px 0; font-size: .88rem; }
+    @media (min-width: 720px) {
+      .wrap { padding: 34px 26px 84px; }
+      .top-card { padding: 22px; }
+      summary { padding: 18px 20px; grid-template-columns: 105px 1fr auto; }
+      .detail-body { padding: 16px 20px 20px; }
+      .recipe-grid { grid-template-columns: 1fr 1fr; }
+      .time { min-width: 96px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Tuesday · June 23 · Playdate + catch-up day</div>
+      <h1>Host the playdate. Clear the tiny overdue stuff. Move PD one notch.</h1>
+      <p class="lede">A phone-friendly plan built from tomorrow's calendar and open tasks: Rosie + Leona at the house, The Writing Revolution reminder, family email account check-in, batteries/fire alarms/Claude cleanup, and one protected PD matrix pass.</p>
+    </header>
+
+    <section class="top-card" aria-label="Day priorities">
+      <p class="mantra">Top 5: playdate ready · family email accounts checked · batteries/fire alarms handled · Claude account signed up · one AI PD matrix revision pass</p>
+      <div class="chips" aria-label="Planning notes">
+        <span class="chip">Calendar anchor: Rosie + Leona 10:30–2:00</span>
+        <span class="chip">Reminder: Writing Revolution Ch. 5 at 9:00</span>
+        <span class="chip">Personal reset: Tao/Tarot/quiet minutes</span>
+        <span class="chip">Keep dinner boring unless inspiration arrives</span>
+      </div>
+    </section>
+
+    <nav class="jump" aria-label="Jump links">
+      <a href="#timeline">Timeline</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#clay-actions">Clay actions</a>
+      <a href="#playdate">Playdate</a>
+      <a href="#bonus">Bonus</a>
+    </nav>
+
+    <section id="timeline">
+      <div class="section-title"><div><h2>Timeline</h2><p>Tap any time block to open or hide details. Treat unscheduled blocks as flexible rails, not laws.</p></div></div>
+
+      <details open>
+        <summary><span class="time">6:30</span><span class="summary-main"><b>Person-before-logistics start</b><span>Tao, tarot, quiet, or a few pages.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>One Tao Te Ching passage.</li><li>One tarot card / short reflection.</li><li>Five quiet minutes.</li><li>If the house wakes up early, shrink this instead of abandoning it.</li></ul><div class="note">Win condition: you begin as a person, not as a queue processor.</div></div>
+      </details>
+
+      <details>
+        <summary><span class="time">7:15</span><span class="summary-main"><b>Breakfast + house runway</b><span>Make the playdate-host version of the house decent.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Breakfast for the girls.</li><li>Kitchen counter/table reset.</li><li>Bathroom glance: toilet paper, hand towel, floor hazards.</li><li>Choose one play zone and one snack option. Do not clean the whole universe.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">8:15</span><span class="summary-main"><b>Fast home-safety/admin sweep</b><span>Batteries, alarms, Claude: tiny overdue jobs first.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Finish recycling batteries or put them directly in the car by the door.</li><li>Check fire alarms: quick test pass, note any batteries needed.</li><li>Sign up for the school Claude account if login/setup is available.</li></ul><div class="note">These are the annoying pebbles in the shoe. Clear them before the playdate eats the middle of the day.</div></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">9:00</span><span class="summary-main"><b>The Writing Revolution — Chapter 5</b><span>Calendar reminder block.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Read or skim for 15–25 minutes.</li><li>Capture one usable PD note: a sentence stem, writing move, or classroom example.</li><li>If interrupted, settle for one paragraph plus one note.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time">9:35</span><span class="summary-main"><b>Playdate final reset</b><span>Snack, bathroom, play area, Rosie preview.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Tell Rosie the simple frame: Leona comes, we welcome her, we take turns, grownups can help solve stuck moments.</li><li>Set out 2–3 easy play options: blocks/animals, art supplies, outside water/sidewalk chalk if practical.</li><li>Prep snack/water. Keep it boring and available.</li></ul></div>
+      </details>
+
+      <details open id="playdate">
+        <summary><span class="time">10:30</span><span class="summary-main"><b>Rosie playdate with Leona</b><span>At the house until 2:00.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Lucy drops Leona off.</li><li>Stay loosely nearby for transitions, snack, conflict repair, and bathroom help.</li><li>Do not expect deep work during this window.</li><li>Optional quiet adult side task: fold laundry, kitchen reset, or 10-minute inbox scan only.</li></ul><div class="note">Playdate win condition: safe, kind-enough, fed/watered, no heroic productivity expectations.</div></div>
+      </details>
+
+      <details>
+        <summary><span class="time soft">12:00</span><span class="summary-main"><b>Lunch / personal reset</b><span>Tao/Tarot reminder can live here if morning slipped.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Simple lunch and water for kids.</li><li>Use the calendar's Tao/Tarot/quiet reminder here if it did not happen earlier.</li><li>Keep cleanup to dishes/trash/table, not a full reset.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time">2:00</span><span class="summary-main"><b>Leona pickup + decompression</b><span>Transition the house back to normal.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Say goodbye / handoff.</li><li>Ten-minute toy sweep with Rosie before the energy disappears.</li><li>Snack or quiet show/book if the kids are cooked.</li><li>Do not roll directly into a giant adult work sprint without a reset.</li></ul></div>
+      </details>
+
+      <details open>
+        <summary><span class="time soft">2:45</span><span class="summary-main"><b>Protected AI PD matrix pass</b><span>One concrete revision, not the whole future.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Connect one grade-level matrix section to content standards or classroom legitimacy.</li><li>Add one non-LLM example: image, video, search, data, audio, or multimodal creation.</li><li>Strengthen the primary-source/verification angle.</li><li>Stop with a visible artifact: changed rows, bullets, or a tiny Gamma update.</li></ul><div class="note">Win condition: tomorrow's due-by-6/24 AI PD task is less imaginary.</div></div>
+      </details>
+
+      <details>
+        <summary><span class="time">3:45</span><span class="summary-main"><b>Family email account annual check-in</b><span>Due today in Open Brain.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Sign into the family email accounts.</li><li>Confirm recovery info / obvious alerts.</li><li>Capture any follow-up as a separate task instead of letting it derail the day.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time soft">4:30</span><span class="summary-main"><b>Dinner decision / low-drama close</b><span>Choose easy; do not audition a whole new system.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Pick leftovers, freezer, sandwiches, or one simple grocery-store option.</li><li>If cooking, start by 4:45 so evening does not become a cliff.</li><li>Light cleanup before dinner beats heroic cleanup after bedtime.</li></ul></div>
+      </details>
+
+      <details>
+        <summary><span class="time bonus">8:00</span><span class="summary-main"><b>Tiny adult closing block</b><span>Only if energy remains.</span></span><span class="chev">›</span></summary>
+        <div class="detail-body"><ul><li>Write tomorrow's top 3.</li><li>Ten minutes on building-principal outreach names.</li><li>Dish-to-share brainstorm for Shane/Cassie party.</li><li>Set Donn/Fantasy Baseball helper aside unless it feels fun.</li></ul></div>
+      </details>
+    </section>
+
+    <section id="checklist">
+      <div class="section-title"><div><h2>Prioritized checklist</h2><p>Not chronological. Tap items as they’re done; checkmarks save on this device.</p></div></div>
+      <div class="panel">
+        <div class="checklist-controls">
+          <button class="utility" id="clearDone" type="button">Clear checkmarks</button>
+          <button class="utility" id="expandAll" type="button">Expand all</button>
+          <button class="utility" id="collapseAll" type="button">Collapse all</button>
+        </div>
+        <div class="task-list" id="tasks">
+          <div class="task-group" id="clay-actions">
+            <h3>Clay's actual jobs</h3>
+            <label class="task"><input type="checkbox" data-task="playdate-ready"><span class="task-text"><strong>Make the house playdate-ready enough</strong><small>Bathroom glance, snack/water, one play zone, one backup play option.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="playdate-hosted"><span class="task-text"><strong>Host Rosie + Leona 10:30–2:00</strong><small>Safe, kind-enough, fed/watered, no heroic productivity expectations.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="family-email"><span class="task-text"><strong>Sign into family email accounts</strong><small>Annual check-in due June 23; capture follow-ups separately.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="batteries"><span class="task-text"><strong>Finish recycling batteries</strong><small>Either complete it or put them physically in the car/by the door.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="fire-alarms"><span class="task-text"><strong>Check the fire alarms</strong><small>Quick test pass; note battery/device follow-ups.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="school-claude"><span class="task-text"><strong>Sign up for school Claude account</strong><small>Small overdue setup task; do before the afternoon if possible.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="pd-matrix"><span class="task-text"><strong>One AI PD matrix revision pass</strong><small>Standards legitimacy, non-LLM examples, primary-source/verification emphasis.</small></span></label>
+          </div>
+
+          <div class="task-group">
+            <h3>Kid / family logistics Clay is shepherding</h3>
+            <label class="task"><input type="checkbox" data-task="breakfast"><span class="task-text"><strong>Girls breakfast and morning launch</strong><small>Do the normal morning without trying to win Instagram.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="rosie-preview"><span class="task-text"><strong>Preview the playdate with Rosie</strong><small>Welcome Leona, take turns, ask grownups for help when stuck.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="lunch"><span class="task-text"><strong>Simple lunch/water during playdate</strong><small>Keep it boring and available.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="pickup-reset"><span class="task-text"><strong>2:00 pickup + ten-minute toy sweep</strong><small>Reset before everyone collapses.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="dinner-choice"><span class="task-text"><strong>Dinner decision by 4:30</strong><small>Leftovers/freezer/sandwiches/simple grocery option all count.</small></span></label>
+          </div>
+
+          <div class="task-group">
+            <h3>Personal grounding / maintenance</h3>
+            <label class="task"><input type="checkbox" data-task="tao-tarot"><span class="task-text"><strong>Tao + tarot + five quiet minutes</strong><small>Morning preferred; noon calendar reminder is the backup.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="writing-revolution"><span class="task-text"><strong>The Writing Revolution — Chapter 5</strong><small>15–25 minutes and one PD-useful note.</small></span></label>
+          </div>
+
+          <div class="task-group">
+            <h3>Bonus only if the day opens up</h3>
+            <label class="task"><input type="checkbox" data-task="principals"><span class="task-text"><strong>Ten-minute principal outreach list</strong><small>Names only; no need to write perfect messages tonight.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="party-dish"><span class="task-text"><strong>Brainstorm dish to share for Shane/Cassie party</strong><small>Due later this week; a shortlist is enough.</small></span></label>
+            <label class="task"><input type="checkbox" data-task="fantasy-baseball"><span class="task-text"><strong>Fantasy Baseball helper thought</strong><small>Only if it feels playful, not obligatory.</small></span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bonus">
+      <div class="section-title"><div><h2>Operating notes</h2><p>Small guardrails so the plan does not become another burden.</p></div></div>
+      <div class="panel"><ul><li>The 10:30–2:00 playdate is the middle-of-day anchor; do not schedule deep work inside it.</li><li>The overdue tasks are deliberately small and physical/admin. Knock them out before they keep generating background noise.</li><li>The PD goal is one visible improvement, not a complete professional-development empire.</li><li>If the day gets weird, preserve: playdate safety, family email check-in, one tiny overdue task, and dinner choice.</li></ul></div>
+    </section>
+
+    <footer>Built for Clay by Donn · checkmarks save locally in your browser · last updated June 22, 2026</footer>
+  </div>
+
+  <script>
+    const key = 'clay-2026-06-23-day-plan-checklist-v1';
+    const boxes = [...document.querySelectorAll('input[type="checkbox"][data-task]')];
+    function loadState(){
+      try {
+        const saved = JSON.parse(localStorage.getItem(key) || '{}');
+        boxes.forEach(box => box.checked = !!saved[box.dataset.task]);
+      } catch(e) {}
+    }
+    function saveState(){
+      const saved = {};
+      boxes.forEach(box => saved[box.dataset.task] = box.checked);
+      localStorage.setItem(key, JSON.stringify(saved));
+    }
+    boxes.forEach(box => box.addEventListener('change', saveState));
+    document.getElementById('clearDone').addEventListener('click', () => { boxes.forEach(box => box.checked = false); saveState(); });
+    document.getElementById('expandAll').addEventListener('click', () => { document.querySelectorAll('details').forEach(d => d.open = true); });
+    document.getElementById('collapseAll').addEventListener('click', () => { document.querySelectorAll('details').forEach(d => d.open = false); });
+    loadState();
+  </script>
+</body>
+</html>
