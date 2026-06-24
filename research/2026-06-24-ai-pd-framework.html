@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<!-- ai-pd-framework-durable-pedagogy-marker -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Durable AI Pedagogy Framework</title>
+  <style>
+    :root {
+      --cream: #f6efe2;
+      --cream-deep: #efe1cc;
+      --ink: #11100d;
+      --muted: #5e554b;
+      --orange: #e5631a;
+      --orange-dark: #a83f0c;
+      --line: rgba(17, 16, 13, 0.18);
+      --soft: rgba(229, 99, 26, 0.10);
+      --paper: #fff9ef;
+      --shadow: 0 24px 70px rgba(55, 38, 20, 0.10);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Century Gothic", CenturyGothic, AppleGothic, "Trebuchet MS", Arial, sans-serif;
+      line-height: 1.58;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 16% 8%, rgba(229, 99, 26, 0.12), transparent 26rem),
+        linear-gradient(90deg, rgba(17, 16, 13, 0.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(17, 16, 13, 0.025) 1px, transparent 1px);
+      background-size: auto, 44px 44px, 44px 44px;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 34px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav .mark {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    nav .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    nav a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav a:hover, nav a:focus {
+      color: var(--orange-dark);
+      border-bottom-color: var(--orange);
+      outline: none;
+    }
+
+    .hero {
+      padding: clamp(52px, 8vw, 104px) 0 48px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(28px, 6vw, 80px);
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--orange-dark);
+      font-size: 0.85rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, .display {
+      font-family: "Segoe UI Black", "Arial Black", Impact, system-ui, sans-serif;
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(3.1rem, 8vw, 7.8rem);
+    }
+
+    .hero h1 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .hero-copy {
+      margin: 26px 0 0;
+      max-width: 740px;
+      font-size: clamp(1.08rem, 1.8vw, 1.35rem);
+      color: var(--muted);
+    }
+
+    .thesis-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 42px);
+      position: relative;
+    }
+
+    .thesis-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: var(--orange);
+    }
+
+    .thesis-card .label {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+    }
+
+    blockquote {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.25rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+    }
+
+    blockquote .accent {
+      color: var(--orange-dark);
+    }
+
+    .section {
+      padding: 76px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 0.32fr 1fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 34px;
+    }
+
+    .section-number {
+      color: var(--orange-dark);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.9rem);
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      letter-spacing: -0.035em;
+    }
+
+    .lede {
+      margin: 18px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .pillar {
+      min-height: 300px;
+      padding: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pillar .kicker {
+      color: var(--orange-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .pillar p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .question {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-weight: 700;
+      color: var(--ink) !important;
+    }
+
+    .framework-line {
+      margin-top: 22px;
+      padding: 28px;
+      background: var(--soft);
+      border-left: 8px solid var(--orange);
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(24px, 5vw, 66px);
+      align-items: start;
+    }
+
+    .plain-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .plain-list li {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 18px;
+    }
+
+    .plain-list strong {
+      color: var(--orange-dark);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .plain-list span {
+      color: var(--muted);
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .quote-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 26px;
+      min-height: 188px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-card p {
+      margin: 0;
+      font-size: clamp(1.22rem, 2vw, 1.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .quote-card .use {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .script-box {
+      background: var(--ink);
+      color: var(--cream);
+      padding: clamp(28px, 5vw, 54px);
+      box-shadow: var(--shadow);
+    }
+
+    .script-box h3 {
+      color: var(--orange);
+    }
+
+    .script-box p {
+      margin: 18px 0 0;
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      color: rgba(246, 239, 226, 0.88);
+    }
+
+    .script-box + .script-box {
+      margin-top: 18px;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .module {
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: transparent;
+    }
+
+    .module p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .module .fit {
+      margin-top: 18px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .closing {
+      padding: clamp(42px, 7vw, 84px);
+      margin-bottom: 70px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .closing .display {
+      margin: 0 auto;
+      max-width: 900px;
+      font-size: clamp(2.2rem, 5vw, 5.6rem);
+    }
+
+    .closing p {
+      margin: 24px auto 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .orange-rule {
+      width: 74px;
+      height: 8px;
+      background: var(--orange);
+      margin: 0 auto 26px;
+    }
+
+    @media (max-width: 880px) {
+      nav { align-items: flex-start; flex-direction: column; }
+      .hero, .section-heading, .split { grid-template-columns: 1fr; }
+      .pillars, .quote-grid, .module-grid { grid-template-columns: 1fr; }
+      .pillar { min-height: unset; }
+      .plain-list li { grid-template-columns: 1fr; gap: 6px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      body::before, nav .links { display: none; }
+      .section { page-break-inside: avoid; }
+      .thesis-card, .pillar, .quote-card, .script-box, .closing { box-shadow: none; }
+      .script-box { background: #fff; color: #11100d; border: 1px solid var(--line); }
+      .script-box p { color: #11100d; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page">
+    <nav aria-label="Page sections">
+      <div class="mark">Durable AI Pedagogy</div>
+      <div class="links">
+        <a href="#framework">Framework</a>
+        <a href="#phrases">Phrases</a>
+        <a href="#scripts">Scripts</a>
+        <a href="#modules">Modules</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Professional development framework</p>
+        <h1 id="page-title">Tools change. <em>Teaching</em> endures.</h1>
+        <p class="hero-copy">A pedagogy-first lens for every AI professional development session Clay builds: broad enough to organize the work, specific enough to say what makes the work different.</p>
+      </div>
+
+      <aside class="thesis-card" aria-label="Core thesis">
+        <p class="label">Core thesis</p>
+        <blockquote>
+          AI in education is <span class="accent">mainly a learning-design, assessment, and teacher-judgment problem</span> — not just a tool-adoption problem.
+        </blockquote>
+      </aside>
+    </section>
+
+    <section class="section" id="framework">
+      <div class="section-heading">
+        <div class="section-number">01 / Framework</div>
+        <div>
+          <h2>The persistent lens</h2>
+          <p class="lede">Every session can change its examples, tools, grade levels, and subject-area focus. The lens stays the same: design meaningful learning, gather real evidence, and protect the professional judgment of the teacher.</p>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar">
+          <div>
+            <div class="kicker">Pillar one</div>
+            <h3>Learning design</h3>
+            <p>What kind of thinking, practice, struggle, collaboration, creativity, or understanding is the task supposed to cultivate?</p>
+          </div>
+          <p class="question">Question: What learning are we trying to protect or deepen?</p>
+        </article>
+
+        <article class="pillar">
+          <div>
+            <div class="kicker">Pillar two</div>
+            <h3>Assessment</h3>
+            <p>When polished products are easy to generate, teachers need better evidence of process, reasoning, revision, judgment, and transfer.</p>
+          </div>
+          <p class="question">Question: What student thinking needs to be visible?</p>
+        </article>
+
+        <article class="pillar">
+          <div>
+            <div class="kicker">Pillar three</div>
+            <h3>Teacher judgment</h3>
+            <p>Teaching is both art and science. AI does not replace professional judgment; it makes that judgment more visible and more necessary.</p>
+          </div>
+          <p class="question">Question: What should the teacher decide, preserve, redesign, or refuse?</p>
+        </article>
+      </div>
+
+      <div class="framework-line">
+        This is not a framework for replacing teachers with AI. It is a framework for helping teachers work wisely when AI exists.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-number">02 / Market position</div>
+        <div>
+          <h2>Not more tools. A durable way to teach after the shortcut.</h2>
+          <p class="lede">Most AI PD is tied to the tool layer: demos, prompt tricks, productivity workflows, and platform tours. This framework lives one layer deeper.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div>
+          <h3>The contrast</h3>
+          <p>Clay is not anti-tool. Tools matter. But tools are the unstable layer. Some will last, some will disappear, and some will be replaced before a school finishes its next PD cycle.</p>
+          <p>The stable layer is pedagogy: the durable principles educators use to decide what learning should look like when students have access to powerful cognitive shortcuts.</p>
+        </div>
+
+        <ul class="plain-list" aria-label="Stable layer list">
+          <li><strong>Instead of</strong><span>“Here are twenty AI tools you can use tomorrow.”</span></li>
+          <li><strong>Offer</strong><span>“Here is a durable game plan for deciding when AI helps learning and when it gets in the way.”</span></li>
+          <li><strong>Instead of</strong><span>“How do we catch students?”</span></li>
+          <li><strong>Ask</strong><span>“What evidence would show us that students actually understood?”</span></li>
+          <li><strong>Instead of</strong><span>“Will AI replace teachers?”</span></li>
+          <li><strong>Insist</strong><span>“AI makes teacher judgment more important, not less.”</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="phrases">
+      <div class="section-heading">
+        <div class="section-number">03 / Phrases</div>
+        <div>
+          <h2>Lines worth keeping</h2>
+          <p class="lede">Use these as slide titles, transitions, workshop anchors, closing lines, or marketing copy. They all point back to the same framework.</p>
+        </div>
+      </div>
+
+      <div class="quote-grid">
+        <article class="quote-card">
+          <p>Tools are temporary. Pedagogy has to be durable.</p>
+          <div class="use">Brand promise</div>
+        </article>
+        <article class="quote-card">
+          <p>Stop chasing tools. Build an AI pedagogy that lasts.</p>
+          <div class="use">Workshop title / tagline</div>
+        </article>
+        <article class="quote-card">
+          <p>If students can generate answers instantly, teachers must design better evidence of thinking.</p>
+          <div class="use">Assessment frame</div>
+        </article>
+        <article class="quote-card">
+          <p>AI changes the conditions of teaching. It does not remove the need for teachers.</p>
+          <div class="use">Teacher-centered frame</div>
+        </article>
+        <article class="quote-card">
+          <p>The tools will change. The teaching questions endure.</p>
+          <div class="use">Closing line</div>
+        </article>
+        <article class="quote-card">
+          <p>Not more tools. A durable way to teach after the shortcut.</p>
+          <div class="use">Market position</div>
+        </article>
+        <article class="quote-card">
+          <p>AI literacy is not prompt tricks. It is judgment, evidence, purpose, and reflection.</p>
+          <div class="use">AI literacy frame</div>
+        </article>
+        <article class="quote-card">
+          <p>We are not asking whether teachers can be replaced. We are asking how teachers work when AI exists.</p>
+          <div class="use">Human-centered frame</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="scripts">
+      <div class="section-heading">
+        <div class="section-number">04 / Scripts</div>
+        <div>
+          <h2>Outset and wrap-up language</h2>
+          <p class="lede">The framework should appear at the beginning and end of every PD session, even when the session topic changes.</p>
+        </div>
+      </div>
+
+      <div class="script-box">
+        <h3>Opening passage</h3>
+        <p>“I’m not here to give you another tour of AI tools. Tools will change. Some will last, some will disappear, and some will be replaced before we even agree on the next policy. The deeper question is pedagogical: how do we design learning, gather evidence of understanding, and exercise teacher judgment when students have access to powerful cognitive shortcuts?”</p>
+      </div>
+
+      <div class="script-box">
+        <h3>Teacher-judgment passage</h3>
+        <p>“This framework keeps the teacher at the center. Teaching has always been both an art and a science: the science of learning, evidence, feedback, and design; and the art of knowing students, reading the room, making judgment calls, and deciding what matters. AI does not erase that. If anything, it makes professional judgment more important.”</p>
+      </div>
+
+      <div class="script-box">
+        <h3>Closing passage</h3>
+        <p>“The tools will change. But the teacher’s work remains: design meaningful learning, gather real evidence of understanding, and exercise professional judgment about when technology helps and when it gets in the way.”</p>
+      </div>
+    </section>
+
+    <section class="section" id="modules">
+      <div class="section-heading">
+        <div class="section-number">05 / Adaptable modules</div>
+        <div>
+          <h2>The details can change. The lens persists.</h2>
+          <p class="lede">Different PD sessions can plug into the framework without losing the central identity of the work.</p>
+        </div>
+      </div>
+
+      <div class="module-grid">
+        <article class="module">
+          <h3>AI literacy</h3>
+          <p>Teach students to use, question, verify, and reflect on AI instead of merely avoiding it or using it as a shortcut.</p>
+          <p class="fit">Framework fit: learning design + teacher judgment.</p>
+        </article>
+        <article class="module">
+          <h3>Assessment redesign</h3>
+          <p>Move from product-only grading toward visible thinking: checkpoints, conferences, drafts, transcript annotation, oral defense, and reflection.</p>
+          <p class="fit">Framework fit: assessment + evidence of understanding.</p>
+        </article>
+        <article class="module">
+          <h3>Disciplinary AI literacy</h3>
+          <p>Ask what AI use means inside actual subjects: evidence in science, voice in ELA, reasoning in math, sourcing in social studies.</p>
+          <p class="fit">Framework fit: learning design + subject-area judgment.</p>
+        </article>
+        <article class="module">
+          <h3>Student misuse and motivation</h3>
+          <p>Treat AI misuse not only as rule-breaking, but as a signal about task purpose, pressure, unclear expectations, or weak evidence design.</p>
+          <p class="fit">Framework fit: teacher judgment + learning culture.</p>
+        </article>
+        <article class="module">
+          <h3>Verification routines</h3>
+          <p>Help students treat AI output as a starting point for inquiry: identify claims, track evidence, compare sources, revise conclusions.</p>
+          <p class="fit">Framework fit: assessment + durable AI literacy.</p>
+        </article>
+        <article class="module">
+          <h3>Policy and norms</h3>
+          <p>Move beyond permission charts by clarifying what kinds of thinking each task requires and where AI support is appropriate.</p>
+          <p class="fit">Framework fit: teacher judgment + classroom design.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing" aria-label="Closing summary">
+      <div class="orange-rule"></div>
+      <p class="display">A durable AI pedagogy for teachers who still matter.</p>
+      <p>Not tool panic. Not tool worship. A professional framework for designing learning, seeing thinking, and honoring the art and science of teaching in an AI-saturated world.</p>
+    </section>
+  </main>
+</body>
+</html>
