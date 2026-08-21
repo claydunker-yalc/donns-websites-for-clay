@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermes v0.17 → v0.20.4 upgrade briefing</title>
+  <meta name="description" content="A scan-friendly briefing for Clay on Hermes Agent changes from v0.17.0 to v0.20.4." />
+  <style>
+    :root { color-scheme: dark; --bg:#0f0f10; --panel:#18181b; --panel2:#202026; --ink:#f3f3ef; --muted:#c7c2b8; --quiet:#9c9588; --gold:#f0cf73; --line:rgba(240,207,115,.22); --soft:rgba(255,255,255,.08); --serif: Georgia, 'Iowan Old Style', serif; --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    * { box-sizing:border-box } body { margin:0; background:radial-gradient(circle at top left, rgba(240,207,115,.13), transparent 34rem), linear-gradient(180deg,#0f0f10,#171719 55%,#0f0f10); color:var(--ink); font-family:var(--sans); line-height:1.65; }
+    main { width:min(1080px, calc(100% - 32px)); margin:0 auto; padding:64px 0; }
+    .top { display:grid; grid-template-columns: minmax(0,1fr) 320px; gap:28px; align-items:start; margin-bottom:30px; }
+    .eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.22em; font-size:.74rem; font-weight:800; }
+    h1 { font-family:var(--serif); font-size:clamp(2.6rem,6vw,5.4rem); line-height:.95; letter-spacing:-.045em; margin:.4rem 0 1rem; }
+    h2 { font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.5rem); line-height:1.05; margin:2.4rem 0 .7rem; border-top:1px solid var(--soft); padding-top:1.4rem; }
+    h3 { margin:1.7rem 0 .4rem; color:#fff2c4; font-size:1.15rem; }
+    p, li, td { color:var(--muted); } a { color:var(--gold); text-underline-offset:.18em; } a:hover { color:var(--ink); }
+    .lede { font-size:1.2rem; max-width:760px; } .card { background:linear-gradient(180deg, rgba(240,207,115,.10), rgba(255,255,255,.035)); border:1px solid var(--line); border-radius:20px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; } .chip { border:1px solid var(--line); border-radius:999px; padding:.35rem .65rem; color:#ffe7a0; background:rgba(240,207,115,.07); font-size:.86rem; }
+    code { background:rgba(240,207,115,.10); border:1px solid var(--line); border-radius:7px; padding:.1rem .32rem; color:#ffe7a0; } pre { background:#0a0a0b; border:1px solid var(--soft); border-radius:14px; padding:18px; overflow:auto; } pre code { border:0; background:transparent; padding:0; }
+    .table-wrap { overflow:auto; border:1px solid var(--soft); border-radius:16px; margin:18px 0; } table { width:100%; border-collapse:collapse; min-width:720px; } th,td { padding:12px 14px; border-bottom:1px solid var(--soft); vertical-align:top; } th { color:#fff2c4; text-align:left; background:rgba(240,207,115,.08); }
+    .footer { margin-top:44px; padding-top:20px; border-top:1px solid var(--soft); color:var(--quiet); font-size:.95rem; display:flex; gap:16px; flex-wrap:wrap; }
+    @media (max-width:820px) { .top { grid-template-columns:1fr; } main { padding-top:40px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="top">
+      <section>
+        <div class="eyebrow">Donn × Clay · Hermes upgrade briefing</div>
+        <h1>Hermes v0.17 → v0.20.4 upgrade briefing</h1>
+        <p class="lede">A scan-friendly morning review of what changed, why it matters to Clay’s workflow, and what to try next.</p>
+        <div class="chips"><span class="chip">subagents</span><span class="chip">MoA</span><span class="chip">verified completion</span><span class="chip">Desktop + Bot Mode</span><span class="chip">gateway reliability</span></div>
+      </section>
+      <aside class="card"><strong>Bottom line</strong><p>This is less a cosmetic update and more a workflow upgrade: Hermes is better at staying on task, farming work out, routing across channels, recovering from failures, and exposing control surfaces.</p></aside>
+    </div>
+    <article class="card">
+<h1>Hermes v0.17 → v0.20.4 upgrade briefing</h1>
+<p><em>Last reviewed: August 2026. Built from official Hermes release notes, the current Hermes docs, and the three Clay-specific migration commits carried forward after the v0.20.4 tag.</em></p>
+<h2>Morning verdict</h2>
+<p>This is less a cosmetic update and more a workflow upgrade. Hermes is now better at <strong>staying on task</strong>, <strong>farming work out to background agents</strong>, <strong>routing itself across channels</strong>, <strong>recovering from tool failures</strong>, and <strong>giving you surfaces to manage memory, agents, bots, cron, Desktop, MCP, and gateway behavior</strong>.</p>
+<p><strong>Scan tags:</strong> <code>worth reviewing</code> · <code>subagents</code> · <code>MoA</code> · <code>verified completion</code> · <code>Desktop + Bot Mode</code> · <code>gateway reliability</code> · <code>custom Clay migration</code></p>
+<h2>Read this first</h2>
+<ol>
+<li><strong>Hermes is more autonomous, but with better finish discipline.</strong> <code>/goal</code> gained stronger completion contracts and evidence-oriented workflows, so long tasks can be judged against proof instead of vibes. <a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.1">v0.18.0</a></li>
+<li><strong>MoA is now a normal model-selection surface.</strong> Mixture of Agents presets appear as selectable <code>moa</code> provider models; advisors run first and the aggregator remains the acting model. <a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.1">v0.18.0</a></li>
+<li><strong>Background subagents matter more.</strong> <code>delegate_task</code> can run batched scouts in parallel, return immediately, and post results back later. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation">Delegation docs</a></li>
+<li><strong>Desktop and gateway are more central.</strong> The v0.20 line adds more Desktop, connection, Bot Mode, gateway, cron, and messaging reliability work. <a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.18">v0.20.4</a></li>
+<li><strong>Your local upgrade includes custom frosting.</strong> Photon batching, Telegram reminder buttons, and channel-specific model overrides were ported after the upstream v0.20.4 tag, so treat them as Clay-specific migration features, not official release features.</li>
+</ol>
+<h2>Version-window timeline</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Version</th><th>Release</th><th>What changed</th><th>Clay impact</th></tr></thead><tbody>
+<tr><td>v0.17.0</td><td>Jun 19, 2026</td><td>“Reach” baseline: Photon/iMessage, Raft channel, Desktop daily-driver work, <code>delegate_task(background=true)</code>, image editing, automation blueprints, Skills Hub, atomic memory operations.</td><td>You already had early background work, Photon direction, and better Desktop basics. This is the baseline to compare against.</td></tr>
+<tr><td>v0.18.0</td><td>Jul 1, 2026</td><td>“Judgment”: MoA first-class, <code>/goal</code> completion contracts, <code>/learn</code>, <code>/journey</code>, Desktop projects, gateway drain/scale-to-zero, background subagents.</td><td>Big jump in “do the work, prove it, and learn the workflow.”</td></tr>
+<tr><td>v0.19.0</td><td>Jul 20, 2026</td><td>“Quicksilver”: faster first-token path, live reasoning streams, Desktop/TUI performance, smart approvals, secret managers, live subagent transcripts, durable gateway delivery, per-channel model/system overrides.</td><td>Less waiting, more channel-specific behavior, better gateway survival, better password-manager fit.</td></tr>
+<tr><td>v0.20.0</td><td>Aug 3, 2026</td><td>“Herald”: real-time voice, wake words, voice notes, A2A, signed outbound webhooks, grounded citations, Desktop plugin/artifact expansion, CLI power commands, tool self-recovery, longer iteration limit.</td><td>Hermes becomes more of a remote operating layer: voice, events, integrations, and live artifacts.</td></tr>
+<tr><td>v0.20.1–v0.20.4</td><td>Aug 13–18, 2026</td><td>Stabilization: Desktop connection registry, Telegram DM topics, MCP 2.x/stateless protocol, Bot Mode, Cua Driver 0.20 contracts, cron continuity/media hardening, SessionDB fixes, kanban notifications, update honesty.</td><td>v0.20.4 is the safer target if you care about Desktop, Bot Mode, MCP, cron, computer-use, and gateway reliability.</td></tr>
+</tbody></table></div>
+<h2>Biggest workflow changes</h2>
+<h3>1. Fan-out research is now a default move</h3>
+<p>Use subagents as cheap scouts, not just “helpers.” Good pattern:</p>
+<pre><code>
+Spin up 3 scouts: release notes, current docs, and repo/runtime impact.
+
+Each returns source-backed deltas and caveats. Reconcile the results into one verified artifact.
+
+</code></pre>
+<p>Practical notes from the current docs:</p>
+<ul>
+<li>Batched <code>delegate<em>task(tasks=[...])</code> runs subagents in parallel, capped by <code>delegation.max</em>concurrent_children</code>.</li>
+<li>Top-level delegation returns a background handle immediately; completed results post back later.</li>
+<li>Subagents inherit the parent’s enabled toolsets; they cannot widen capabilities per task.</li>
+<li>Leaf subagents cannot call <code>delegate<em>task</code>, <code>clarify</code>, <code>memory</code>, <code>send</em>message</code>, or <code>cronjob</code>.</li>
+<li>For repo-editing parallel work, consider <code>delegation.worktree_isolation: true</code>.</li>
+<li>Long-lived/durable work still belongs in cron or a tracked background process, not delegation. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation">Delegation docs</a></li>
+</ul>
+<h3>2. MoA is for judgment moments</h3>
+<p>MoA is a virtual provider/model path, not a toolset. Use it when multiple perspectives are worth the latency/cost: hard synthesis, code review, decision memos, contentious research, or final critique.</p>
+<p>Key gotchas:</p>
+<ul>
+<li>Advisors run in parallel, but the turn waits for the slowest advisor.</li>
+<li>The aggregator is the acting model: final answer and tool calls come from it.</li>
+<li><code>/moa &lt;prompt&gt;</code> is one-shot sugar; it does not permanently switch the session model.</li>
+<li>Keep reference output short with <code>reference<em>max</em>tokens</code>.</li>
+<li>Default fanout is usually enough; <code>per_iteration</code> is fresher but much more expensive.</li>
+<li>Enable <code>moa.privacy_filter</code> if reference models may echo sensitive context. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/mixture-of-agents">MoA docs</a></li>
+</ul>
+<h3>3. “Done” should mean evidence</h3>
+<p>The biggest behavioral upgrade is not a new button. It is a stronger expectation that tasks finish with proof.</p>
+<p>For your work, ask Hermes to read back the target before it reports success:</p>
+<ul>
+<li><strong>Web:</strong> fetch the live URL and verify a distinctive string.</li>
+<li><strong>GitHub:</strong> show branch, commit, PR URL, and CI state.</li>
+<li><strong>Cron:</strong> list the job, inspect <code>last_status</code> / delivery target, and verify important deliveries.</li>
+<li><strong>Trading or external APIs:</strong> surface the real order/result status, not just the signal.</li>
+<li><strong>Desktop/browser:</strong> capture fresh state after input.</li>
+</ul>
+<p>This matches the v0.18 <code>/goal</code> completion-contract direction and your existing preference for verified outcomes. <a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.1">v0.18.0</a></p>
+<h3>4. Desktop is becoming the operator console</h3>
+<p>Desktop is no longer just “chat with a nicer skin.” The current docs describe Desktop using the same Hermes core, config, sessions, skills, memory, and API keys as CLI/gateway. It adds visible management surfaces for models, tools, MCP, gateway connections, sessions, context usage, memory graph / learning journey, and Bot Mode. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/desktop">Desktop docs</a></p>
+<p>For Clay: use Desktop for morning review, session/bot navigation, and visual inspection. Use CLI/repo tools for exact commands and deep development.</p>
+<h3>5. Gateway/channel routing is now infrastructure</h3>
+<p>The gateway now supports a broad platform set and more per-channel behavior. The current docs emphasize platform setup, platform-specific capability tables, channel overrides, adapter pause/resume, and circuit-breaker behavior. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging">Messaging docs</a></p>
+<p>Practical moves:</p>
+<ul>
+<li>Keep channel-specific model/system overrides explicit and documented.</li>
+<li>Use Telegram topics/buttons for control surfaces, not only notifications.</li>
+<li>Treat Photon/iMessage as a phone-native intake surface; test batching and authorization.</li>
+<li>Verify exact delivery targets for scheduled jobs and reminders.</li>
+</ul>
+<h3>6. Cron can be more stateful and less noisy</h3>
+<p>Cron now has stronger configuration surfaces: attached skills, provider/model override, pre-run scripts, <code>context<em>from</code>, <code>workdir</code>, platform delivery, continuity, and script-only <code>no</em>agent</code> jobs. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/cron">Cron docs</a></p>
+<p>Clay defaults worth using:</p>
+<ul>
+<li>Use <code>America/Chicago</code>, not fixed offsets.</li>
+<li>For “today” logic, determine live local date/time at run start.</li>
+<li>Use <code>[SILENT]</code> for intended no-op watcher runs.</li>
+<li>Use script-only <code>no_agent=True</code> for deterministic watchdogs and health checks.</li>
+<li>Do not trust “cron run succeeded” as proof of visible delivery; verify the target when debugging.</li>
+</ul>
+<h3>7. Memory, skills, and curator need hygiene</h3>
+<p>The built-in memory remains compact. Richer project knowledge belongs in skills, session search, local Markdown hubs, docs, or external memory systems. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/memory">Memory docs</a>, <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills">Skills docs</a></p>
+<p>Post-upgrade options:</p>
+<ul>
+<li>Enable <code>memory.write_approval: true</code> if you want tighter control over always-injected memory.</li>
+<li>Enable <code>skills.write_approval: true</code> if you want diff review before new/changed skills land.</li>
+<li>Use <code>/journey</code> / learning views to inspect what Hermes learned.</li>
+<li>Let curator manage agent-created skills, but remember it does not delete bundled/hub skills automatically. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/curator">Curator docs</a></li>
+</ul>
+<h3>8. Plugins and MCP are the right home for durable integrations</h3>
+<p>If an integration is reusable, do not bury it in a prompt. Use:</p>
+<ul>
+<li><strong>Skill</strong> for procedure.</li>
+<li><strong>Plugin</strong> for packaged Hermes capability. <a href="https://hermes-agent.nousresearch.com/docs/developer-guide/plugins">Plugin docs</a></li>
+<li><strong>MCP server</strong> for external tools/resources that should be discovered and called through the standard protocol. <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp">MCP docs</a></li>
+</ul>
+<p>MCP got especially important in this window: tool naming, health checks, server filtering, OAuth, Hermes-as-MCP-server, and v0.20.3’s SDK/protocol migration all make it more real as an integration layer.</p>
+<h2>Custom migrated features</h2>
+<p>These are part of <strong>your migrated Hermes</strong>, not official upstream v0.20.4 release notes.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>What it does</th><th>How to test it</th></tr></thead><tbody>
+<tr><td>Photon initial inbound batching</td><td>Holds rapid Photon/iMessage messages briefly and combines them before Hermes starts work.</td><td>Send screenshot → text → “also this” quickly; confirm Hermes answers the combined intent.</td></tr>
+<tr><td>Telegram reminder-control buttons</td><td>Renders reminder actions as inline Telegram buttons and routes clicks back into Hermes.</td><td>Trigger a reminder and click a control instead of typing a follow-up command.</td></tr>
+<tr><td>Channel-specific model overrides</td><td>Lets a Discord channel use a different provider/model from the global default; threads inherit the parent channel’s override.</td><td>Ask the same bounded question in normal Discord and in an overridden channel/thread.</td></tr>
+</tbody></table></div>
+<h2>Suggested next experiments</h2>
+<ol>
+<li><strong>Cheap delegation preset — 20 minutes</strong></li>
+</ol>
+<p>   Set a cheaper <code>delegation.model</code> and try a 3-scout research task.</p>
+<ol>
+<li><strong>MoA preset trio — 45 minutes</strong></li>
+</ol>
+<p>   Create presets for <code>research-synthesis</code>, <code>code-review</code>, and <code>decision-memo</code>; keep reference outputs short.</p>
+<ol>
+<li><strong>Goal contract template — 30 minutes</strong></li>
+</ol>
+<p>   Create a standard ask pattern: acceptance criteria, evidence surface, stop condition, and forbidden side effects.</p>
+<ol>
+<li><strong>Cron audit — 45 minutes</strong></li>
+</ol>
+<p>   Review timezones, no-op behavior, continuity, delivery targets, and deterministic script-only candidates.</p>
+<ol>
+<li><strong>Desktop morning console — 30 minutes</strong></li>
+</ol>
+<p>   Open Desktop and inspect sessions, bots, memory/learning, gateway connections, and active work.</p>
+<ol>
+<li><strong>Phone control surface test — 30 minutes</strong></li>
+</ol>
+<p>   Test Photon batching and Telegram reminder buttons in the real phone workflows you actually use.</p>
+<ol>
+<li><strong>MCP/plugin inventory — 30 minutes</strong></li>
+</ol>
+<p>   List enabled MCP servers/plugins, disable broad surfaces you do not use, and document the ones that matter.</p>
+<h2>Post-upgrade hygiene commands</h2>
+<pre><code>
+hermes update --check
+
+hermes config check
+
+hermes config migrate
+
+hermes skills check
+
+hermes mcp list
+
+hermes doctor
+
+</code></pre>
+<p>Use <code>hermes gateway status</code> and <code>hermes cron list</code> for the two parts most likely to affect your daily remote workflow.</p>
+<h2>Source map</h2>
+<h3>Official release notes</h3>
+<ul>
+<li>v0.17.0 — The Reach Release: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.19</li>
+<li>v0.18.0 — The Judgment Release: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.1</li>
+<li>v0.19.0 — The Quicksilver Release: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20</li>
+<li>v0.20.0 — The Herald Release: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.3</li>
+<li>v0.20.1: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.13</li>
+<li>v0.20.2: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16</li>
+<li>v0.20.3: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16.2</li>
+<li>v0.20.4: https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.18</li>
+</ul>
+<h3>Official docs</h3>
+<ul>
+<li>Docs home: https://hermes-agent.nousresearch.com/docs/</li>
+<li>Updating: https://hermes-agent.nousresearch.com/docs/getting-started/updating</li>
+<li>CLI commands: https://hermes-agent.nousresearch.com/docs/reference/cli-commands</li>
+<li>Slash commands: https://hermes-agent.nousresearch.com/docs/reference/slash-commands</li>
+<li>Configuration: https://hermes-agent.nousresearch.com/docs/user-guide/configuration</li>
+<li>Delegation: https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation</li>
+<li>MoA: https://hermes-agent.nousresearch.com/docs/user-guide/features/mixture-of-agents</li>
+<li>Cron: https://hermes-agent.nousresearch.com/docs/user-guide/features/cron</li>
+<li>Memory: https://hermes-agent.nousresearch.com/docs/user-guide/features/memory</li>
+<li>Skills: https://hermes-agent.nousresearch.com/docs/user-guide/features/skills</li>
+<li>Curator: https://hermes-agent.nousresearch.com/docs/user-guide/features/curator</li>
+<li>Plugins: https://hermes-agent.nousresearch.com/docs/developer-guide/plugins</li>
+<li>MCP: https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp</li>
+<li>Messaging/gateway: https://hermes-agent.nousresearch.com/docs/user-guide/messaging</li>
+<li>Desktop: https://hermes-agent.nousresearch.com/docs/user-guide/desktop</li>
+<li>Voice: https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode</li>
+</ul>
+    </article>
+    <p class="footer"><span>Repository: <a href="https://github.com/claydunker-yalc/donns-websites-for-clay">claydunker-yalc/donns-websites-for-clay</a></span><span>Marker: <code>Hermes v0.17 v0.20.4 upgrade briefing marker</code></span></p>
+  </main>
+</body>
+</html>
