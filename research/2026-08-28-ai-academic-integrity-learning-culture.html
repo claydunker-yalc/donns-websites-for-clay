@@ -1,0 +1,268 @@
+<!doctype html>
+<!-- ai-academic-integrity-learning-culture-marker -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI, Academic Integrity, and a Culture of Learning</title>
+  <meta name="description" content="A tabbed research brief on recent higher-education research about generative AI misuse, academic integrity, and learning-centered policy design." />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f1e7;
+      --paper: #fffaf1;
+      --paper-2: #f0e5d2;
+      --ink: #17130e;
+      --muted: #665d51;
+      --quiet: #8c8171;
+      --line: rgba(23, 19, 14, .14);
+      --line-strong: rgba(23, 19, 14, .28);
+      --gold: #b98217;
+      --gold-soft: #f1d28c;
+      --clay: #c4572a;
+      --green: #58734b;
+      --blue: #415f77;
+      --shadow: 0 22px 70px rgba(64, 43, 20, .11);
+      --radius: 22px;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 12% 6%, rgba(196, 87, 42, .18), transparent 29rem),
+        radial-gradient(circle at 85% 14%, rgba(88, 115, 75, .12), transparent 30rem),
+        linear-gradient(180deg, #fbf5ea 0%, var(--bg) 44%, #efe4d1 100%);
+      color: var(--ink);
+      line-height: 1.58;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-underline-offset: .18em; }
+    .wrap { width: min(var(--max), calc(100% - 34px)); margin: 0 auto; }
+    header { padding: 26px 0 18px; }
+    .topbar { display: flex; justify-content: space-between; gap: 18px; align-items: center; font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+    .topbar a { text-decoration: none; border-bottom: 1px solid transparent; }
+    .topbar a:hover { border-bottom-color: currentColor; }
+    .brand { font-weight: 800; color: var(--ink); }
+    .hero { padding: clamp(38px, 7vw, 86px) 0 30px; display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(26px, 5vw, 70px); align-items: end; }
+    .eyebrow { margin: 0 0 14px; color: var(--clay); font-size: .82rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3 { text-wrap: balance; }
+    h1 { margin: 0; font-family: var(--serif); font-size: clamp(3rem, 7.6vw, 7.4rem); line-height: .92; letter-spacing: -.055em; max-width: 850px; }
+    .lede { margin: 22px 0 0; max-width: 780px; color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.28rem); }
+    .thesis { background: rgba(255, 250, 241, .78); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(22px, 3.5vw, 36px); position: relative; overflow: hidden; }
+    .thesis::before { content: ""; position: absolute; inset: 0 0 auto; height: 8px; background: linear-gradient(90deg, var(--clay), var(--gold), var(--green)); }
+    .thesis .label { margin: 8px 0 14px; color: var(--quiet); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; }
+    .thesis p { margin: 0; font-family: var(--serif); font-size: clamp(1.45rem, 2.6vw, 2.15rem); line-height: 1.14; letter-spacing: -.025em; }
+    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0 36px; }
+    .quick { background: rgba(255, 250, 241, .66); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+    .quick strong { display: block; font-size: 1.7rem; line-height: 1; letter-spacing: -.04em; color: var(--clay); }
+    .quick span { display: block; margin-top: 8px; color: var(--muted); font-size: .9rem; }
+    .tabs-shell { position: sticky; top: 0; z-index: 10; padding: 12px 0; background: rgba(247, 241, 231, .86); backdrop-filter: blur(16px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .tabs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 2px; }
+    .tab { flex: 0 0 auto; border: 1px solid var(--line); background: rgba(255, 250, 241, .72); color: var(--muted); border-radius: 999px; padding: 10px 15px; font: inherit; font-size: .9rem; font-weight: 750; cursor: pointer; }
+    .tab[aria-selected="true"] { background: var(--ink); color: #fffaf1; border-color: var(--ink); box-shadow: 0 10px 24px rgba(23, 19, 14, .14); }
+    .panel { display: none; padding: 46px 0 70px; }
+    .panel.active { display: block; }
+    .section-head { display: grid; grid-template-columns: .36fr 1fr; gap: 28px; align-items: start; margin-bottom: 24px; }
+    .section-kicker { color: var(--clay); font-weight: 850; letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; }
+    h2 { margin: 0; font-family: var(--serif); font-size: clamp(2.15rem, 4.8vw, 4.8rem); line-height: .96; letter-spacing: -.045em; }
+    .section-note { margin: 14px 0 0; max-width: 780px; color: var(--muted); font-size: 1.02rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: rgba(255, 250, 241, .82); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: 0 14px 42px rgba(64, 43, 20, .06); }
+    .card h3 { margin: 0 0 10px; font-size: 1.16rem; line-height: 1.15; letter-spacing: -.025em; }
+    .card p { margin: 0; color: var(--muted); font-size: .97rem; }
+    .card .tag { display: inline-flex; margin-bottom: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 9px; color: var(--blue); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 18px; align-items: start; }
+    .stack { display: grid; gap: 14px; }
+    .callout { background: var(--ink); color: #fffaf1; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .callout h3 { margin: 0 0 10px; font-family: var(--serif); font-size: 1.8rem; line-height: 1.05; }
+    .callout p { margin: 0; color: rgba(255, 250, 241, .76); }
+    .steps { counter-reset: step; display: grid; gap: 12px; }
+    .step { counter-increment: step; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; background: rgba(255, 250, 241, .82); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+    .step::before { content: counter(step); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--gold-soft); color: var(--ink); font-weight: 900; }
+    .step strong { display: block; line-height: 1.2; }
+    .step span { display: block; margin-top: 4px; color: var(--muted); font-size: .94rem; }
+    .source-list { display: grid; gap: 12px; }
+    details.source { background: rgba(255, 250, 241, .86); border: 1px solid var(--line); border-radius: 18px; padding: 0; overflow: hidden; }
+    details.source[open] { border-color: var(--line-strong); box-shadow: 0 12px 36px rgba(64, 43, 20, .07); }
+    summary { cursor: pointer; list-style: none; padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; }
+    summary::-webkit-details-marker { display: none; }
+    .s-title { font-weight: 850; line-height: 1.2; }
+    .s-meta { display: block; margin-top: 4px; color: var(--quiet); font-size: .9rem; font-weight: 500; }
+    .badge { white-space: nowrap; color: var(--clay); border: 1px solid rgba(196, 87, 42, .28); border-radius: 999px; padding: 4px 9px; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 850; }
+    .source-body { padding: 0 18px 18px; color: var(--muted); border-top: 1px solid var(--line); }
+    .source-body ul { margin: 12px 0 0; padding-left: 1.1rem; }
+    .source-body li { margin: .38rem 0; }
+    .source-body a { color: var(--clay); font-weight: 700; }
+    .matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .mini { background: rgba(255, 250, 241, .82); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+    .mini h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .mini p { margin: 0; color: var(--muted); font-size: .94rem; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--quiet); font-size: .92rem; }
+    @media (max-width: 920px) {
+      .hero, .split, .section-head { grid-template-columns: 1fr; }
+      .quick-grid, .cards, .matrix { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .quick-grid, .cards, .matrix { grid-template-columns: 1fr; }
+      summary { grid-template-columns: 1fr; }
+      .badge { width: max-content; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="topbar" aria-label="Page navigation">
+      <a class="brand" href="../index.html">Donn × Clay</a>
+      <span>Research brief · AI academic integrity · Aug. 28, 2026</span>
+    </nav>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Higher education research scan</p>
+        <h1>Make integrity feel like learning, not surveillance.</h1>
+        <p class="lede">A skim-friendly review of recent scholarship on generative AI misuse, academic integrity policy, and how to build a culture where students understand and choose the honest path.</p>
+      </div>
+      <aside class="thesis" aria-label="Main takeaway">
+        <div class="label">The through-line</div>
+        <p>Students comply when expectations are clear, legitimate, useful, and tied to learning. They hide when policy feels vague, punitive, or detached from the work.</p>
+      </aside>
+    </section>
+    <section class="quick-grid" aria-label="Quick facts">
+      <div class="quick"><strong>37</strong><span>scholarly sources and leads organized for review</span></div>
+      <div class="quick"><strong>2023–26</strong><span>recent higher-ed AI integrity literature</span></div>
+      <div class="quick"><strong>4</strong><span>research lanes: motives, policy, reviews, interventions</span></div>
+      <div class="quick"><strong>1</strong><span>simple answer: redesign the learning environment</span></div>
+    </section>
+  </header>
+
+  <div class="tabs-shell">
+    <div class="wrap tabs" role="tablist" aria-label="Research sections">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="panel-map" id="tab-map">Map</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-drivers" id="tab-drivers">Why students misuse</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-culture" id="tab-culture">Culture moves</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-assessment" id="tab-assessment">Assessment design</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-sources" id="tab-sources">Source shelf</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-caveats" id="tab-caveats">Caveats</button>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="panel active" id="panel-map" role="tabpanel" aria-labelledby="tab-map">
+      <div class="section-head">
+        <div class="section-kicker">01 · Orientation</div>
+        <div><h2>The answer is not “catch them better.”</h2><p class="section-note">The best recent work treats AI misuse as a design, motivation, trust, and norms problem. Detection is fragile. Policy by itself is forgettable. Culture shows up in the assignment brief, the classroom conversation, and the assessment design.</p></div>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="tag">Core problem</span><h3>Vague rules create grey zones.</h3><p>Students distinguish brainstorming, editing, translation, and full generation, but many policies do not. Ambiguity turns into rationalization.</p></article>
+        <article class="card"><span class="tag">Core risk</span><h3>Disclosure can feel like confession.</h3><p>Mandatory AI declarations fail when students think honest disclosure will trigger punishment or inconsistent grading.</p></article>
+        <article class="card"><span class="tag">Core lever</span><h3>Meaning beats mere monitoring.</h3><p>Degree apathy, stress, procrastination, and low course meaning recur as drivers. The honest path has to feel worth taking.</p></article>
+      </div>
+      <div class="split" style="margin-top:18px">
+        <div class="callout"><h3>A usable policy should sound like pedagogy.</h3><p>“Here is what AI can and cannot do on this task, here is why, here is how to disclose it, and here is what learning must still be yours.”</p></div>
+        <div class="steps">
+          <div class="step"><div><strong>Define the task-level AI lane.</strong><span>No AI, brainstorming only, editing only, feedback allowed, AI output allowed with critique, or AI expected and assessed.</span></div></div>
+          <div class="step"><div><strong>Explain the learning reason.</strong><span>Students are more likely to buy in when they see what skill AI would steal from them.</span></div></div>
+          <div class="step"><div><strong>Make disclosure low-friction.</strong><span>Normalize short AI-use notes before high-stakes enforcement.</span></div></div>
+          <div class="step"><div><strong>Assess process and judgment.</strong><span>Drafts, decisions, oral checks, critique, source verification, and reflection are harder to outsource.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-drivers" role="tabpanel" aria-labelledby="tab-drivers">
+      <div class="section-head"><div class="section-kicker">02 · Motives</div><div><h2>Why students misuse AI</h2><p class="section-note">The studies do not describe one type of cheater. They describe pressure, opportunity, confused norms, disengagement, and ethical grey zones.</p></div></div>
+      <div class="matrix">
+        <article class="mini"><h3>Perceived control</h3><p>If AI can complete the task invisibly, misuse rises. This shows up strongly in Theory of Planned Behavior studies.</p></article>
+        <article class="mini"><h3>Peer norms</h3><p>Students watch what classmates do. Classroom norm-setting matters more than a policy PDF no one discusses.</p></article>
+        <article class="mini"><h3>Degree apathy</h3><p>When work feels like hoop-jumping, AI becomes a shortcut. Purpose and relevance are prevention tools.</p></article>
+        <article class="mini"><h3>Stress and time pressure</h3><p>Misuse often acts like panic management. Staged work and academic skill support are integrity supports.</p></article>
+        <article class="mini"><h3>Ethical ambiguity</h3><p>Students usually know “submit an AI essay” is wrong but disagree about editing, translation, paraphrase, and idea generation.</p></article>
+        <article class="mini"><h3>Fear of disclosure</h3><p>Students hide AI use when declarations feel punitive, unpredictable, or like self-incrimination.</p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-culture" role="tabpanel" aria-labelledby="tab-culture">
+      <div class="section-head"><div class="section-kicker">03 · Culture</div><div><h2>How to make integrity feel worth choosing</h2><p class="section-note">The culture-building literature clusters around trust, student voice, moral reasoning, belonging, and consistent instructor practice.</p></div></div>
+      <div class="cards">
+        <article class="card"><span class="tag">Student voice</span><h3>Co-create the rules.</h3><p>Ask students to classify AI-use scenarios, rewrite vague policy language, and explain where the grey zones are. Legitimacy improves when policy is not dropped from the ceiling.</p></article>
+        <article class="card"><span class="tag">Fairness</span><h3>Name the peer harm.</h3><p>Integrity messages should explain fairness, credential value, and harm to classmates, not just “you might get caught.”</p></article>
+        <article class="card"><span class="tag">Restorative practice</span><h3>Use repair, not only penalty.</h3><p>For appropriate cases, restorative conversations can focus on harm, responsibility, repair, and future learning strategies.</p></article>
+        <article class="card"><span class="tag">International students</span><h3>Do not assume shared authorship norms.</h3><p>Policies need concrete, culturally explicit examples for translation, grammar support, source use, collaboration, and AI editing.</p></article>
+        <article class="card"><span class="tag">Trust</span><h3>Train faculty for consistency.</h3><p>Students notice when one instructor encourages AI, another bans it, and a third says “just cite it” with no examples.</p></article>
+        <article class="card"><span class="tag">Emotion</span><h3>Talk about anxiety and authenticity.</h3><p>New work emphasizes that AI policy is emotional: guilt, pressure, belonging, surveillance, and moral identity all shape behavior.</p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-assessment" role="tabpanel" aria-labelledby="tab-assessment">
+      <div class="section-head"><div class="section-kicker">04 · Design</div><div><h2>Assessment that does not invite ghostwriting</h2><p class="section-note">The practical evidence is still young, but the strongest pilots and frameworks are remarkably consistent: make thinking visible and make legitimate AI use discussable.</p></div></div>
+      <div class="split">
+        <div class="steps">
+          <div class="step"><div><strong>Use an AI Assessment Scale.</strong><span>Adopt shared course labels for what AI can do in each task. AIAS is the cleanest model.</span></div></div>
+          <div class="step"><div><strong>Require process evidence.</strong><span>Drafts, annotated decisions, research logs, prompt/output appendices, and revision notes.</span></div></div>
+          <div class="step"><div><strong>Make AI output the object of critique.</strong><span>Students verify, edit, challenge, and justify changes to AI-generated material.</span></div></div>
+          <div class="step"><div><strong>Add human checkpoints.</strong><span>Short oral defenses, in-class writing, conferences, or explain-your-code moments.</span></div></div>
+          <div class="step"><div><strong>Use local or authentic context.</strong><span>Tasks tied to specific data, community, practice, lab, fieldwork, or personal reasoning are harder to outsource meaningfully.</span></div></div>
+        </div>
+        <div class="callout"><h3>Detection is not a foundation.</h3><p>Scarfe et al. found 94% of AI submissions went undetected in a real assessment infiltration test. Detectors can be weak signals, but the assessment system has to assume AI exists.</p></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-sources" role="tabpanel" aria-labelledby="tab-sources">
+      <div class="section-head"><div class="section-kicker">05 · Sources</div><div><h2>The shelf, organized for review</h2><p class="section-note">These are the best sources from the session. Open a row when you want the finding and the practical implication. Links go to DOI, article, or open PDF pages.</p></div></div>
+      <div class="source-list">
+        <details class="source" open><summary><span><span class="s-title">Bittle & El-Gayar — Generative AI and Academic Integrity in Higher Education</span><span class="s-meta">2025 · systematic review · 41 studies</span></span><span class="badge">Review</span></summary><div class="source-body"><ul><li>Dual-use frame: AI can support learning and enable ghostwriting or unauthorized assistance.</li><li>Recommends clear policy, educator/student AI literacy, assessment redesign, and transparent governance.</li><li><a href="https://doi.org/10.3390/info16040296">https://doi.org/10.3390/info16040296</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Balalle & Pannilage — Reassessing Academic Integrity in the Age of AI</span><span class="s-meta">2025 · systematic review · 25 included articles</span></span><span class="badge">Review</span></summary><div class="source-body"><ul><li>Frames academic integrity as a culture problem involving honesty, trust, ethics, assessment, and due process.</li><li>Warns against detector-centered systems because fairness and reliability problems remain.</li><li><a href="https://doi.org/10.1016/j.ssaho.2025.101299">https://doi.org/10.1016/j.ssaho.2025.101299</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Johnston et al. — Student perspectives on GenAI technologies</span><span class="s-meta">2024 · International Journal for Educational Integrity · 2,555 students</span></span><span class="badge">Student voice</span></summary><div class="source-body"><ul><li>Students distinguish acceptable assistance from full content generation and generally reject total bans.</li><li>Supports granular policy and student co-creation.</li><li><a href="https://doi.org/10.1007/s40979-024-00149-4">https://doi.org/10.1007/s40979-024-00149-4</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Tan, Alhammad & Stelmaszak — AI-use declaration non-compliance</span><span class="s-meta">2024 · Assessment & Evaluation in Higher Education · King’s Business School</span></span><span class="badge">Disclosure</span></summary><div class="source-body"><ul><li>Up to 74% failed to complete mandatory AI declarations.</li><li>Drivers: fear, ambiguous guidance, inconsistent enforcement, and peer norms.</li><li>Declarations need two-way transparency and trust.</li><li><a href="https://doi.org/10.1080/02602938.2024.2415654">https://doi.org/10.1080/02602938.2024.2415654</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Playfoot, Quigley & Thomas — Degree apathy and AI assignment writing</span><span class="s-meta">2024 · The Internet and Higher Education · 160 undergraduates</span></span><span class="badge">Motivation</span></summary><div class="source-body"><ul><li>Degree apathy was the only significant predictor of willingness to use AI for assignment writing.</li><li>Detection risk and punishment still mattered, but meaning and engagement were the deeper lever.</li><li><a href="https://doi.org/10.1016/j.iheduc.2024.100950">https://doi.org/10.1016/j.iheduc.2024.100950</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Greitemeyer & Kastenmüller — Longitudinal TPB cheating model</span><span class="s-meta">2024 · Technology, Mind, and Behavior · 610 then 212 follow-up</span></span><span class="badge">Behavior</span></summary><div class="source-body"><ul><li>Attitudes, subjective norms, and perceived behavioral control predicted intention to cheat with chatbot text.</li><li>Intention predicted later self-reported misuse.</li><li><a href="https://doi.org/10.1037/tmb0000133">https://doi.org/10.1037/tmb0000133</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Perkins, Furze, Roe & MacVaugh — AI Assessment Scale</span><span class="s-meta">2024 · Journal of University Teaching and Learning Practice</span></span><span class="badge">Framework</span></summary><div class="source-body"><ul><li>Five levels of permitted AI use give staff and students a shared vocabulary.</li><li>Helps align AI permissions to learning outcomes and student responsibility.</li><li><a href="https://doi.org/10.53761/q3azde36">https://doi.org/10.53761/q3azde36</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Furze, Perkins, Roe & MacVaugh — AIAS in action</span><span class="s-meta">2024 · AJET · institutional pilot</span></span><span class="badge">Pilot</span></summary><div class="source-body"><ul><li>Institutional pilot reported clearer expectations, reduced GenAI misconduct cases, and improved engagement/outcomes.</li><li>Causality is limited, but the model is practical and review-ready.</li><li><a href="https://doi.org/10.14742/ajet.9434">https://doi.org/10.14742/ajet.9434</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Scarfe et al. — Real-world AI infiltration of examinations</span><span class="s-meta">2024 · PLOS ONE · blind case study</span></span><span class="badge">Detection</span></summary><div class="source-body"><ul><li>94% of AI submissions were undetected by markers.</li><li>AI submissions often outperformed real student submissions.</li><li>Shows why assessment redesign matters more than detector confidence.</li><li><a href="https://doi.org/10.1371/journal.pone.0305354">https://doi.org/10.1371/journal.pone.0305354</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Chen et al. — Cheating method change and learning loss in intro CS</span><span class="s-meta">2024 · open PDF · course-data analysis</span></span><span class="badge">Learning loss</span></summary><div class="source-body"><ul><li>Evidence suggested a shift from Chegg/CourseHero-style plagiarism toward ChatGPT.</li><li>Presumed plagiarism was associated with final-exam learning losses.</li><li><a href="https://zilles.cs.illinois.edu/papers/chen_chatgpt_cheating_l_s_2024.pdf">Open PDF</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Martin et al. — Participatory co-design of AI-integrated coursework</span><span class="s-meta">2025 · Behavioral Sciences · pilot evaluation</span></span><span class="badge">Intervention</span></summary><div class="source-body"><ul><li>Students used Copilot and were assessed on critique, editing, and justification of AI outputs.</li><li>AI did not simply reduce workload; checking and reasoning mattered.</li><li><a href="https://doi.org/10.3390/bs15060808">https://doi.org/10.3390/bs15060808</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Beardsley et al. — Learning agreement for GenAI use</span><span class="s-meta">2025 · Innovations in Education and Teaching International · pilot</span></span><span class="badge">Agreement</span></summary><div class="source-body"><ul><li>Students liked learning agreements, but adherence to prompt/limitation disclosure remained weak.</li><li>Agreements need rubrics, examples, revisiting, and feedback cycles.</li><li><a href="https://doi.org/10.1080/14703297.2025.2535444">https://doi.org/10.1080/14703297.2025.2535444</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Bannister et al. — International students and GenAI policy</span><span class="s-meta">2024 · Journal of International Students · 131 institutions</span></span><span class="badge">Equity</span></summary><div class="source-body"><ul><li>Most policies gave little explicit attention to international students’ needs.</li><li>Guidance should address diverse assumptions about authorship, translation, citation, and acceptable assistance.</li><li><a href="https://doi.org/10.32674/jis.v14i3.6277">https://doi.org/10.32674/jis.v14i3.6277</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Foltýnek et al. — ENAI recommendations on ethical AI use</span><span class="s-meta">2023 · International Journal for Educational Integrity</span></span><span class="badge">Guidance</span></summary><div class="source-body"><ul><li>Declared AI use can be acceptable; unauthorized credit-bearing use can be misconduct.</li><li>Students and teachers need explicit training in ethical AI use and acknowledgement.</li><li><a href="https://doi.org/10.1007/s40979-023-00133-4">https://doi.org/10.1007/s40979-023-00133-4</a></li></ul></div></details>
+        <details class="source"><summary><span><span class="s-title">Birks & Clare — Prevention frameworks for AI misconduct</span><span class="s-meta">2023 · International Journal for Educational Integrity</span></span><span class="badge">Prevention</span></summary><div class="source-body"><ul><li>Use existing prevention frameworks: reduce temptation, excuses, provocation, and peer pressure.</li><li>Clear guidelines, scaffolding, reminders, and assessment design can support conscience.</li><li><a href="https://doi.org/10.1007/s40979-023-00142-3">https://doi.org/10.1007/s40979-023-00142-3</a></li></ul></div></details>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-caveats" role="tabpanel" aria-labelledby="tab-caveats">
+      <div class="section-head"><div class="section-kicker">06 · Evidence limits</div><div><h2>What not to overclaim</h2><p class="section-note">The direction is clear. The causal evidence is still young. A sensible policy should pilot, measure, and revise.</p></div></div>
+      <div class="cards">
+        <article class="card"><span class="tag">Evidence</span><h3>Few randomized or multi-institution trials.</h3><p>Most work is surveys, policy analysis, conceptual frameworks, small pilots, or single-course cases.</p></article>
+        <article class="card"><span class="tag">Measures</span><h3>Self-report is noisy.</h3><p>Students underreport misconduct and interpret “AI use” differently. Compare multiple evidence types when possible.</p></article>
+        <article class="card"><span class="tag">Honor codes</span><h3>GenAI-specific honor-code research is thin.</h3><p>There is more evidence for broader integrity culture and restorative practice than for AI-specific honor-code trials.</p></article>
+        <article class="card"><span class="tag">Interventions</span><h3>Bundles are easier to support than silver bullets.</h3><p>The best model is clear rules + teaching + assessment redesign + student partnership, not one magic form or policy.</p></article>
+        <article class="card"><span class="tag">Access</span><h3>Some 2025–2026 leads need full-text follow-up.</h3><p>A few promising papers were visible through abstracts or metadata only and should be treated as leads until fully reviewed.</p></article>
+        <article class="card"><span class="tag">Local fit</span><h3>Discipline and culture matter.</h3><p>Writing, CS, language learning, group work, and professional programs need different examples and permission levels.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Built from Clay’s Aug. 28, 2026 research-subagent session. This page is a review artifact, not a final policy. Start with the Source shelf, then decide what belongs in a local academic-integrity policy or PD session.
+  </footer>
+
+  <script>
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+    function activate(tab) {
+      tabs.forEach(t => t.setAttribute('aria-selected', String(t === tab)));
+      panels.forEach(p => p.classList.toggle('active', p.id === tab.getAttribute('aria-controls')));
+      history.replaceState(null, '', '#' + tab.id.replace('tab-', ''));
+    }
+    tabs.forEach(tab => tab.addEventListener('click', () => activate(tab)));
+    const initial = location.hash.replace('#', '');
+    if (initial) {
+      const tab = document.getElementById('tab-' + initial);
+      if (tab) activate(tab);
+    }
+  </script>
+</body>
+</html>
